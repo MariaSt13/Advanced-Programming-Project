@@ -13,7 +13,7 @@ using namespace std;
 int main() {
 
     //create a new game.
-    Board* b =  new ConsoleBoard(3,3);
+    Board* b =  new ConsoleBoard(8,8);
     Player* blackActor = new HumanLocalPlayer(b->blackActor);
     Player* whiteActor = new HumanLocalPlayer(b->whitekActor);
     GameLogic* standardGameLogic = new StandardGameLogic();
