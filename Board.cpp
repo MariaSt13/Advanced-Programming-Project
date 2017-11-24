@@ -19,7 +19,6 @@ Board::Board(const int &rowSize,const int &colSize): rowSize(rowSize+1), colSize
     for (int i = 0; i < this->rowSize; i++) {
         for (int j = 0; j < this->colSize ; j++) {
             array[i][j] = empty;
-            cout << i << "," << j<< endl ;
         }
 
     }
