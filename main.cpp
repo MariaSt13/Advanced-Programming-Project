@@ -12,6 +12,8 @@ using namespace std;
 
 int main() {
 
+    // i made a change :)
+    
     //create a new game.
     Board* b =  new ConsoleBoard(8,8);
     Player* blackActor = new HumanLocalPlayer(b->blackActor);
