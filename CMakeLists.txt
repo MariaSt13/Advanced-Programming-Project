@@ -1,7 +1,23 @@
 cmake_minimum_required(VERSION 3.8)
-project(exam1)
+project(Advanced_Programming_Project)
 
-set(CMAKE_CXX_STANDARD 98)
+set(CMAKE_CXX_STANDARD 11)
 
-set(SOURCE_FILES main.cpp Board.cpp Board.h ConsoleBoard.cpp ConsoleBoard.h Player.h HumanLocalPlayer.cpp HumanLocalPlayer.h GameLogic.h StandardGameLogic.cpp StandardGameLogic.h ReversiGame.cpp ReversiGame.h Point.cpp Point.h)
-add_executable(exam1 ${SOURCE_FILES})
+set(SOURCE_FILES
+        Board.cpp
+        Board.h
+        ConsoleBoard.cpp
+        ConsoleBoard.h
+        GameLogic.h
+        HumanLocalPlayer.cpp
+        HumanLocalPlayer.h
+        main.cpp
+        Player.h
+        Point.cpp
+        Point.h
+        ReversiGame.cpp
+        ReversiGame.h
+        StandardGameLogic.cpp
+        StandardGameLogic.h AlPlayer.cpp AlPlayer.h)
+
+add_executable(Advanced_Programming_Project ${SOURCE_FILES})
