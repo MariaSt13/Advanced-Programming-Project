@@ -1,7 +1,9 @@
 //name: linoy cohen
 //ID: 206333502
 
+#include <iostream>
 #include "Point.h"
+using namespace std;
 
 //constuctor.
 Point::Point(const int &x,const int &y) : x(x), y(y){}
@@ -25,10 +27,9 @@ bool Point:: operator <(const Point& p) const{
 // the vector. else return 'false'.
 bool Point:: ifThePointIsInVector(const vector<Point> &v) const {
 
-    for (int i = 0; i <v.size() ; i++) {
-
-        int x1 = v.at(i).getX();
-        int y1 = v.at(i).getY();
+    for (vector<Point>::const_iterator it2 = v.begin(); it2 < v.end(); it2++) {
+        int x1 = (*it2).getX();
+        int y1 = (*it2).getY();
 
         if(x == x1 && y ==y1){
             return true;
