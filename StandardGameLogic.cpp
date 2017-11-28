@@ -16,7 +16,6 @@ vector<Point> StandardGameLogic::returnValidMoves(const Player* p ,const Board* 
         for (int j = 1; j < b->getColSize(); j++) {
             //update vector
             checkPoint(p,Point(i,j),b ,v);
-           // v.insert(v.end(),temp.begin(),temp.end());
         }
     }
     return v;

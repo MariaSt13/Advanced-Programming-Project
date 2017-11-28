@@ -9,14 +9,14 @@
 #include "Player.h"
 #include "GameLogic.h"
 
-class AlPlayer: public Player  {
+class AIPlayer: public Player  {
 
 public:
     //constructor.
-    AlPlayer(Board::disk d, GameLogic gameLogic, Board board);
+    AIPlayer(Board::disk d, GameLogic *gameLogic, Board *board);
 
     //destructor.
-    virtual ~AlPlayer(){};
+    virtual ~AIPlayer(){};
 
     //the player in his turn choose point
     //to put in his disk.
@@ -24,9 +24,9 @@ public:
 
 private:
 
-    Board board;
+    Board* board;
 
-    GameLogic gameLogic
+    GameLogic* gameLogic;
 
 };
 

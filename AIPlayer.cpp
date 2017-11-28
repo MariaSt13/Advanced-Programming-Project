@@ -2,12 +2,12 @@
 // Created by linoy on 28/11/17.
 //
 
-#include "AlPlayer.h"
+#include "AIPlayer.h"
 
 
-Point AlPlayer::chooseStep() const {
+Point AIPlayer::chooseStep() const {
 
 
 }
 
-AlPlayer::AlPlayer(Board::disk d, GameLogic gameLogic, Board board): Player(d), gameLogic(gameLogic),board(board){}
+AIPlayer::AIPlayer(Board::disk d, GameLogic* gameLogic, Board* board): Player(d), gameLogic(gameLogic),board(board){}
