@@ -15,8 +15,8 @@ vector<Point> StandardGameLogic::returnValidMoves(const Player* p ,const Board* 
     for (int i = 1; i < b->getRowSize() ; i++) {
         for (int j = 1; j < b->getColSize(); j++) {
             //update vector
-            vector<Point> temp = checkPoint(p,Point(i,j),b);
-            v.insert(v.end(),temp.begin(),temp.end());
+            checkPoint(p,Point(i,j),b ,v);
+           // v.insert(v.end(),temp.begin(),temp.end());
         }
     }
     return v;
@@ -24,14 +24,14 @@ vector<Point> StandardGameLogic::returnValidMoves(const Player* p ,const Board* 
 
 // the function get a point and check if it is a valid point
 // (possible move) for the player.
-vector<Point> StandardGameLogic::checkPoint(const Player* player, const Point &p, const Board* b) {
-    vector<Point> v;
+void StandardGameLogic::checkPoint(const Player* player, const Point &p, const Board* b, vector<Point> &vec) {
+    //vector<Point> v;
     Board::disk** array = b->getArray();
     int x = p.getX();
     int y = p.getY();
 
     //if the cell is empty.
-    if(array[x][y] == ' '){
+    if(array[x][y] == player->getDisk()){
 
         //the loop goes through all the cell's neighbors.
         for (int i = -1; i < 2 ; i++) {
@@ -46,12 +46,10 @@ vector<Point> StandardGameLogic::checkPoint(const Player* player, const Point &p
                     if(array[x+i][y+j] != ' ' && array[x+i][y+j] != player->getDisk()){
 
                         //if there will be reversion of the opponent's washers
-                        if(ifReverseOpponentDisk(player,Point((x),(y)),b,i,j)){
-
-                            Point point = Point((x),(y));
-
-                            if(!point.ifThePointIsInVector(v)){
-                                v.push_back(p);
+                        Point point = ifReverseOpponentDisk(player,Point(x,y),b,i,j);
+                        if(b->pointIsInRange(point)){
+                            if(!point.ifThePointIsInVector(vec)){
+                                vec.push_back(point);
                             }
                         }
                     }
@@ -59,12 +57,12 @@ vector<Point> StandardGameLogic::checkPoint(const Player* player, const Point &p
             }
         }
     }
-    return v;
+   // return v;
 }
 
 // the function get a points and check if selecting this point
 // will reverse the opponent disks.
-bool StandardGameLogic::ifReverseOpponentDisk(const Player* player,const  Point &p,  const Board* b,const int &i,const int &j) {
+Point StandardGameLogic::ifReverseOpponentDisk(const Player* player,const  Point &p,  const Board* b,const int &i,const int &j) {
     Board::disk** array = b->getArray();
     Point currentPoint = p;
     vector<Point> v;
@@ -74,20 +72,8 @@ bool StandardGameLogic::ifReverseOpponentDisk(const Player* player,const  Point 
 
     //while the point is not outside the boundaries of the matrix and
     // the point is not empty.
-    while(b->pointIsInRange(point) && array[point.getX()][point.getY()] != ' '){
-
-        //if it is cell of current player.
-        if(array[x][y] == player->getDisk()){
-
-            //if this point key is already exist in the map.
-            if(pointsMap.find(currentPoint) != pointsMap.end()){
-                pointsMap[currentPoint].insert(pointsMap[currentPoint].end(),v.begin(),v.end());
-            }
-            else{
-                pointsMap[currentPoint] = v;
-            }
-            return true;
-        }
+    while(b->pointIsInRange(point) && array[point.getX()][point.getY()] != ' ' &&
+            array[point.getX()][point.getY()] != player->getDisk()){
 
         //if the point is not exist in the vector
         if(!point.ifThePointIsInVector(v)){
@@ -98,7 +84,20 @@ bool StandardGameLogic::ifReverseOpponentDisk(const Player* player,const  Point 
         y = point.getY() + j;
         point = Point(x,y);
     }
-    return false;
+    //if it is cell empty
+    if(array[x][y] == ' '){
+
+        //if this point key is already exist in the map.
+        if(pointsMap.find(point) != pointsMap.end()){
+            pointsMap[point].insert(pointsMap[point].end(),v.begin(),v.end());
+        }
+        else{
+            pointsMap[point] = v;
+        }
+        return point;
+    }
+
+    return Point(-1,-1);
 }
 
 //The function places a disc where the player has selected

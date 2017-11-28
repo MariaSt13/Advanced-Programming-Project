@@ -32,11 +32,11 @@ private:
 
     // the function get a point and check if it is a valid point
     // (possible move) for the player.
-    vector<Point> checkPoint(const Player* player,const Point &p,const Board* b);
+    void checkPoint(const Player* player,const Point &p,const Board* b, vector<Point> &vector);
 
     // the function get a points and check if selecting this point
     // will reverse the opponent disks.
-    bool ifReverseOpponentDisk(const Player* player,const Point &p,const Board* b,const int &i, const int &j);
+    Point ifReverseOpponentDisk(const Player* player,const Point &p,const Board* b,const int &i, const int &j);
 
 };
 
