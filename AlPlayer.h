@@ -7,19 +7,26 @@
 
 
 #include "Player.h"
+#include "GameLogic.h"
 
 class AlPlayer: public Player  {
 
 public:
     //constructor.
-    AlPlayer(Board::disk d);
+    AlPlayer(Board::disk d, GameLogic gameLogic, Board board);
 
     //destructor.
-    virtual ~HumanLocalPlayer(){};
+    virtual ~AlPlayer(){};
 
     //the player in his turn choose point
     //to put in his disk.
     virtual Point chooseStep()const;
+
+private:
+
+    Board board;
+
+    GameLogic gameLogic
 
 };
 
