@@ -16,10 +16,10 @@ TEST(BoardTest,copyConstuctor){
     array[4][5] = b.blackActor;
     array[1][6] = b.blackActor;
     array[2][3] = b.blackActor;
-    array[4][6] = b.whitekActor;
-    array[4][5] = b.whitekActor;
-    array[1][6] = b.whitekActor;
-    array[2][3] = b.whitekActor;
+    array[4][6] = b.whiteActor;
+    array[4][5] = b.whiteActor;
+    array[1][6] = b.whiteActor;
+    array[2][3] = b.whiteActor;
     bool answer = true;
 
     Board copyBoard =  ConsoleBoard(&b);
@@ -49,7 +49,7 @@ TEST(BoardTest,fullBoard){
     EXPECT_TRUE(b.ifBoardIsFull());
     array[5][4] = b.empty;
     EXPECT_FALSE(b.ifBoardIsFull());
-    array[5][4] = b.whitekActor;
+    array[5][4] = b.whiteActor;
     EXPECT_TRUE(b.ifBoardIsFull());
 }
 
@@ -81,16 +81,16 @@ TEST(BoardTest,BoardLimits){
 TEST(BoardTest,countDisk){
     Board b =  ConsoleBoard(SIZE_ROW,SIZE_COL);
     EXPECT_TRUE(b.numOfPlayerDisks(b.blackActor) == 2);
-    EXPECT_TRUE(b.numOfPlayerDisks(b.whitekActor) == 2);
+    EXPECT_TRUE(b.numOfPlayerDisks(b.whiteActor) == 2);
     Board::disk** array =  b.getArray();
     array[1][1] = b.blackActor;
     array[4][7] = b.blackActor;
     array[8][8] = b.blackActor;
     array[2][3] = b.blackActor;
-    array[4][6] = b.whitekActor;
-    array[4][1] = b.whitekActor;
-    array[1][6] = b.whitekActor;
-    array[2][3] = b.whitekActor;
+    array[4][6] = b.whiteActor;
+    array[4][1] = b.whiteActor;
+    array[1][6] = b.whiteActor;
+    array[2][3] = b.whiteActor;
     EXPECT_TRUE(b.numOfPlayerDisks(b.blackActor) == 6);
-    EXPECT_TRUE(b.numOfPlayerDisks(b.whitekActor) == 6);
+    EXPECT_TRUE(b.numOfPlayerDisks(b.whiteActor) == 6);
 }
