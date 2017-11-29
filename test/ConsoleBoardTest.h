@@ -4,7 +4,7 @@
 
 #ifndef EXAM1_BOARDTEST_H
 #define EXAM1_BOARDTEST_H
-#include "gtest/gtest.h"
+#include <gtest/gtest.h>
 #include "../ConsoleBoard.h"
 
 #define SIZE_ROW 8
