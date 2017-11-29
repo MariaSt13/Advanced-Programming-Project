@@ -2,6 +2,7 @@
 // Created by linoy on 28/11/17.
 //
 
+#include <iostream>
 #include "AIPlayer.h"
 #include "ConsoleBoard.h"
 #include "HumanLocalPlayer.h"
@@ -39,7 +40,7 @@ Point AIPlayer::chooseStep() const {
             gameLogic->flipCells(blackActor, currentOpponentPoint, copyBoard2);
 
             //calculate score for this step and push to vector.
-           // currentScore = copyBoard2->numOfPlayerDisks(blackActor) - copyBoard2->numOfPlayerDisks(this);
+            currentScore = copyBoard2->numOfPlayerDisks(blackActor->getDisk()) - copyBoard2->numOfPlayerDisks(this->getDisk());
             score.push_back(make_pair(currentAIPoint,currentScore));
 
         }

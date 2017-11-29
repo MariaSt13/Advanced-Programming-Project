@@ -11,12 +11,38 @@
 // board is filled or when there are no further possible
 // moves to either side.
 class ReversiGame {
+
+public:
+
+    //game mode.
+    enum mode{noMode = 0, humanAgainstAI = 2,humanAgainsHuman= 1};
+
+    //constructor.
+    ReversiGame(const Board* gameBoard,const Player* whitePlayer,const Player* blackPlayer,GameLogic* gameLogic,mode m);
+
+
+    //this function run the game.
+    void play();
+
+    // if the game end return true, else
+    // return false.
+    bool isGameOver();
+
 private:
     const Board* gameBoard;
     const Player* whitePlayer;
     const Player* blackPlayer;
     GameLogic* gameLogic;
     const Player* hisTurn;
+    mode currentMode;
+
+    Point getStep(bool firstTry,vector<Point> v);
+
+    //print the step that played.
+    void  printCurrentBoard();
+
+    //print the step that played.
+    void  printChoosenPoint(Point p);
 
     //switch between the players turn.
     void changeTurn();
@@ -26,17 +52,6 @@ private:
 
     //print the final board and the winner.
     void gameOver() const;
-
-public:
-    //constructor.
-    ReversiGame(const Board* gameBoard,const Player* whitePlayer,const Player* blackPlayer,GameLogic* gameLogic);
-
-    //this function run the game.
-    void play();
-
-    // if the game end return true, else
-    // return false.
-    bool isGameOver();
 
 };
 

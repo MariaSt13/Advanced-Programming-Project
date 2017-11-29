@@ -6,49 +6,94 @@ using namespace std;
 #include "ReversiGame.h"
 #include "string"
 
-// constructor.
-ReversiGame::ReversiGame(const Board *gameBoard, const Player *blackPlayer,const Player *whitePlayer, GameLogic *gameLogic):
-    gameBoard(gameBoard),blackPlayer(blackPlayer),whitePlayer(whitePlayer),gameLogic(gameLogic){
+/**
+ * constructor.
+ * @param gameBoard
+ * @param blackPlayer
+ * @param whitePlayer
+ * @param gameLogic
+ * @param m
+ */
+ReversiGame::ReversiGame(const Board *gameBoard, const Player *blackPlayer,const Player *whitePlayer, GameLogic *gameLogic, mode m):
+    gameBoard(gameBoard),blackPlayer(blackPlayer),whitePlayer(whitePlayer),gameLogic(gameLogic),currentMode(m){
     this->hisTurn = this->blackPlayer;
     play();
 }
 
-// this function run the game.
+/**
+ * this function run the game.
+ */
 void ReversiGame::play() {
+    Point step = Point(-1,-1);
+
     //running the game
     while(!isGameOver()) {
         bool firstTry = true;
-
-        //print board and current player.
-        cout << "\n" << "current board:\n\n";
-        this->gameBoard->printBoard();
+        bool ifItisHumanPLayer = ((this->currentMode == humanAgainstAI && this->hisTurn->getDisk() == this->gameBoard->blackActor) ||
+                   this->currentMode == humanAgainsHuman);
 
         //get a vector of possible points and print it.
         vector<Point> v = this->gameLogic->returnValidMoves(this->hisTurn, this->gameBoard);
-        if(printPossibleMoves(v)) {
-            cout << "\n\n";
 
-            //get input from the player.
-            Point step = Point(-1, -1);
-            do {
-                if(!firstTry){
-                    cout << "Invalid input" << endl;
-                }
-                firstTry = false;
-                cout << "please enter your move row col (for example: 1 2):";
+        //if it is turn of human player.
+        if(ifItisHumanPLayer){
+            printCurrentBoard();
+
+            //if there is virtual player , print his las move.
+            if((!step.operator==(Point(-1,-1))) && (this->currentMode == humanAgainstAI)){
+                printChoosenPoint(step);
+            }
+
+
+            //if there are possible move to current player.
+            if(printPossibleMoves(v)) {
+
+                step = getStep(firstTry,v);
+
+                //makes the current player's choice and changes the next player's turn.
+                gameLogic->flipCells(this->hisTurn, step, gameBoard);
+            }
+        }
+
+        //if it is virtual player
+        else{
+
+            //if there are possible move to current player.
+            if(v.size() != 0){
                 step = this->hisTurn->chooseStep();
 
-            } while (!step.ifThePointIsInVector(v));
-
-            //makes the current player's choice and changes the next player's turn.
-            gameLogic->flipCells(this->hisTurn, step, gameBoard);
+                //makes the current player's choice and changes the next player's turn.
+                gameLogic->flipCells(this->hisTurn, step, gameBoard);
+            }
         }
         changeTurn();
     }
     gameOver();
 }
 
-// print the final board and the winner.
+/**
+ * print the current board.
+ */
+void ReversiGame::printCurrentBoard(){
+    //print board and current player.
+    cout << "\n" << "current board:\n\n";
+    this->gameBoard->printBoard();
+}
+
+/**
+ * print last point.
+ * @param step - last point.
+ */
+void ReversiGame::printChoosenPoint(Point step){
+    changeTurn();
+    char c = (this->hisTurn->getDisk());
+    cout <<c<< " played" << step<<endl<<endl;
+    changeTurn();
+}
+
+/**
+ *  print the final board and the winner.
+ */
 void ReversiGame::gameOver()const{
     cout << "current board:\n\n" ;
     this->gameBoard->printBoard();
@@ -81,8 +126,10 @@ void ReversiGame::gameOver()const{
     }
 }
 
-// if the game end return true, else
-// return false.
+/**
+ * if the game end return true, else return false.
+ * @return bool.
+ */
 bool ReversiGame::isGameOver() {
     //if the there is no empty cells return true.
     if(this->gameBoard->ifBoardIsFull()){
@@ -103,17 +150,40 @@ bool ReversiGame::isGameOver() {
         if(v2.size() == 0){
             return true;
         }
-        //changeTurn();
-        //printPossibleMoves(v1);
         changeTurn();
         return false;
     }
 }
 
+/**
+ *
+ * @param firstTry - true if it is the first try.
+ * @param v vector of points.
+ * @return Point.
+ */
+Point ReversiGame:: getStep(bool firstTry,vector<Point> v){
+    //get input from the player.
+    Point step = Point(-1, -1);
+        cout << "\n\n";
+        do {
+            if(!firstTry){
+                cout << "Invalid input" << endl;
+            }
+            firstTry = false;
+            cout << "please enter your move row col (for example: 1 2):";
+            step = this->hisTurn->chooseStep();
 
-// print the possible moves of the player in his turn.
+        } while (!step.ifThePointIsInVector(v));
+
+    return step;
+}
+
+/**
+ * print the possible moves of the player in his turn.
+ * @param v vector of points.
+ * @return bool.
+ */
 bool ReversiGame::printPossibleMoves(const vector<Point> &v)const {
-
     char c = (this->hisTurn->getDisk());
     cout << c;
     cout <<  ": It's your move.\n";
@@ -129,14 +199,16 @@ bool ReversiGame::printPossibleMoves(const vector<Point> &v)const {
     for (int i = 0; i < v.size() ; i++) {
         cout << v.at(i);
         if(i != v.size() -1){
-           cout << ",";
+            cout << ",";
         }
     }
     return true;
-
 }
 
-// switch between the players turn.
+
+/**
+ * switch between the players turn.
+ */
 void  ReversiGame::changeTurn (){
     if(this->hisTurn == this->blackPlayer){
         this->hisTurn = this->whitePlayer;

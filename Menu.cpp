@@ -20,9 +20,10 @@ void Menu::runMenu() {
     cout << "Please choose game mode:" << endl;
     cout << "(1) Human player" << endl;
     cout << "(2) AI player" << endl;
-    int chosenMode = 0;
+
+    int chosenMode =  ReversiGame::noMode;
     cin >> chosenMode;
-    while (chosenMode != 1 && chosenMode != 2) {
+    while (chosenMode != ReversiGame::humanAgainsHuman && chosenMode !=  ReversiGame::humanAgainstAI) {
         if(cin.fail()) {
             cout << " invalid input. Please try again" << endl;
             // get rid of failure state
@@ -43,15 +44,19 @@ void Menu::runGame(int mode) {
     Board* b =  new ConsoleBoard(8,8);
     Player* blackActor;
     Player* whiteActor;
+    ReversiGame::mode currentMode;
     GameLogic* standardGameLogic = new StandardGameLogic();
-    if ( mode == 1) {
+    if ( mode == ReversiGame::humanAgainsHuman) {
         blackActor = new HumanLocalPlayer(b->blackActor);
         whiteActor = new HumanLocalPlayer(b->whitekActor);
-    } else if ( mode == 2) {
+        currentMode = ReversiGame::humanAgainsHuman;
+    } else if ( mode == ReversiGame::humanAgainstAI) {
         blackActor = new HumanLocalPlayer(b->blackActor);
-        whiteActor = new AIPlayer(b->whitekActor,standardGameLogic, b);
+        GameLogic* standardGameLogic2 = new StandardGameLogic();
+        whiteActor = new AIPlayer(b->whitekActor,standardGameLogic2, b);
+        currentMode = ReversiGame::humanAgainstAI;
     }
-    ReversiGame game = ReversiGame(b,blackActor,whiteActor,standardGameLogic);
+    ReversiGame game = ReversiGame(b,blackActor,whiteActor,standardGameLogic,currentMode);
 
     //free memory
     delete(b);
