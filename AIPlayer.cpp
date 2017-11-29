@@ -51,7 +51,7 @@ Point AIPlayer::chooseStep() const {
 
 
     //find the index of the minimum score.
-    int min = 0;
+    int min = score[0].second;
     int index =0;
 
     for (int k = 0; k < score.size(); k++) {

@@ -84,16 +84,17 @@ Point StandardGameLogic::ifReverseOpponentDisk(const Player* player,const  Point
         point = Point(x,y);
     }
     //if it is cell empty
-    if(array[x][y] == ' '){
-
-        //if this point key is already exist in the map.
-        if(pointsMap.find(point) != pointsMap.end()){
-            pointsMap[point].insert(pointsMap[point].end(),v.begin(),v.end());
+    if(b->pointIsInRange(point)){
+        if(array[x][y] == ' '){
+            //if this point key is already exist in the map.
+            if(pointsMap.find(point) != pointsMap.end()){
+                pointsMap[point].insert(pointsMap[point].end(),v.begin(),v.end());
+            }
+            else{
+                pointsMap[point] = v;
+            }
+            return point;
         }
-        else{
-            pointsMap[point] = v;
-        }
-        return point;
     }
 
     return Point(-1,-1);

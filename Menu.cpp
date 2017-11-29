@@ -41,7 +41,7 @@ void Menu::runMenu() {
 
 }
 void Menu::runGame(int mode) {
-    Board* b =  new ConsoleBoard(8,8);
+    Board* b =  new ConsoleBoard(3,3);
     Player* blackActor;
     Player* whiteActor;
     ReversiGame::mode currentMode;
