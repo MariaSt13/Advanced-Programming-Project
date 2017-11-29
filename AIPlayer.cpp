@@ -32,6 +32,11 @@ Point AIPlayer::chooseStep() const {
         //get opponent valid steps vector.
         v2 = this->gameLogic->returnValidMoves(blackActor,copyBoard);
 
+        //there is no steps for opponent.
+        if(v2.size() == 0 ){
+            return currentAIPoint;
+        }
+
         //this loop go over all opponent valid steps.
         for (int j = 0; j < v2.size(); j++) {
             copyBoard2 =  new ConsoleBoard(copyBoard);

@@ -39,10 +39,10 @@ private:
     Point getStep(bool firstTry,vector<Point> v);
 
     //print the step that played.
-    void  printCurrentBoard();
+    void  printCurrentBoard()const;
 
     //print the step that played.
-    void  printChoosenPoint(Point p);
+    void  printChoosenPoint(Point p,bool virtualOponentPlaylastTurn);
 
     //switch between the players turn.
     void changeTurn();

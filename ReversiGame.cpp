@@ -25,9 +25,12 @@ ReversiGame::ReversiGame(const Board *gameBoard, const Player *blackPlayer,const
  */
 void ReversiGame::play() {
     Point step = Point(-1,-1);
+    bool firstTimeInLoop = true;
+    bool virtualOponentPlaylastTurn = false;
 
     //running the game
     while(!isGameOver()) {
+
         bool firstTry = true;
         bool ifItisHumanPLayer = ((this->currentMode == humanAgainstAI && this->hisTurn->getDisk() == this->gameBoard->blackActor) ||
                    this->currentMode == humanAgainsHuman);
@@ -39,11 +42,10 @@ void ReversiGame::play() {
         if(ifItisHumanPLayer){
             printCurrentBoard();
 
-            //if there is virtual player , print his las move.
-            if((!step.operator==(Point(-1,-1))) && (this->currentMode == humanAgainstAI)){
-                printChoosenPoint(step);
+            //if the opponent is a virtual player , print his last move.
+            if(this->currentMode == humanAgainstAI && !firstTimeInLoop){
+                printChoosenPoint(step,virtualOponentPlaylastTurn);
             }
-
 
             //if there are possible move to current player.
             if(printPossibleMoves(v)) {
@@ -64,9 +66,14 @@ void ReversiGame::play() {
 
                 //makes the current player's choice and changes the next player's turn.
                 gameLogic->flipCells(this->hisTurn, step, gameBoard);
+                virtualOponentPlaylastTurn = true;
+            }
+            else{
+                virtualOponentPlaylastTurn = false;
             }
         }
         changeTurn();
+        firstTimeInLoop = false;
     }
     gameOver();
 }
@@ -74,7 +81,7 @@ void ReversiGame::play() {
 /**
  * print the current board.
  */
-void ReversiGame::printCurrentBoard(){
+void ReversiGame::printCurrentBoard()const {
     //print board and current player.
     cout << "\n" << "current board:\n\n";
     this->gameBoard->printBoard();
@@ -84,10 +91,15 @@ void ReversiGame::printCurrentBoard(){
  * print last point.
  * @param step - last point.
  */
-void ReversiGame::printChoosenPoint(Point step){
+void ReversiGame::printChoosenPoint(Point step,bool virtualOponentPlaylastTurn){
     changeTurn();
     char c = (this->hisTurn->getDisk());
-    cout <<c<< " played" << step<<endl<<endl;
+    if(!virtualOponentPlaylastTurn){
+        cout <<c<< " had no moves"<<endl<<endl;
+    }
+    else{
+        cout <<c<< " played" << step<<endl<<endl;
+    }
     changeTurn();
 }
 
@@ -95,8 +107,7 @@ void ReversiGame::printChoosenPoint(Point step){
  *  print the final board and the winner.
  */
 void ReversiGame::gameOver()const{
-    cout << "current board:\n\n" ;
-    this->gameBoard->printBoard();
+    printCurrentBoard();
     cout <<"game over. ";
     int countWhite = 0;
     int countBlack = 0;
