@@ -1,11 +1,11 @@
-//name: linoy cohen
-//ID: 206333502
 
 #include "StandardGameLogic.h"
 using namespace std;
 #include <iostream>
 
-//The function returns a vector with all possible steps for the player.
+/*
+ * The function returns a vector with all possible steps for the player.
+ */
 vector<Point> StandardGameLogic::returnValidMoves(const Player* p ,const Board* b) {
     Board::disk** array = b->getArray();
     vector<Point> v;
@@ -14,22 +14,23 @@ vector<Point> StandardGameLogic::returnValidMoves(const Player* p ,const Board* 
     //check every point in the matrix
     for (int i = 1; i < b->getRowSize() ; i++) {
         for (int j = 1; j < b->getColSize(); j++) {
-            //update vector
+            //check if the point is a valid move for the player
             checkPoint(p,Point(i,j),b ,v);
         }
     }
     return v;
 }
 
-// the function get a point and check if it is a valid point
-// (possible move) for the player.
+/*
+ * the function get a point and check if it is a valid point
+ * (possible move) for the player.
+ */
 void StandardGameLogic::checkPoint(const Player* player, const Point &p, const Board* b, vector<Point> &vec) {
-    //vector<Point> v;
     Board::disk** array = b->getArray();
     int x = p.getX();
     int y = p.getY();
 
-    //if the cell is empty.
+    //if the cell is of th current player
     if(array[x][y] == player->getDisk()){
 
         //the loop goes through all the cell's neighbors.
@@ -42,10 +43,11 @@ void StandardGameLogic::checkPoint(const Player* player, const Point &p, const B
                 if( b->pointIsInRange(cuurentNeighbor)){
 
                     //If it is cell of the opposing player
-                    if(array[x+i][y+j] != ' ' && array[x+i][y+j] != player->getDisk()){
+                    if(array[x+i][y+j] != Board::empty && array[x+i][y+j] != player->getDisk()){
 
                         //if there will be reversion of the opponent's washers
                         Point point = ifReverseOpponentDisk(player,Point(x,y),b,i,j);
+
                         if(b->pointIsInRange(point)){
                             if(!point.ifThePointIsInVector(vec)){
                                 vec.push_back(point);
@@ -56,11 +58,12 @@ void StandardGameLogic::checkPoint(const Player* player, const Point &p, const B
             }
         }
     }
-   // return v;
 }
 
-// the function get a points and check if selecting this point
-// will reverse the opponent disks.
+/*
+ * the function get a points and check if selecting this point
+ * will reverse the opponent disks.
+ */
 Point StandardGameLogic::ifReverseOpponentDisk(const Player* player,const  Point &p,  const Board* b,const int &i,const int &j) {
     Board::disk** array = b->getArray();
     Point currentPoint = p;
@@ -69,9 +72,11 @@ Point StandardGameLogic::ifReverseOpponentDisk(const Player* player,const  Point
     int y = currentPoint.getY() + j;
     Point point = Point(x,y);
 
-    //while the point is not outside the boundaries of the matrix and
-    // the point is not empty.
-    while(b->pointIsInRange(point) && array[point.getX()][point.getY()] != ' ' &&
+    /*
+     * while the point is not outside the boundaries of the matrix and
+     * the point is not empty and not the player color.
+     */
+    while(b->pointIsInRange(point) && array[point.getX()][point.getY()] != Board::empty &&
             array[point.getX()][point.getY()] != player->getDisk()){
 
         //if the point is not exist in the vector
@@ -83,9 +88,10 @@ Point StandardGameLogic::ifReverseOpponentDisk(const Player* player,const  Point
         y = point.getY() + j;
         point = Point(x,y);
     }
-    //if it is cell empty
+
+    //if it is cell empty and in board
     if(b->pointIsInRange(point)){
-        if(array[x][y] == ' '){
+        if(array[x][y] == Board::empty){
             //if this point key is already exist in the map.
             if(pointsMap.find(point) != pointsMap.end()){
                 pointsMap[point].insert(pointsMap[point].end(),v.begin(),v.end());
@@ -100,8 +106,10 @@ Point StandardGameLogic::ifReverseOpponentDisk(const Player* player,const  Point
     return Point(-1,-1);
 }
 
-//The function places a disc where the player has selected
-//And calls a function that turns the opponent's disks.
+/*
+ * The function places a disc where the player has selected
+ * And calls a function that turns the opponent's disks.
+ */
 void StandardGameLogic::flipCells(const Player* player,const Point &newPoint, const Board* b) {
     Board::disk** array = b->getArray();
     array[newPoint.getX()][newPoint.getY()] = player->getDisk();

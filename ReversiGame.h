@@ -1,5 +1,3 @@
-//name: linoy cohen
-//ID: 206333502
 
 #ifndef EXAM1_REVERSIGAME_H
 #define EXAM1_REVERSIGAME_H
@@ -7,9 +5,11 @@
 #include "Player.h"
 #include "GameLogic.h"
 
-//this class runs the game. The game ends when the entire
-// board is filled or when there are no further possible
-// moves to either side.
+/*
+ * this class runs the game. The game ends when the entire
+ * board is filled or when there are no further possible
+ * moves to both sides.
+ */
 class ReversiGame {
 
 public:
@@ -24,8 +24,10 @@ public:
     //this function run the game.
     void play();
 
-    // if the game end return true, else
-    // return false.
+    /*
+     * if the game end  - return true
+     * else return false.
+     */
     bool isGameOver();
 
 private:
@@ -36,6 +38,7 @@ private:
     const Player* hisTurn;
     mode currentMode;
 
+    // gets the step from the player
     Point getStep(bool firstTry,vector<Point> v);
 
     //print the step that played.

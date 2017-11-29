@@ -1,6 +1,3 @@
-//
-// Created by maria on 28/11/17.
-//
 
 #include <iostream>
 #include <limits>
@@ -12,15 +9,24 @@
 #include "ReversiGame.h"
 
 using namespace std;
-
-Menu::Menu() {
+/*
+ * constructor. runs the menu of the game.
+ * rows - number of rows in the board game.
+ * cols - number of columns in the board game.
+ */
+Menu::Menu(const int &rows,const int &cols): rowNumber(rows), colNumber(cols){
     runMenu();
 }
-void Menu::runMenu() {
+/*
+ * runs the menu. show it and get the player choise.
+ */
+void Menu::runMenu(){
+    // print menu
     cout << "Please choose game mode:" << endl;
     cout << "(1) Human player" << endl;
     cout << "(2) AI player" << endl;
 
+    // mode of the game
     int chosenMode =  ReversiGame::noMode;
     cin >> chosenMode;
     while (chosenMode != ReversiGame::humanAgainsHuman && chosenMode !=  ReversiGame::humanAgainstAI) {
@@ -40,20 +46,26 @@ void Menu::runMenu() {
     runGame(chosenMode);
 
 }
-void Menu::runGame(int mode) {
-    Board* b =  new ConsoleBoard(3,3);
+/*
+ * runs the game by the mode choise.
+ * mode - the number of the mode chosen.
+ */
+void Menu::runGame(const int &mode) {
+    Board* b =  new ConsoleBoard(rowNumber, colNumber);
     Player* blackActor;
     Player* whiteActor;
     ReversiGame::mode currentMode;
     GameLogic* standardGameLogic = new StandardGameLogic();
+    GameLogic* standardGameLogic2 = new StandardGameLogic();
+
     if ( mode == ReversiGame::humanAgainsHuman) {
         blackActor = new HumanLocalPlayer(b->blackActor);
-        whiteActor = new HumanLocalPlayer(b->whitekActor);
+        whiteActor = new HumanLocalPlayer(b->whiteActor);
         currentMode = ReversiGame::humanAgainsHuman;
     } else if ( mode == ReversiGame::humanAgainstAI) {
         blackActor = new HumanLocalPlayer(b->blackActor);
-        GameLogic* standardGameLogic2 = new StandardGameLogic();
-        whiteActor = new AIPlayer(b->whitekActor,standardGameLogic2, b);
+        // send a copy of the logic to the AI player.
+        whiteActor = new AIPlayer(b->whiteActor,standardGameLogic2, b);
         currentMode = ReversiGame::humanAgainstAI;
     }
     ReversiGame game = ReversiGame(b,blackActor,whiteActor,standardGameLogic,currentMode);
@@ -63,4 +75,5 @@ void Menu::runGame(int mode) {
     delete(blackActor);
     delete(whiteActor);
     delete(standardGameLogic);
+    delete(standardGameLogic2);
 }

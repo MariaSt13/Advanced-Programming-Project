@@ -1,16 +1,21 @@
-//name: linoy cohen
-//ID: 206333502
 
 #include "ConsoleBoard.h"
 #include <iostream>
 using namespace std;
 
+/*
+ * constructor
+ */
 ConsoleBoard::ConsoleBoard(const int &rowSize, const int &colSize) : Board(rowSize, colSize) {}
-
+/*
+ * copy constructor
+ */
 ConsoleBoard::ConsoleBoard(Board* board): Board(board){};
 
-//The function prints the game board
-//return - void.
+/*
+ * The function prints the game board
+ * return - void.
+ */
 void ConsoleBoard::printBoard() const {
 
     printNumberedRow();
@@ -27,8 +32,10 @@ void ConsoleBoard::printBoard() const {
     }
 }
 
-// The function prints a numbered row above the game board.
-// return:void.
+/*
+ * The function prints a numbered row above the game board.
+ * return:void.
+ */
 void ConsoleBoard::printNumberedRow() const {
     for (int k = 1; k < this->colSize ; k++) {
         cout << " | ";
@@ -38,16 +45,17 @@ void ConsoleBoard::printNumberedRow() const {
     printSeparator();
 }
 
-// The function prints a separator line.
-// separator line printed between any two lines in the table.
-// return:void.
+/*
+ * The function prints a separator line.
+ * separator line printed between any two lines in the table.
+ * return:void.
+ */
 void ConsoleBoard::printSeparator() const {
-    cout << "|";
-    cout << "\n";
+    cout << "|" << endl;
     for (int i = 1; i < this->colSize; ++i) {
         cout << "----";
     }
-    cout << "--\n";
+    cout << "--" << endl;
 }
 
 // destructor.

@@ -1,5 +1,3 @@
-//name: linoy cohen
-//ID: 206333502
 
 #ifndef EXAM1_POINT1_H
 #define EXAM1_POINT1_H
@@ -7,8 +5,10 @@
 #include <vector>
 using namespace std;
 
-// point class.
-// points represent by x and y value.
+/*
+ * point class.
+ * points represented by x and y value.
+ */
 class Point{
 
 private:
@@ -19,12 +19,14 @@ public:
     //constructor.
     Point(const int &x,const int &y);
 
-    //this function get a vector of points and
-    // return 'true' if this point is exist in
-    // the vector. else return 'false'.
+    /*
+     * this function get a vector of points and
+     * return 'true' if this point is exist in
+     * the vector. else return 'false'.
+     */
     bool ifThePointIsInVector(const vector<Point> &v) const;
 
-    //opertor overloading.
+    //operator overloading.
     friend ostream &operator <<(ostream &out, const Point &pp);
     bool operator ==(const Point& p) const;
     bool operator <(const Point& p) const;

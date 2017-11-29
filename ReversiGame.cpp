@@ -1,5 +1,3 @@
-//name: linoy cohen
-//ID: 206333502
 
 #include <iostream>
 using namespace std;
@@ -8,11 +6,11 @@ using namespace std;
 
 /**
  * constructor.
- * @param gameBoard
- * @param blackPlayer
- * @param whitePlayer
- * @param gameLogic
- * @param m
+ * @param gameBoard - the board game
+ * @param blackPlayer - the black player
+ * @param whitePlayer - the white player
+ * @param gameLogic - the logic of the game
+ * @param m - the mode of the game
  */
 ReversiGame::ReversiGame(const Board *gameBoard, const Player *blackPlayer,const Player *whitePlayer, GameLogic *gameLogic, mode m):
     gameBoard(gameBoard),blackPlayer(blackPlayer),whitePlayer(whitePlayer),gameLogic(gameLogic),currentMode(m){
@@ -20,36 +18,35 @@ ReversiGame::ReversiGame(const Board *gameBoard, const Player *blackPlayer,const
     play();
 }
 
-/**
+/*
  * this function run the game.
  */
 void ReversiGame::play() {
     Point step = Point(-1,-1);
     bool firstTimeInLoop = true;
-    bool virtualOponentPlaylastTurn = false;
+    bool virtualOpponentPlayLastTurn = false;
 
     //running the game
     while(!isGameOver()) {
 
         bool firstTry = true;
-        bool ifItisHumanPLayer = ((this->currentMode == humanAgainstAI && this->hisTurn->getDisk() == this->gameBoard->blackActor) ||
+        bool ifItIsHumanPLayer = ((this->currentMode == humanAgainstAI && this->hisTurn->getDisk() == this->gameBoard->blackActor) ||
                    this->currentMode == humanAgainsHuman);
 
         //get a vector of possible points and print it.
         vector<Point> v = this->gameLogic->returnValidMoves(this->hisTurn, this->gameBoard);
 
         //if it is turn of human player.
-        if(ifItisHumanPLayer){
+        if(ifItIsHumanPLayer){
             printCurrentBoard();
 
             //if the opponent is a virtual player , print his last move.
             if(this->currentMode == humanAgainstAI && !firstTimeInLoop){
-                printChoosenPoint(step,virtualOponentPlaylastTurn);
+                printChoosenPoint(step,virtualOpponentPlayLastTurn);
             }
 
             //if there are possible move to current player.
             if(printPossibleMoves(v)) {
-
                 step = getStep(firstTry,v);
 
                 //makes the current player's choice and changes the next player's turn.
@@ -66,10 +63,10 @@ void ReversiGame::play() {
 
                 //makes the current player's choice and changes the next player's turn.
                 gameLogic->flipCells(this->hisTurn, step, gameBoard);
-                virtualOponentPlaylastTurn = true;
+                virtualOpponentPlayLastTurn = true;
             }
             else{
-                virtualOponentPlaylastTurn = false;
+                virtualOpponentPlayLastTurn = false;
             }
         }
         changeTurn();
@@ -78,37 +75,37 @@ void ReversiGame::play() {
     gameOver();
 }
 
-/**
- * print the current board.
+/*
+ * prints the current board.
  */
 void ReversiGame::printCurrentBoard()const {
     //print board and current player.
-    cout << "\n" << "current board:\n\n";
+    cout << endl << "current board:" << endl << endl;
     this->gameBoard->printBoard();
 }
 
-/**
+/*
  * print last point.
  * @param step - last point.
  */
-void ReversiGame::printChoosenPoint(Point step,bool virtualOponentPlaylastTurn){
+void ReversiGame::printChoosenPoint(Point step,bool virtualOpponentPlayLastTurn){
     changeTurn();
     char c = (this->hisTurn->getDisk());
-    if(!virtualOponentPlaylastTurn){
-        cout <<c<< " had no moves"<<endl<<endl;
+    if(!virtualOpponentPlayLastTurn){
+        cout << c << " had no moves" << endl << endl;
     }
     else{
-        cout <<c<< " played" << step<<endl<<endl;
+        cout << c << " played" << step << endl << endl;
     }
     changeTurn();
 }
 
-/**
+/*
  *  print the final board and the winner.
  */
 void ReversiGame::gameOver()const{
     printCurrentBoard();
-    cout <<"game over. ";
+    cout <<"Game over. ";
     int countWhite = 0;
     int countBlack = 0;
     Board::disk ** array = gameBoard->getArray();
@@ -127,17 +124,17 @@ void ReversiGame::gameOver()const{
 
     //prints the winning player.
     if(countBlack > countWhite){
-        cout <<"winner: the black player";
+        cout <<"The winner is: the black player.";
     }
     else if(countBlack < countWhite){
-        cout <<"winner: the white player";
+        cout <<"The winner is: the white player.";
     }
     else if(countBlack == countWhite){
-        cout <<"no winner";
+        cout <<"It's a draw.";
     }
 }
 
-/**
+/*
  * if the game end return true, else return false.
  * @return bool.
  */
@@ -166,8 +163,8 @@ bool ReversiGame::isGameOver() {
     }
 }
 
-/**
- *
+/*
+ * gets the step from the player.
  * @param firstTry - true if it is the first try.
  * @param v vector of points.
  * @return Point.
@@ -175,7 +172,7 @@ bool ReversiGame::isGameOver() {
 Point ReversiGame:: getStep(bool firstTry,vector<Point> v){
     //get input from the player.
     Point step = Point(-1, -1);
-        cout << "\n\n";
+        cout << endl << endl;
         do {
             if(!firstTry){
                 cout << "Invalid input" << endl;
@@ -189,7 +186,7 @@ Point ReversiGame:: getStep(bool firstTry,vector<Point> v){
     return step;
 }
 
-/**
+/*
  * print the possible moves of the player in his turn.
  * @param v vector of points.
  * @return bool.
@@ -197,7 +194,7 @@ Point ReversiGame:: getStep(bool firstTry,vector<Point> v){
 bool ReversiGame::printPossibleMoves(const vector<Point> &v)const {
     char c = (this->hisTurn->getDisk());
     cout << c;
-    cout <<  ": It's your move.\n";
+    cout <<  ": It's your move." << endl;
 
     //if there is no possible moves.
     if(v.size() == 0){
@@ -217,7 +214,7 @@ bool ReversiGame::printPossibleMoves(const vector<Point> &v)const {
 }
 
 
-/**
+/*
  * switch between the players turn.
  */
 void  ReversiGame::changeTurn (){

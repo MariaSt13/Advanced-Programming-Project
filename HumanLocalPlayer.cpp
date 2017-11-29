@@ -1,14 +1,17 @@
-//name: linoy cohen
-//ID: 206333502
 
 #include "HumanLocalPlayer.h"
 using namespace std;
 #include <iostream>
 #include <limits>
 
+/*
+ * constructor.
+ */
 HumanLocalPlayer::HumanLocalPlayer(Board::disk d): Player(d) {}
 
-// the player choose his next move in his turn .
+/*
+ * the player choose his next move in his turn .
+ */
 Point HumanLocalPlayer::chooseStep() const {
     int row;
     int col;
@@ -19,7 +22,7 @@ Point HumanLocalPlayer::chooseStep() const {
         cin.clear();
 
         // discard 'bad' character(s)
-        cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
        return Point(-1,-1);
     }
 

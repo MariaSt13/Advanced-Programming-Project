@@ -1,5 +1,3 @@
-//name: linoy cohen
-//ID: 206333502
 
 #ifndef EXAM1_PLAYER_H
 #define EXAM1_PLAYER_H
@@ -7,21 +5,23 @@
 #include "Point.h"
 #include "Board.h"
 
-//player class.
-// a player can choose his moves.
+/*
+ * player class.
+ * a player can choose his moves.
+ */
 class Player{
 public:
 
     // the player choose his next move in his turn .
     virtual Point chooseStep() const = 0;
 
-    //contructor.
+    //constructor.
     Player(Board::disk d): d(d){} ;
 
     //destructor.
     virtual ~Player() {};
 
-    //get disk
+    //get disk type
     Board::disk getDisk()const{
         return this->d;
     }

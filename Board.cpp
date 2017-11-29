@@ -1,13 +1,14 @@
-//name: linoy cohen
-//ID: 206333502
 
 #include <iostream>
 #include "Board.h"
 using namespace std;
 
-//deep copy constructor.
-Board::Board(Board* board): Board(board->getRowSize()-1,board->getColSize()-1){
+/*
+ * Deep copy constructor.
+ */
+Board::Board(Board* board): rowSize(board->getRowSize()), colSize(board->getColSize()){
 
+    allocateBoard();
     disk** arrToCopy = board->getArray();
 
     //deep copy
@@ -21,13 +22,8 @@ Board::Board(Board* board): Board(board->getRowSize()-1,board->getColSize()-1){
 //constructor.
 Board::Board(const int &rowSize,const int &colSize): rowSize(rowSize+1), colSize(colSize+1) {
 
-    //create new matrix.
-    array = new disk*[this->rowSize];
-
-    for (int j = 0; j < this->rowSize; j++) {
-        array[j] = new disk[this->colSize];
-    }
-
+    //allocate memory
+    allocateBoard();
     //Initializes all the cells in the array with a space character.
     for (int i = 0; i < this->rowSize; i++) {
         for (int j = 0; j < this->colSize ; j++) {
@@ -38,23 +34,28 @@ Board::Board(const int &rowSize,const int &colSize): rowSize(rowSize+1), colSize
     //Boot the cells of the players.
     int x =(this->rowSize)/2;
     int y = (this->colSize)/2;
-    array[x][y] = whitekActor;
-    array[x+1][y+1] = whitekActor;
+    array[x][y] = whiteActor;
+    array[x+1][y+1] = whiteActor;
     array[x][y+1] = blackActor;
     array[x+1][y] = blackActor;
 }
 
-// the function get a point and return
-// true if the point is in the board range.
-// else , return false.
-// return : bool.
+/*
+ * the function get a point and return
+ * true if the point is in the board range.
+ * else , return false.
+ * return : bool.
+ */
 bool Board::pointIsInRange(const Point &p) const{
     return p.getX() > 0 && p.getX() < this->rowSize &&
            p.getY()>0 && p.getY() < this->colSize;
 }
 
 
-//return number of disks in the board of the player.
+/*
+ * return number of disks in the board of the player.
+ * d - the type of disk to count.
+ */
 int Board::numOfPlayerDisks(disk d)const{
     int count = 0;
     for (int i = 1; i < this->rowSize ; i++) {
@@ -66,13 +67,14 @@ int Board::numOfPlayerDisks(disk d)const{
     }
     return count;
 }
-// if tere is no empty cells return true.
-// else return false.
-//return : bool.
+/* if there is no empty cells return true.
+ * else return false.
+ * return : bool.
+ */
 bool Board::ifBoardIsFull() const {
     for (int i = 1; i < this->rowSize ; i++) {
         for (int j = 1; j < this->colSize ; j++) {
-            if(array[i][j] == ' '){
+            if(array[i][j] == empty){
                 return false;
             }
         }
@@ -90,9 +92,20 @@ const int Board::getColSize() const {
     return this->colSize;
 }
 
-// reutrn array member.
-Board:: disk **Board::getArray () const {
+// return the board matrix
+Board::disk **Board::getArray () const {
     return this->array;
+}
+/*
+ * allocate the memory for the board
+ */
+void Board::allocateBoard() {
+    //create new matrix.
+    array = new disk*[this->rowSize];
+
+    for (int j = 0; j < this->rowSize; j++) {
+        array[j] = new disk[this->colSize];
+    }
 }
 
 //destructor.

@@ -1,17 +1,21 @@
-//name: linoy cohen
-//ID: 206333502
 
 #ifndef EXAM1_EXAMPLE_H
 #define EXAM1_EXAMPLE_H
 #include "Board.h"
 
-// This class extends board class .
-// display of the game board using the console.
+/*
+ * This class extends board class .
+ * display of the game board using the console.
+ */
 class ConsoleBoard: public Board {
 
 public:
 
-    //consturctor.
+    /*
+     * constructor.
+     * rowsize - the number of rows in the board.
+     * colSize - number of columns in the board
+     */
     ConsoleBoard(const int &rowSize, const int &colSize);
 
     //deep copy constructor
@@ -27,8 +31,10 @@ private:
     //The function prints a numbered row above the game board.
     void printNumberedRow() const;
 
-    //The function prints a separator line.
-    // separator line printed between any two lines in the table.
+    /*
+     * The function prints a separator line.
+     * separator line printed between any two lines in the table.
+     */
     void printSeparator() const;
 };
 
