@@ -14,6 +14,9 @@ public:
     //consturctor.
     ConsoleBoard(const int &rowSize, const int &colSize);
 
+    //deep copy constructor
+    ConsoleBoard(Board* board);
+
     //The function prints the board game.
     void printBoard() const;
 

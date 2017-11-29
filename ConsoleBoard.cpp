@@ -7,6 +7,8 @@ using namespace std;
 
 ConsoleBoard::ConsoleBoard(const int &rowSize, const int &colSize) : Board(rowSize, colSize) {}
 
+ConsoleBoard::ConsoleBoard(Board* board): Board(board){};
+
 //The function prints the game board
 //return - void.
 void ConsoleBoard::printBoard() const {

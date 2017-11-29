@@ -5,13 +5,13 @@
 #ifndef ADVANCED_PROGRAMMING_PROJECT_ALPLAYER_H
 #define ADVANCED_PROGRAMMING_PROJECT_ALPLAYER_H
 
-
-#include "Player.h"
 #include "GameLogic.h"
+#include "Player.h"
 
 class AIPlayer: public Player  {
 
 public:
+
     //constructor.
     AIPlayer(Board::disk d, GameLogic *gameLogic, Board *board);
 

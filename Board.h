@@ -18,6 +18,9 @@ class Board {
         //constructor.
         Board(const int &rowSize, const int &colSize);
 
+        //deep copy constructor
+        Board(Board* board);
+
         //destructor
         virtual ~Board();
 
@@ -29,6 +32,9 @@ class Board {
         // if tere is no empty cells return true.
         // else return false.
         bool ifBoardIsFull() const;
+
+        //return number of disks in the board of the player.
+        int numOfPlayerDisks(disk d)const ;
 
         //get functions.
         const int getColSize() const ;

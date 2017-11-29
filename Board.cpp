@@ -5,6 +5,19 @@
 #include "Board.h"
 using namespace std;
 
+//deep copy constructor.
+Board::Board(Board* board): Board(board->getRowSize()-1,board->getColSize()-1){
+
+    disk** arrToCopy = board->getArray();
+
+    //deep copy
+    for (int i = 0; i < this->rowSize; i++) {
+        for (int j = 0; j < this->colSize ; j++) {
+            array[i][j] = arrToCopy[i][j];
+        }
+    }
+}
+
 //constructor.
 Board::Board(const int &rowSize,const int &colSize): rowSize(rowSize+1), colSize(colSize+1) {
 
@@ -20,7 +33,6 @@ Board::Board(const int &rowSize,const int &colSize): rowSize(rowSize+1), colSize
         for (int j = 0; j < this->colSize ; j++) {
             array[i][j] = empty;
         }
-
     }
 
     //Boot the cells of the players.
@@ -41,6 +53,19 @@ bool Board::pointIsInRange(const Point &p) const{
            p.getY()>0 && p.getY() < this->colSize;
 }
 
+
+//return number of disks in the board of the player.
+int Board::numOfPlayerDisks(disk d)const{
+    int count = 0;
+    for (int i = 1; i < this->rowSize ; i++) {
+        for (int j = 1; j < this->colSize ; j++) {
+            if(array[i][j] == d){
+                count++;
+            }
+        }
+    }
+    return count;
+}
 // if tere is no empty cells return true.
 // else return false.
 //return : bool.
