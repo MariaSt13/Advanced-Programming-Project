@@ -74,7 +74,6 @@ Point AIPlayer::chooseStep() const {
     }
     // delete allocated memory
     delete(copyBoard);
-    delete(copyBoard2);
     delete(blackActor);
 
     // return the chosen point
