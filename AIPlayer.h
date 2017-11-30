@@ -5,6 +5,9 @@
 #include "GameLogic.h"
 #include "Player.h"
 
+/*
+ * this class extends player class and represent AI player.
+ */
 class AIPlayer: public Player  {
 
 public:
