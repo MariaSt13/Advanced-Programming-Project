@@ -1,6 +1,3 @@
-//
-// Created by linoy on 29/11/17.
-//
 
 #include "ConsoleBoardTest.h"
 #include <gtest/gtest.h>
@@ -10,6 +7,7 @@
  * test 1: check that copy constructor work correctly.
  */
 TEST(BoardTest,copyConstuctor){
+    ConsoleBoardTest test = ConsoleBoardTest();
     ConsoleBoard b =  ConsoleBoard(SIZE_ROW,SIZE_COL);
     Board::disk** array =  b.getArray();
     array[4][6] = b.blackActor;
@@ -31,7 +29,7 @@ TEST(BoardTest,copyConstuctor){
     }
 
     //empty board
-    fullBoard(b,b.empty);
+    test.fullBoard(b,b.empty);
 
 
     ConsoleBoard copyBoard2 =  ConsoleBoard(&b);
@@ -50,11 +48,12 @@ TEST(BoardTest,copyConstuctor){
  * test 2: check that fullBoard function work correctly.
  */
 TEST(BoardTest,fullBoard){
+    ConsoleBoardTest test = ConsoleBoardTest();
     ConsoleBoard b =  ConsoleBoard(SIZE_ROW,SIZE_COL);
     Board::disk** array =  b.getArray();
 
     //full board
-    fullBoard(b,b.blackActor);
+    test.fullBoard(b,b.blackActor);
 
     EXPECT_TRUE(b.ifBoardIsFull());
     array[5][4] = b.empty;
@@ -63,7 +62,7 @@ TEST(BoardTest,fullBoard){
     EXPECT_TRUE(b.ifBoardIsFull());
 
     //empty board.
-    fullBoard(b,b.empty);
+    test.fullBoard(b,b.empty);
 
     EXPECT_FALSE(b.ifBoardIsFull());
     array[8][4] = b.whiteActor;
@@ -107,6 +106,7 @@ TEST(BoardTest,BoardLimits){
  * test 2: check that numOfPlayerDisks function work correctly.
  */
 TEST(BoardTest,countDisk){
+    ConsoleBoardTest test = ConsoleBoardTest();
     ConsoleBoard b =  ConsoleBoard(SIZE_ROW,SIZE_COL);
     EXPECT_TRUE(b.numOfPlayerDisks(b.blackActor) == 2);
     EXPECT_TRUE(b.numOfPlayerDisks(b.whiteActor) == 2);
@@ -125,13 +125,13 @@ TEST(BoardTest,countDisk){
     EXPECT_TRUE(b.numOfPlayerDisks(b.whiteActor) == 6);
 
     //full board
-    fullBoard(b,b.blackActor);
+    test.fullBoard(b,b.blackActor);
 
     EXPECT_TRUE(b.numOfPlayerDisks(b.blackActor) == 64);
     EXPECT_TRUE(b.numOfPlayerDisks(b.whiteActor) == 0);
 
     //empty board
-    fullBoard(b,b.empty);
+    test.fullBoard(b,b.empty);
     EXPECT_TRUE(b.numOfPlayerDisks(b.blackActor) == 0);
     EXPECT_TRUE(b.numOfPlayerDisks(b.whiteActor) == 0);
 }
@@ -141,11 +141,11 @@ TEST(BoardTest,countDisk){
  * @param b
  * @param d
  */
-void ConsoleBoardTest:: fullBoard(ConsoleBoard b,Board::disk d){
+void ConsoleBoardTest:: fullBoard(ConsoleBoard &b,Board::disk d){
     Board::disk** array =  b.getArray();
     //empty board.
-    for (int i = 0; i < b.getRowSize(); i++) {
-        for (int j = 0; j < b.getColSize() ; j++) {
+    for (int i = 1; i < b.getRowSize(); i++) {
+        for (int j = 1; j < b.getColSize() ; j++) {
             array[i][j] = d;
         }
     }

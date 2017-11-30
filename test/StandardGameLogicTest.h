@@ -1,6 +1,4 @@
-//
-// Created by linoy on 29/11/17.
-//
+
 
 #ifndef EXAM1_GAMELOGICTEST_H
 #define EXAM1_GAMELOGICTEST_H
