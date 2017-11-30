@@ -24,12 +24,6 @@ public:
     //this function run the game.
     void play();
 
-    /*
-     * if the game end  - return true
-     * else return false.
-     */
-    bool isGameOver();
-
 private:
     const Board* gameBoard;
     const Player* whitePlayer;
@@ -41,6 +35,12 @@ private:
     // gets the step from the player
     Point getStep(bool firstTry,vector<Point> v);
 
+    /*
+     * if the game end  - return true
+     * else return false.
+     */
+    bool isGameOver();
+    
     //print the step that played.
     void  printCurrentBoard()const;
 
