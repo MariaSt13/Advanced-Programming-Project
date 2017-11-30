@@ -1,9 +1,5 @@
-//
-// Created by linoy on 29/11/17.
-//
 
 #include <gtest/gtest.h>
-#include "PointTest.h"
 #include "../Point.h"
 
 /*

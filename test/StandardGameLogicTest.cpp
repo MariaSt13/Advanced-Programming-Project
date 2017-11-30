@@ -1,6 +1,3 @@
-//
-// Created by linoy on 29/11/17.
-//
 
 #include "StandardGameLogicTest.h"
 #include <gtest/gtest.h>
@@ -16,14 +13,20 @@
 TEST(GameLogicTest,returnValidMovesTest){
     StandardGameLogic gameLogic = StandardGameLogic();
     ConsoleBoard b = ConsoleBoard(SIZE_ROW, SIZE_COL);
-    HumanLocalPlayer whitePlayer = HumanLocalPlayer(b.whiteActor);
-    vector<Point> v1 = gameLogic.returnValidMoves(&whitePlayer,&b);
+    HumanLocalPlayer blackPlayer = HumanLocalPlayer(b.blackActor);
+    vector<Point> v1 = gameLogic.returnValidMoves(&blackPlayer,&b);
     vector<Point> v2;
     v2.push_back(Point(3,4));
     v2.push_back(Point(4,3));
     v2.push_back(Point(5,6));
     v2.push_back(Point(6,5));
-
+    for (vector<Point>::const_iterator it = v1.begin(); it < v1.end(); it++) {
+        EXPECT_TRUE((*it).ifThePointIsInVector(v2));
+    }
+    EXPECT_FALSE(Point(7,1).ifThePointIsInVector(v1));
+    EXPECT_FALSE(Point(8,1).ifThePointIsInVector(v1));
+    EXPECT_FALSE(Point(7,3).ifThePointIsInVector(v1));
+    EXPECT_FALSE(Point(1,1).ifThePointIsInVector(v1));
 }
 
 

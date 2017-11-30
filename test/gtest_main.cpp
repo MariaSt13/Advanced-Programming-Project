@@ -1,6 +1,3 @@
-//
-// Created by maria on 29/11/17.
-//
 
 #include <gtest/gtest.h>
 
