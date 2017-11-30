@@ -1,5 +1,4 @@
 
-#include "StandardGameLogicTest.h"
 #include <gtest/gtest.h>
 #include "../StandardGameLogic.h"
 #include "../HumanLocalPlayer.h"
