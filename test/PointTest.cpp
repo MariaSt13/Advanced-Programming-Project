@@ -7,7 +7,7 @@
 #include "../Point.h"
 
 /*
- * test if the function that check if cureent point is in the given vector
+ * Test1: test if the function that check if cureent point is in the given vector
  */
 TEST(PointTest, ifPointIsInVector) {
     vector<Point> v;
@@ -35,7 +35,7 @@ TEST(PointTest, ifPointIsInVector) {
     EXPECT_FALSE(Point(3,4).ifThePointIsInVector(v));
 }
 /*
- * test operator == overloading
+ *  Test2: test operator == overloading
  */
 TEST(PointTest, testEqual) {
     //equal
@@ -50,7 +50,7 @@ TEST(PointTest, testEqual) {
     EXPECT_FALSE(Point(x,y) == Point(y,x));
 }
 /*
- * test operator < overloading
+ * Test 3: test operator < overloading
  */
 TEST(PointTest, smallTest) {
     // small
