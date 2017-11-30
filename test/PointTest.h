@@ -6,9 +6,7 @@
 #define EXAM1_POINTTEST_H
 
 
-class PointTest {
-
-};
+class PointTest {};
 
 
 #endif //EXAM1_POINTTEST_H
