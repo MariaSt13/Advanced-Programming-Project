@@ -21,7 +21,7 @@ Point AIPlayer::chooseStep() const {
     int mScore;
     vector< pair<Point,int > > v;
     Player* blackActor = new HumanLocalPlayer(board->blackActor);
-    int mMaxScore = 0;
+    int mMaxScore;
 
     //Step1 :Given the current board mode, find all possible moves of the AI player
     v1 = this->gameLogic->returnValidMoves(this,copyBoard);
@@ -36,6 +36,7 @@ Point AIPlayer::chooseStep() const {
 
         //Step 4: make the move and update the status of the board
         gameLogic->flipCells(this, m, copyBoard);
+        copyBoard->printBoard();
 
         //get opponent valid steps vector.
         v2 = this->gameLogic->returnValidMoves(blackActor,copyBoard);
@@ -47,14 +48,18 @@ Point AIPlayer::chooseStep() const {
             delete(blackActor);
             return m;
         }
-
         //Step 5: For all possible moves of the opponent in the new board mode:
         for (vector<Point>::const_iterator it2 = v2.begin(); it2 < v2.end(); it2++) {
+
+            //copy board.
             copyBoard2 =  new ConsoleBoard(copyBoard);
+
+            //initialize map in gameLogic.
+            this->gameLogic->returnValidMoves(blackActor,copyBoard);
+
             Point currentOpponentPoint = (*it2);
 
             cout<<"opponent point " << currentOpponentPoint<<": ";
-
             //make opponent move and update the status of the board
             gameLogic->flipCells(blackActor, currentOpponentPoint, copyBoard2);
 
@@ -71,14 +76,20 @@ Point AIPlayer::chooseStep() const {
             delete(copyBoard2);
         }
 
-        cout<<"insert max: " << mMaxScore<<endl<<endl;
+        cout<<"insert m: "<<m << " insert max: " << mMaxScore<<endl<<endl;
         cout<<"-------------------------------------------------"<<endl;
         ///add m and the score of m to the vector.
         v.push_back(make_pair(m,mMaxScore));
 
         //copy board.
         delete(copyBoard);
-        copyBoard =  new ConsoleBoard(this->board);
+        copyBoard = new ConsoleBoard(this->board);
+
+        //initialize, map in gameLogic.
+        this->gameLogic->returnValidMoves(this,copyBoard);
+
+        //initialize mMaxScore
+        mMaxScore = 0;
     }
 
 
