@@ -20,7 +20,7 @@ Point AIPlayer::chooseStep() const {
     int mScore;
     vector< pair<Point,int > > v;
     Player* blackActor = new HumanLocalPlayer(board->blackActor);
-    int mMaxScore;
+    int mMaxScore = 0;
 
     //Step1 :Given the current board mode, find all possible moves of the AI player.
     v1 = this->gameLogic->returnValidMoves(this,copyBoard);
