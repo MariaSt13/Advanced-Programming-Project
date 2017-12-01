@@ -17,44 +17,54 @@ Point AIPlayer::chooseStep() const {
     vector<Point> v2;
     Board* copyBoard = new ConsoleBoard(this->board);
     Board* copyBoard2;
-    int currentScore;
-    vector< pair<Point,int > > score;
+    int mScore;
+    vector< pair<Point,int > > v;
     Player* blackActor = new HumanLocalPlayer(board->blackActor);
+    int mMaxScore;
 
-    //get AI valid steps vector.
+    //Step1 :Given the current board mode, find all possible moves of the AI player
     v1 = this->gameLogic->returnValidMoves(this,copyBoard);
 
-    //this loop go over all AI valid steps.
+    //Step 2: For each possible move m:
     for (vector<Point>::const_iterator it = v1.begin(); it < v1.end(); it++) {
 
-        //initialize current point.
-        Point currentAIPoint = (*it);
+        //initialize possible move m.
+        Point m = (*it);
 
-        //makes AI player's step.
-        gameLogic->flipCells(this, currentAIPoint, copyBoard);
+        //Step 4: make the move and update the status of the board
+        gameLogic->flipCells(this, m, copyBoard);
 
         //get opponent valid steps vector.
         v2 = this->gameLogic->returnValidMoves(blackActor,copyBoard);
 
-        //there is no steps for opponent.
-        if(v2.size() == 0 ){
+        //if this move causes the opponent to have no legal moves.
+        if(v2.size() == 0){
             delete(copyBoard);
             delete(blackActor);
-            return currentAIPoint;
+            return m;
         }
 
-        //this loop go over all opponent valid steps.
+        //Step 5: For all possible moves of the opponent in the new board mode:
         for (vector<Point>::const_iterator it2 = v2.begin(); it2 < v2.end(); it2++) {
             copyBoard2 =  new ConsoleBoard(copyBoard);
             Point currentOpponentPoint = (*it2);
-            //makes opponent player's step.
+
+            //make opponent move and update the status of the board
             gameLogic->flipCells(blackActor, currentOpponentPoint, copyBoard2);
 
-            //calculate score for this step and push to vector.
-            currentScore = copyBoard2->numOfPlayerDisks(blackActor->getDisk()) - copyBoard2->numOfPlayerDisks(this->getDisk());
-            score.push_back(make_pair(currentAIPoint,currentScore));
+            //Step 6: Calculate the opponent's score in the new position(the number of blackActor discs less than a number
+            //of computer disks).
+            mScore = copyBoard2->numOfPlayerDisks(blackActor->getDisk()) - copyBoard2->numOfPlayerDisks(this->getDisk());
+
+            //Step 7: Set m score as the maximum score that the opponent can receive in the new mode
+            if(mScore > mMaxScore || it2 == v2.begin()){
+                mMaxScore = mScore;
+            }
             delete(copyBoard2);
         }
+
+        ///add m and the score of m to the vector.
+        v.push_back(make_pair(m,mScore));
 
         //copy board.
         delete(copyBoard);
@@ -62,13 +72,13 @@ Point AIPlayer::chooseStep() const {
     }
 
 
-    //find the index of the minimum score.
-    int min = score[0].second;
+    //Step 8: Select the m move with the lowest score.
+    int min = v[0].second;
     int index = 0;
 
-    for (int k = 0; k < score.size(); k++) {
-        if(score[k].second < min){
-            min = score[k].second;
+    for (int k = 0; k < v.size(); k++) {
+        if(v[k].second < min){
+            min = v[k].second;
             index = k;
         }
     }
@@ -77,6 +87,6 @@ Point AIPlayer::chooseStep() const {
     delete(blackActor);
 
     // return the chosen point
-    return score[index].first;
+    return v[index].first;
 
 }
