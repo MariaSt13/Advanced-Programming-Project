@@ -164,3 +164,106 @@ TEST(GameLogicTest,returnValdMovesWithFullBoardSmallBoard){
     EXPECT_TRUE(v1.empty());
     EXPECT_TRUE(v2.empty());
 }
+
+TEST(GameLogicTest, emptyBoardBigBoard) {
+    StandardGameLogic gameLogic = StandardGameLogic();
+    ConsoleBoard b = ConsoleBoard(SIZE_ROW_STANDARD, SIZE_COL_STANDARD);
+    HumanLocalPlayer whitePlayer = HumanLocalPlayer(b.whiteActor);
+    HumanLocalPlayer blackPlayer = HumanLocalPlayer(b.blackActor);
+    Board::disk** array =  b.getArray();
+    //empty board
+    array[4][4] = b.empty;
+    array[4][5] = b.empty;
+    array[5][4] = b.empty;
+    array[5][5] = b.empty;
+    //no moves
+    vector<Point> v1 = gameLogic.returnValidMoves(&whitePlayer,&b);
+    vector<Point> v2 = gameLogic.returnValidMoves(&blackPlayer,&b);
+    EXPECT_TRUE(v1.empty());
+    EXPECT_TRUE(v2.empty());
+}
+
+TEST(GameLogicTest, emptyBoardSmallBoard) {
+    StandardGameLogic gameLogic = StandardGameLogic();
+    ConsoleBoard b = ConsoleBoard(SIZE_ROW_SMALL, SIZE_COL_SMALL);
+    HumanLocalPlayer whitePlayer = HumanLocalPlayer(b.whiteActor);
+    HumanLocalPlayer blackPlayer = HumanLocalPlayer(b.blackActor);
+    Board::disk** array =  b.getArray();
+    //empty board
+    array[2][2] = b.empty;
+    array[2][3] = b.empty;
+    array[3][3] = b.empty;
+    array[3][2] = b.empty;
+    //no moves
+    vector<Point> v1 = gameLogic.returnValidMoves(&whitePlayer,&b);
+    vector<Point> v2 = gameLogic.returnValidMoves(&blackPlayer,&b);
+    EXPECT_TRUE(v1.empty());
+    EXPECT_TRUE(v2.empty());
+}
+TEST(GameLogicTest, oneMoveBigBoard) {
+    StandardGameLogic gameLogic = StandardGameLogic();
+    ConsoleBoard b = ConsoleBoard(SIZE_ROW_STANDARD, SIZE_COL_STANDARD);
+    HumanLocalPlayer whitePlayer = HumanLocalPlayer(b.whiteActor);
+    HumanLocalPlayer blackPlayer = HumanLocalPlayer(b.blackActor);
+    Board::disk** array =  b.getArray();
+    //full board
+    for (int i = 0; i < b.getRowSize(); i++) {
+        for (int j = 0; j < b.getColSize() ; j++) {
+            array[i][j] = b.blackActor;
+        }
+    }
+    // only one move to white
+    array[8][8] = b.whiteActor;
+    array[8][1] = b.empty;
+
+    //no moves
+    vector<Point> v1 = gameLogic.returnValidMoves(&whitePlayer,&b);
+    EXPECT_TRUE(v1.size() == 1);
+
+    //full board
+    for (int i = 0; i < b.getRowSize(); i++) {
+        for (int j = 0; j < b.getColSize() ; j++) {
+            array[i][j] = b.whiteActor;
+        }
+    }
+    // only one move to black
+    array[8][1] = b.blackActor;
+    array[8][8] = b.empty;
+
+    vector<Point> v2 = gameLogic.returnValidMoves(&blackPlayer,&b);
+    EXPECT_TRUE(v2.size() == 1);
+}
+
+TEST(GameLogicTest, oneMoveSmallBoard) {
+    StandardGameLogic gameLogic = StandardGameLogic();
+    ConsoleBoard b = ConsoleBoard(SIZE_ROW_SMALL, SIZE_COL_SMALL);
+    HumanLocalPlayer whitePlayer = HumanLocalPlayer(b.whiteActor);
+    HumanLocalPlayer blackPlayer = HumanLocalPlayer(b.blackActor);
+    Board::disk** array =  b.getArray();
+    //full board
+    for (int i = 0; i < b.getRowSize(); i++) {
+        for (int j = 0; j < b.getColSize() ; j++) {
+            array[i][j] = b.blackActor;
+        }
+    }
+    // only one move to white
+    array[1][1] = b.whiteActor;
+    array[1][3] = b.empty;
+
+    //no moves
+    vector<Point> v1 = gameLogic.returnValidMoves(&whitePlayer,&b);
+    EXPECT_TRUE(v1.size() == 1);
+
+    //full board
+    for (int i = 0; i < b.getRowSize(); i++) {
+        for (int j = 0; j < b.getColSize() ; j++) {
+            array[i][j] = b.whiteActor;
+        }
+    }
+    // only one move to black
+    array[1][3] = b.blackActor;
+    array[3][3] = b.empty;
+
+    vector<Point> v2 = gameLogic.returnValidMoves(&blackPlayer,&b);
+    EXPECT_TRUE(v2.size() == 1);
+}
