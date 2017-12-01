@@ -9,8 +9,9 @@
 /*
  * Test 1: check for black 1 step at 3,4. white should play 3,3
  * then black playes 3,2. white should play 2,2.
+ * to the opponent there are one or more valid moves.
  */
-TEST(AIplayerTest, checkChoseCell1) {
+TEST(AIplayerTest, checkChooseCell1) {
     Board::disk  d = Board::whiteActor;
     StandardGameLogic l = StandardGameLogic();
     ConsoleBoard b = ConsoleBoard(ROW_SIZE, COL_SIZE);
@@ -113,8 +114,9 @@ TEST(AIplayerTest, checkChoseCell1) {
 /*
  * Test 2: check for black 1 step at 6,5. white should play 4,6
  * then black playes 3,3. white should play 4,3.
+ * to the opponent there are one or more valid moves.
  */
-TEST(AIplayerTest, checkChoseCell2) {
+TEST(AIplayerTest, checkChooseCell2) {
     Board::disk  d = Board::whiteActor;
     StandardGameLogic l = StandardGameLogic();
     ConsoleBoard b = ConsoleBoard(ROW_SIZE, COL_SIZE);
@@ -211,4 +213,45 @@ TEST(AIplayerTest, checkChoseCell2) {
     l.flipCells(&h, Point(4,7),&b);
     EXPECT_EQ(p.chooseStep(), Point(5,6));
     l.flipCells(&p, Point(5,6),&b);
+}
+
+/*
+ * Test 3: check that the AIPlayer choose the
+ * move that causes the opponent to have no legal moves.
+ */
+TEST(AIplayerTest, checkChooseCellBlackPlayerHasNoMoves) {
+    Board::disk  d = Board::whiteActor;
+    StandardGameLogic l = StandardGameLogic();
+    ConsoleBoard b = ConsoleBoard(ROW_SIZE, COL_SIZE);
+    HumanLocalPlayer h = HumanLocalPlayer(b.blackActor);
+    Board::disk** array =  b.getArray();
+    AIPlayer p = AIPlayer(d, &l, &b);
+
+    for (int i = 1; i < b.getRowSize(); i++) {
+        for (int j = 1; j < b.getColSize() ; j++) {
+            array[i][j] = b.blackActor;
+        }
+    }
+
+    array[7][1] = b.whiteActor;
+    array[8][1] = b.whiteActor;
+    array[7][8] =  b.empty;
+    array[8][8] =  b.empty;
+
+    EXPECT_EQ(p.chooseStep(), Point(8,8));
+
+    for (int i = 1; i < b.getRowSize(); i++) {
+        for (int j = 1; j < b.getColSize() ; j++) {
+            array[i][j] = b.blackActor;
+        }
+    }
+
+    array[3][4] = b.whiteActor;
+    array[5][4] = b.whiteActor;
+    array[1][5] = b.whiteActor;
+    array[1][1] = b.whiteActor;
+    array[5][5] = b.empty;
+    array[4][5] = b.empty;
+    array[5][6] = b.empty;
+    EXPECT_EQ(p.chooseStep(), Point(4,5));
 }

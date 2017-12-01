@@ -13,7 +13,6 @@ AIPlayer::AIPlayer(Board::disk d, GameLogic* gameLogic, Board* board): Player(d)
  * The AI player chooses his turn with minimax algorithm.
  */
 Point AIPlayer::chooseStep() const {
-    cout<<endl<<"****************in min max algorithm****************" <<endl;
     vector<Point> v1;
     vector<Point> v2;
     Board* copyBoard = new ConsoleBoard(this->board);
@@ -23,7 +22,7 @@ Point AIPlayer::chooseStep() const {
     Player* blackActor = new HumanLocalPlayer(board->blackActor);
     int mMaxScore;
 
-    //Step1 :Given the current board mode, find all possible moves of the AI player
+    //Step1 :Given the current board mode, find all possible moves of the AI player.
     v1 = this->gameLogic->returnValidMoves(this,copyBoard);
 
     //Step 2: For each possible move m:
@@ -32,18 +31,14 @@ Point AIPlayer::chooseStep() const {
         //initialize possible move m.
         Point m = (*it);
 
-        cout<<"AI point " << m <<": "<<endl;
-
         //Step 4: make the move and update the status of the board
         gameLogic->flipCells(this, m, copyBoard);
-        copyBoard->printBoard();
 
         //get opponent valid steps vector.
         v2 = this->gameLogic->returnValidMoves(blackActor,copyBoard);
 
         //if this move causes the opponent to have no legal moves.
         if(v2.size() == 0){
-            cout<<"this move causes the opponent to have no legal moves. " <<endl;
             delete(copyBoard);
             delete(blackActor);
             return m;
@@ -59,25 +54,20 @@ Point AIPlayer::chooseStep() const {
 
             Point currentOpponentPoint = (*it2);
 
-            cout<<"opponent point " << currentOpponentPoint<<": ";
             //make opponent move and update the status of the board
             gameLogic->flipCells(blackActor, currentOpponentPoint, copyBoard2);
 
             //Step 6: Calculate the opponent's score in the new position(the number of blackActor discs less than a number
             //of computer disks).
             mScore = copyBoard2->numOfPlayerDisks(blackActor->getDisk()) - copyBoard2->numOfPlayerDisks(this->getDisk());
-            cout<<"mScore :" << mScore <<",mMaxScore: " << mMaxScore<<endl;
 
             //Step 7: Set m score as the maximum score that the opponent can receive in the new mode
             if(mScore > mMaxScore || it2 == v2.begin()){
-                cout<<"update max score to be: " << mScore<<endl;
                 mMaxScore = mScore;
             }
             delete(copyBoard2);
         }
 
-        cout<<"insert m: "<<m << " insert max: " << mMaxScore<<endl<<endl;
-        cout<<"-------------------------------------------------"<<endl;
         ///add m and the score of m to the vector.
         v.push_back(make_pair(m,mMaxScore));
 
