@@ -10,7 +10,8 @@
 #define SIZE_COL_SMALL 3
 
 /*
- * test 1: check that returnValidMoves function work correctly.
+ * test 1: check that returnValidMoves function work correctly
+ * when there are one or more valid moves.
  */
 TEST(GameLogicTest,returnValidMovesTest){
     StandardGameLogic gameLogic = StandardGameLogic();
@@ -53,8 +54,8 @@ TEST(GameLogicTest,returnValidMovesTest){
 
 
 /*
- * test 2: check that returnValidMoves function work correctly on
- * small board.
+ * test 2: check that returnValidMoves function work correctly
+ * when it is small board.
  */
 TEST(GameLogicTest,returnValidMovesSmallBoardTest){
     StandardGameLogic gameLogic = StandardGameLogic();
@@ -88,9 +89,8 @@ TEST(GameLogicTest,returnValidMovesSmallBoardTest){
 
 
 /*
- * test 3: check that if the game start with full board or
- * there is no valid moves. return valid moves return empty
- * vactor.
+ * test 3: check if the board is full or there is no
+ * valid moves.returnValidMoves return empty vector.
  */
 TEST(GameLogicTest,returnValdMovesWithFullBoard){
     StandardGameLogic gameLogic = StandardGameLogic();
@@ -127,9 +127,9 @@ TEST(GameLogicTest,returnValdMovesWithFullBoard){
 }
 
 /*
- * test 4: check that if the game start with full board or
+ * test 4: check that if the board is full or
  * there is no valid moves. return valid moves return empty
- * vactor on small board.
+ * vector when it is small board.
  */
 TEST(GameLogicTest,returnValdMovesWithFullBoardSmallBoard){
     StandardGameLogic gameLogic = StandardGameLogic();
@@ -165,6 +165,10 @@ TEST(GameLogicTest,returnValdMovesWithFullBoardSmallBoard){
     EXPECT_TRUE(v2.empty());
 }
 
+/**
+ * test 5: check that there are no valid moves to
+ * the players when the board is empty.
+ */
 TEST(GameLogicTest, emptyBoardBigBoard) {
     StandardGameLogic gameLogic = StandardGameLogic();
     ConsoleBoard b = ConsoleBoard(SIZE_ROW_STANDARD, SIZE_COL_STANDARD);
@@ -183,6 +187,11 @@ TEST(GameLogicTest, emptyBoardBigBoard) {
     EXPECT_TRUE(v2.empty());
 }
 
+/**
+ * test 6: check that there are no valid moves to
+ * the players when the small board is empty.
+ * on small board.
+ */
 TEST(GameLogicTest, emptyBoardSmallBoard) {
     StandardGameLogic gameLogic = StandardGameLogic();
     ConsoleBoard b = ConsoleBoard(SIZE_ROW_SMALL, SIZE_COL_SMALL);
@@ -200,6 +209,11 @@ TEST(GameLogicTest, emptyBoardSmallBoard) {
     EXPECT_TRUE(v1.empty());
     EXPECT_TRUE(v2.empty());
 }
+
+/**
+ * test 7: check that returnValidMoves return one move.
+ * when it is small board.
+ */
 TEST(GameLogicTest, oneMoveBigBoard) {
     StandardGameLogic gameLogic = StandardGameLogic();
     ConsoleBoard b = ConsoleBoard(SIZE_ROW_STANDARD, SIZE_COL_STANDARD);
@@ -234,6 +248,10 @@ TEST(GameLogicTest, oneMoveBigBoard) {
     EXPECT_TRUE(v2.size() == 1);
 }
 
+/**
+ * test 7: check that returnValidMoves return one move.
+ * when it is small board.
+ */
 TEST(GameLogicTest, oneMoveSmallBoard) {
     StandardGameLogic gameLogic = StandardGameLogic();
     ConsoleBoard b = ConsoleBoard(SIZE_ROW_SMALL, SIZE_COL_SMALL);

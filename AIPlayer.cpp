@@ -31,7 +31,7 @@ Point AIPlayer::chooseStep() const {
         //initialize possible move m.
         Point m = (*it);
 
-        //Step 4: make the move and update the status of the board
+        //Step 2.a: make the move and update the status of the board
         gameLogic->flipCells(this, m, copyBoard);
 
         //get opponent valid steps vector.
@@ -43,7 +43,7 @@ Point AIPlayer::chooseStep() const {
             delete(blackActor);
             return m;
         }
-        //Step 5: For all possible moves of the opponent in the new board mode:
+        //Step 2.b: For all possible moves of the opponent in the new board mode:
         for (vector<Point>::const_iterator it2 = v2.begin(); it2 < v2.end(); it2++) {
 
             //copy board.
@@ -57,18 +57,19 @@ Point AIPlayer::chooseStep() const {
             //make opponent move and update the status of the board
             gameLogic->flipCells(blackActor, currentOpponentPoint, copyBoard2);
 
-            //Step 6: Calculate the opponent's score in the new position(the number of blackActor discs less than a number
+            //Step b.i: Calculate the opponent's score in the new position(the number of blackActor discs less than a number
             //of computer disks).
             mScore = copyBoard2->numOfPlayerDisks(blackActor->getDisk()) - copyBoard2->numOfPlayerDisks(this->getDisk());
 
-            //Step 7: Set m score as the maximum score that the opponent can receive in the new mode
+            //if mScore is bigger then the max or it is the first time in loop.
             if(mScore > mMaxScore || it2 == v2.begin()){
                 mMaxScore = mScore;
             }
             delete(copyBoard2);
         }
 
-        ///add m and the score of m to the vector.
+        //Step 2.c: Set m score as the maximum score that the opponent can receive in the new mode
+        //add m and the score of m to the vector.
         v.push_back(make_pair(m,mMaxScore));
 
         //copy board.
@@ -83,7 +84,7 @@ Point AIPlayer::chooseStep() const {
     }
 
 
-    //Step 8: Select the m move with the lowest score.
+    //Step 3: Select the m move with the lowest score.
     int min = v[0].second;
     int index = 0;
 
@@ -99,5 +100,4 @@ Point AIPlayer::chooseStep() const {
 
     // return the chosen point
     return v[index].first;
-
 }
