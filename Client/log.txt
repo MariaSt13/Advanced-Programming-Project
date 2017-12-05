@@ -1,0 +1,472 @@
+commit 67c0a99e32f4004351f0aaf59fb58eea004049f9
+Merge: 34f657d bd70e4e
+Author: Maria Strelecky <mariast13@gmail.com>
+Date:   Thu Nov 30 20:12:42 2017 +0200
+
+    mergeMerge branch 'master' of https://github.com/MariaSt13/Advanced-Programming-Project
+
+commit bd70e4e03f36209d8964cd0a413c9e9019038512
+Author: Linoy <linoya995@gmail.com>
+Date:   Thu Nov 30 20:12:12 2017 +0200
+
+    addCHange
+
+commit 34f657d5b788ee5f86445290acfed3ff342305c5
+Author: Maria Strelecky <mariast13@gmail.com>
+Date:   Thu Nov 30 20:09:15 2017 +0200
+
+    test for AI
+
+commit 794fb1fefe52018782e50238b81ad7b14a5b5226
+Merge: 0cbac15 0980aff
+Author: Linoy <linoya995@gmail.com>
+Date:   Thu Nov 30 17:44:12 2017 +0200
+
+    kkkkMerge branch 'master' of https://github.com/MariaSt13/Advanced-Programming-Project
+
+commit 0cbac15daa287a3cf1718865b0f3bea8dadac4e0
+Author: Linoy <linoya995@gmail.com>
+Date:   Thu Nov 30 17:29:31 2017 +0200
+
+    remove
+
+commit 0980affac0e2d85622e03ed76b246d73c6f67a51
+Author: Maria Strelecky <mariast13@gmail.com>
+Date:   Thu Nov 30 10:41:17 2017 +0200
+
+    .
+
+commit fcbb25f21fb01458dc7698377d57d25bb7048b69
+Author: Maria Strelecky <mariast13@gmail.com>
+Date:   Thu Nov 30 10:17:09 2017 +0200
+
+    small change
+
+commit af628bdb8f9e50b04638c8f08d717d264a93e46f
+Author: Linoy <linoya995@gmail.com>
+Date:   Thu Nov 30 02:50:01 2017 +0200
+
+    change
+
+commit 9e86745ca60da6b147c550fdfcae45ac5955ce4b
+Author: Maria Strelecky <mariast13@gmail.com>
+Date:   Thu Nov 30 00:39:20 2017 +0200
+
+    comments
+
+commit 99fc2a77563acac343e7d0bceff5ff9cd9c20498
+Author: Maria Strelecky <mariast13@gmail.com>
+Date:   Thu Nov 30 00:20:20 2017 +0200
+
+    test to point
+
+commit 11ac0ae01b23c88fecce3526b1a2d68a6799a6fd
+Author: Linoy <linoya995@gmail.com>
+Date:   Wed Nov 29 23:50:21 2017 +0200
+
+    yes
+
+commit 41b6693f2e9a7b3dcd21a66cd970fba79f1ca610
+Author: Maria Strelecky <mariast13@gmail.com>
+Date:   Wed Nov 29 23:14:13 2017 +0200
+
+    cmake change
+
+commit a7253623249b4ceef76a1f08d5a22b32ace99f46
+Author: Linoy <linoya995@gmail.com>
+Date:   Wed Nov 29 22:50:12 2017 +0200
+
+    ll
+
+commit 474e91db2290c8b2f5246af254e6ce4b8010a96f
+Author: Linoy <linoya995@gmail.com>
+Date:   Wed Nov 29 22:45:58 2017 +0200
+
+    linoy
+
+commit c168e86ac5485275459290711d1f1688e6a74223
+Author: Linoy <linoya995@gmail.com>
+Date:   Wed Nov 29 22:33:49 2017 +0200
+
+    linoy change
+
+commit 86f88ffbb45208de4fa12466dfcee97ea20d1e0d
+Author: Maria Strelecky <mariast13@gmail.com>
+Date:   Wed Nov 29 22:30:06 2017 +0200
+
+    .
+
+commit 6895bfb4f32ba9ada9712f570c0912e95a209355
+Author: Maria Strelecky <mariast13@gmail.com>
+Date:   Wed Nov 29 22:21:12 2017 +0200
+
+    small changes
+
+commit c303e0709085dfe1c278c6b0fe16e8daae332579
+Author: Linoy <linoya995@gmail.com>
+Date:   Wed Nov 29 18:35:55 2017 +0200
+
+    just a second little change
+
+commit 3304a731d5714d1d7ee305ce687f54875ea6ac8c
+Merge: 1a9f4be 2e6cab0
+Author: Linoy <linoya995@gmail.com>
+Date:   Wed Nov 29 17:32:48 2017 +0200
+
+    it is okMerge branch 'master' of https://github.com/MariaSt13/Advanced-Programming-Project
+
+commit 1a9f4beacec356e5c44ab9b8908f45ab3da15833
+Author: Linoy <linoya995@gmail.com>
+Date:   Wed Nov 29 17:31:19 2017 +0200
+
+    my new change
+
+commit 2e6cab09c00dfbe0f63ea9643d76ca25e0a1fb8d
+Author: Maria Strelecky <mariast13@gmail.com>
+Date:   Wed Nov 29 17:29:26 2017 +0200
+
+    .
+
+commit 1009b4f4f8ab163f63f05905292d4c3490948ca0
+Author: Maria Strelecky <mariast13@gmail.com>
+Date:   Wed Nov 29 17:05:52 2017 +0200
+
+    tests
+
+commit 6163ed8b189cbd9812171b514d845762a02ef554
+Author: Linoy <linoya995@gmail.com>
+Date:   Wed Nov 29 17:02:01 2017 +0200
+
+    my change
+
+commit 029c36fc52ae67c1df182671eb1bdeedb65f785e
+Author: Linoy <linoya995@gmail.com>
+Date:   Wed Nov 29 12:36:04 2017 +0200
+
+    just a little change
+
+commit d9f2cfc0529bb0dcc3a3c7852280a80fc47afd64
+Author: Maria Strelecky <mariast13@gmail.com>
+Date:   Wed Nov 29 01:15:11 2017 +0200
+
+    added menu
+
+commit 2367dabbcfe941a8e614fabf336d5653ae8163ba
+Author: Maria Strelecky <mariast13@gmail.com>
+Date:   Wed Nov 29 00:08:51 2017 +0200
+
+    update
+
+commit a49f034341f82905810c639fa7dabe997fc3ec08
+Author: Maria Strelecky <mariast13@gmail.com>
+Date:   Wed Nov 29 00:07:13 2017 +0200
+
+    update
+
+commit c6cf8eb5ff7518a57764f9441364ad054b727a23
+Author: linoya995 <33958051+linoya995@users.noreply.github.com>
+Date:   Tue Nov 28 23:41:28 2017 +0200
+
+    Add files via upload
+
+commit d53714393237b41130e76b06eb8a19e138d0d609
+Merge: 92afa06 692470a
+Author: Linoy <linoya995@gmail.com>
+Date:   Tue Nov 28 23:28:05 2017 +0200
+
+    Merge branch 'master' of https://github.com/MariaSt13/Advanced-Programming-Project
+
+commit 92afa06b0ca8483808339a236fe1e0cd4c7f81af
+Author: Linoy <linoya995@gmail.com>
+Date:   Tue Nov 28 23:23:32 2017 +0200
+
+    add player computer
+
+commit 9cc2a05d1d1b5194ab1ffa28ce2885d108ffde59
+Author: Linoy <linoya995@gmail.com>
+Date:   Tue Nov 28 23:18:06 2017 +0200
+
+    remove folder
+
+commit 692470a551b4ee187841d13c0df54560e1a19091
+Author: MariaSt13 <33953339+MariaSt13@users.noreply.github.com>
+Date:   Tue Nov 28 23:11:46 2017 +0200
+
+    Delete ReversiGame.cpp.o
+
+commit 7a22835bb30881f7e9ae2caffd8b209df7e5bbd8
+Author: MariaSt13 <33953339+MariaSt13@users.noreply.github.com>
+Date:   Tue Nov 28 23:11:36 2017 +0200
+
+    Delete Point.cpp.o
+
+commit 61b534ae12eded18e888dd98cdd45aa2b241de50
+Author: linoya995 <33958051+linoya995@users.noreply.github.com>
+Date:   Tue Nov 28 23:09:29 2017 +0200
+
+    Delete Board.cpp.o
+
+commit 0e4639b4176621a96d16c932255ce6a719f4a9b8
+Author: MariaSt13 <33953339+MariaSt13@users.noreply.github.com>
+Date:   Tue Nov 28 23:09:19 2017 +0200
+
+    Delete CMakeLists.txt
+
+commit fd26b0fb3a9885f1d3cce4a972ca929729642044
+Author: MariaSt13 <33953339+MariaSt13@users.noreply.github.com>
+Date:   Tue Nov 28 23:07:04 2017 +0200
+
+    Delete CMakeSystem.cmake
+
+commit 22bd8b9180453288bed747e94f50189db03f14be
+Author: MariaSt13 <33953339+MariaSt13@users.noreply.github.com>
+Date:   Tue Nov 28 23:06:34 2017 +0200
+
+    Delete vcs.xml
+
+commit bc8e34e0c9d1c71b9f185386b4924f25817c94d4
+Author: MariaSt13 <33953339+MariaSt13@users.noreply.github.com>
+Date:   Tue Nov 28 23:06:26 2017 +0200
+
+    Delete workspace.xml
+
+commit 1a8860e29a860a2248fca1b660eec42e975f2b45
+Author: MariaSt13 <33953339+MariaSt13@users.noreply.github.com>
+Date:   Tue Nov 28 23:06:12 2017 +0200
+
+    Delete modules.xml
+
+commit a8759f7a9192d51bec5bf854f72517edb731cbc8
+Author: MariaSt13 <33953339+MariaSt13@users.noreply.github.com>
+Date:   Tue Nov 28 23:06:03 2017 +0200
+
+    Delete misc.xml
+
+commit f2d04a195974232f7eca92313332dac5ea1dc4f2
+Author: linoya995 <33958051+linoya995@users.noreply.github.com>
+Date:   Tue Nov 28 23:05:02 2017 +0200
+
+    Delete .name
+
+commit 1f48433406b5bd8cf12da5c0a1583d713f1ae21b
+Author: MariaSt13 <33953339+MariaSt13@users.noreply.github.com>
+Date:   Tue Nov 28 23:04:55 2017 +0200
+
+    Delete HumanLocalPlayer.cpp.o
+
+commit a42068f35d1d4186a3b442cfaf5069b4f2f1aeac
+Author: MariaSt13 <33953339+MariaSt13@users.noreply.github.com>
+Date:   Tue Nov 28 23:04:46 2017 +0200
+
+    Delete CXX.includecache
+
+commit 61b9490ac3606eeae0a4b6590e95ea687f41fd45
+Author: linoya995 <33958051+linoya995@users.noreply.github.com>
+Date:   Tue Nov 28 23:04:31 2017 +0200
+
+    Delete Advanced-Programming-Project.iml
+
+commit e8c5c8fee4afb33f8af06a771bc8cab4c95d402d
+Author: MariaSt13 <33953339+MariaSt13@users.noreply.github.com>
+Date:   Tue Nov 28 23:03:52 2017 +0200
+
+    Delete DependInfo.cmake
+
+commit 8179525bbabd3081378f239eaf83ff911ca050ff
+Author: MariaSt13 <33953339+MariaSt13@users.noreply.github.com>
+Date:   Tue Nov 28 23:03:45 2017 +0200
+
+    Delete ConsoleBoard.cpp.o
+
+commit 05e74c504273a161d48967b65f3ada9f79f8b553
+Author: MariaSt13 <33953339+MariaSt13@users.noreply.github.com>
+Date:   Tue Nov 28 23:03:37 2017 +0200
+
+    Delete progress.make
+
+commit 43bdc8e11b24db16139c1cacc309740eeae3e75d
+Author: MariaSt13 <33953339+MariaSt13@users.noreply.github.com>
+Date:   Tue Nov 28 23:03:26 2017 +0200
+
+    Delete clion-log.txt
+
+commit 0cd17b2b2e7bd30f192bd830f9993678f7550116
+Author: MariaSt13 <33953339+MariaSt13@users.noreply.github.com>
+Date:   Tue Nov 28 23:03:19 2017 +0200
+
+    Delete Makefile.cmake
+
+commit 6bdf90970c236cc8cdcb92273b75e5016060cc5f
+Author: MariaSt13 <33953339+MariaSt13@users.noreply.github.com>
+Date:   Tue Nov 28 23:03:10 2017 +0200
+
+    Delete feature_tests.cxx
+
+commit 4d8c6add6a855d329d5e5b577ef0aaaadb0d3bba
+Author: MariaSt13 <33953339+MariaSt13@users.noreply.github.com>
+Date:   Tue Nov 28 23:02:59 2017 +0200
+
+    Delete feature_tests.c
+
+commit e10fbe7062749d325b0ed25a729bed0e4589fa9b
+Author: MariaSt13 <33953339+MariaSt13@users.noreply.github.com>
+Date:   Tue Nov 28 23:02:50 2017 +0200
+
+    Delete feature_tests.bin
+
+commit 6912cc78861fbf09ac5c17ca2b716ccd8302d493
+Author: MariaSt13 <33953339+MariaSt13@users.noreply.github.com>
+Date:   Tue Nov 28 23:02:42 2017 +0200
+
+    Delete cmake.check_cache
+
+commit 47867b587d9ec14efcda100eb888e273ffe9b5c8
+Author: MariaSt13 <33953339+MariaSt13@users.noreply.github.com>
+Date:   Tue Nov 28 23:02:34 2017 +0200
+
+    Delete clion-environment.txt
+
+commit 691589261674eef1a1055db33f8ee0ff4deb803f
+Author: MariaSt13 <33953339+MariaSt13@users.noreply.github.com>
+Date:   Tue Nov 28 23:02:24 2017 +0200
+
+    Delete TargetDirectories.txt
+
+commit 509ebbf13a3c2f82e5babcf338ccb285342d68cf
+Author: MariaSt13 <33953339+MariaSt13@users.noreply.github.com>
+Date:   Tue Nov 28 23:02:17 2017 +0200
+
+    Delete Makefile2
+
+commit 0238f991c33e569e9e22fa41ffc886a2361b0359
+Author: MariaSt13 <33953339+MariaSt13@users.noreply.github.com>
+Date:   Tue Nov 28 23:02:02 2017 +0200
+
+    Delete CMakeOutput.log
+
+commit 9b5d82abc43a0e6b574e51be59fb04877c36bcfa
+Author: MariaSt13 <33953339+MariaSt13@users.noreply.github.com>
+Date:   Tue Nov 28 23:01:51 2017 +0200
+
+    Delete CMakeDirectoryInformation.cmake
+
+commit 7ff772cda7fa5207e8388781c68b178c1e5f5e2e
+Author: MariaSt13 <33953339+MariaSt13@users.noreply.github.com>
+Date:   Tue Nov 28 23:01:42 2017 +0200
+
+    Delete progress.marks
+
+commit d616be709ad9c2193fff0ecfe2a57c27fc5813be
+Author: MariaSt13 <33953339+MariaSt13@users.noreply.github.com>
+Date:   Tue Nov 28 23:00:37 2017 +0200
+
+    Delete Advanced_Programming_Project
+
+commit 8400def4af5f1f9496446dca8e1c1c38e60e395f
+Author: MariaSt13 <33953339+MariaSt13@users.noreply.github.com>
+Date:   Tue Nov 28 23:00:26 2017 +0200
+
+    Delete Advanced_Programming_Project.cbp
+
+commit 6ff112a7103d97b796c2de64205a12b61d969787
+Author: MariaSt13 <33953339+MariaSt13@users.noreply.github.com>
+Date:   Tue Nov 28 23:00:16 2017 +0200
+
+    Delete CMakeCache.txt
+
+commit b9b07db4cd1e617df37f8659bb798ddd6b2ac3e1
+Author: MariaSt13 <33953339+MariaSt13@users.noreply.github.com>
+Date:   Tue Nov 28 23:00:01 2017 +0200
+
+    Delete Makefile
+
+commit 089dcc00ea42555384c2be52886abe6aee440d3a
+Author: MariaSt13 <33953339+MariaSt13@users.noreply.github.com>
+Date:   Tue Nov 28 22:59:46 2017 +0200
+
+    Delete cmake_install.cmake
+
+commit fea9846adb40212796a6adee20f19b889c4858b7
+Merge: 77a8290 4efabe2
+Author: Linoy <linoya995@gmail.com>
+Date:   Tue Nov 28 22:42:16 2017 +0200
+
+    Merge branch 'master' of https://github.com/MariaSt13/Advanced-Programming-Project
+    
+    ok
+
+commit 77a829002f5f2019a55d94ca3effe990c11ea988
+Author: Linoy <linoya995@gmail.com>
+Date:   Tue Nov 28 22:33:50 2017 +0200
+
+    add player
+
+commit 4efabe263a5090884b4aea04836bb024e75e7b65
+Author: Maria Strelecky <mariast13@gmail.com>
+Date:   Tue Nov 28 21:28:47 2017 +0200
+
+    change in logic
+
+commit 1e3dc001441124f7d3614888ff37990f3469889f
+Author: Maria Strelecky <mariast13@gmail.com>
+Date:   Sat Nov 25 12:33:56 2017 +0200
+
+    x
+    X
+    &&
+    ```````````````````````
+    
+    x
+    ^^^^^X
+    X
+    ^X
+    WK
+    wk
+    wq
+    
+    x
+    
+    X
+    :q
+    
+    q
+    
+    x
+    
+    X
+    :Q!
+    :q!
+    q
+    ^
+    ^u
+    
+    Q
+    
+    CDCSD
+    ^X
+    
+    X
+
+commit 73521c712e9a0710a76cdedb53526753ec5df359
+Author: Linoy <linoya995@gmail.com>
+Date:   Fri Nov 24 18:45:08 2017 +0200
+
+    init commit
+
+commit c05b4bed24db73012392496da0501319f64a0b64
+Author: Linoy <linoya995@gmail.com>
+Date:   Fri Nov 24 18:44:14 2017 +0200
+
+    init commit
+
+commit 1374e9b179aaf59db32dd848ec13a3fb5cf86cb8
+Author: linoya995 <33958051+linoya995@users.noreply.github.com>
+Date:   Fri Nov 24 15:28:17 2017 +0200
+
+    Add files via upload
+
+commit 223b4c536f6134c0379fde06116d9d584ca0950a
+Author: linoya995 <33958051+linoya995@users.noreply.github.com>
+Date:   Fri Nov 24 15:25:03 2017 +0200
+
+    Create README.md
