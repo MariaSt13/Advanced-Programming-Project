@@ -4,6 +4,7 @@
 #include "Board.h"
 #include "Player.h"
 #include "GameLogic.h"
+#include "ConnectToServer.h"
 
 /*
  * this class runs the game. The game ends when the entire
@@ -18,7 +19,8 @@ public:
     enum mode{noMode = 0, humanAgainsHuman = 1, humanAgainstAI = 2, remoteGame = 3};
 
     //constructor.
-    ReversiGame(const Board* gameBoard,const Player* whitePlayer,const Player* blackPlayer,GameLogic* gameLogic,mode m);
+    ReversiGame(const Board* gameBoard,const Player* whitePlayer,const Player* blackPlayer,GameLogic* gameLogic,
+                mode m, ConnectToServer server);
 
 
     //this function run the game.
@@ -31,6 +33,7 @@ private:
     GameLogic* gameLogic;
     const Player* hisTurn;
     mode currentMode;
+    ConnectToServer serverInfo;
 
     // gets the step from the player
     Point getStep(bool firstTry,vector<Point> v);

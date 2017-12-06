@@ -32,7 +32,7 @@ Point AIPlayer::chooseStep() const {
         Point m = (*it);
 
         //Step 2.a: make the move and update the status of the board
-        gameLogic->flipCells(this, m, copyBoard);
+        gameLogic->flipCells(this, m, copyBoard, true);
 
         //get opponent valid steps vector.
         v2 = this->gameLogic->returnValidMoves(blackActor,copyBoard);
@@ -49,13 +49,10 @@ Point AIPlayer::chooseStep() const {
             //copy board.
             copyBoard2 =  new ConsoleBoard(copyBoard);
 
-            //initialize map in gameLogic.
-            this->gameLogic->returnValidMoves(blackActor,copyBoard);
-
             Point currentOpponentPoint = (*it2);
 
             //make opponent move and update the status of the board
-            gameLogic->flipCells(blackActor, currentOpponentPoint, copyBoard2);
+            gameLogic->flipCells(blackActor, currentOpponentPoint, copyBoard2, true);
 
             //Step b.i: Calculate the opponent's score in the new position(the number of blackActor discs less than a number
             //of computer disks).
@@ -76,8 +73,6 @@ Point AIPlayer::chooseStep() const {
         delete(copyBoard);
         copyBoard = new ConsoleBoard(this->board);
 
-        //initialize, map in gameLogic.
-        this->gameLogic->returnValidMoves(this,copyBoard);
 
         //initialize mMaxScore
         mMaxScore = 0;

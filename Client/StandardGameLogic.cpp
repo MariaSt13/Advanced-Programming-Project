@@ -110,7 +110,10 @@ Point StandardGameLogic::ifReverseOpponentDisk(const Player* player,const  Point
  * The function places a disc where the player has selected
  * And calls a function that turns the opponent's disks.
  */
-void StandardGameLogic::flipCells(const Player* player,const Point &newPoint, const Board* b) {
+void StandardGameLogic::flipCells(const Player* player,const Point &newPoint, const Board* b, bool updateMap) {
+    if ( updateMap == true) {
+        returnValidMoves(player, b);
+    }
     Board::disk** array = b->getArray();
     array[newPoint.getX()][newPoint.getY()] = player->getDisk();
     vector<Point> v = pointsMap[newPoint];
@@ -125,6 +128,7 @@ void StandardGameLogic::flipCells(const Player* player,const Point &newPoint, co
     pointsMap.clear();
 
 }
+
 
 //destructor.
 StandardGameLogic::~StandardGameLogic() {}

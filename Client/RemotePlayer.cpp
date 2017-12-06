@@ -3,3 +3,5 @@
 //
 
 #include "RemotePlayer.h"
+
+RemotePlayer::RemotePlayer(Board::disk d): Player(d) {}

@@ -10,7 +10,7 @@
 class RemotePlayer: public Player {
 
 public:
-    RemotePlayer();
+    RemotePlayer(Board::disk d);
 };
 
 

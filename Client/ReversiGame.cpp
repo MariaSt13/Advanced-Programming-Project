@@ -12,8 +12,11 @@ using namespace std;
  * @param gameLogic - the logic of the game
  * @param m - the mode of the game
  */
-ReversiGame::ReversiGame(const Board *gameBoard, const Player *blackPlayer,const Player *whitePlayer, GameLogic *gameLogic, mode m):
-    gameBoard(gameBoard),blackPlayer(blackPlayer),whitePlayer(whitePlayer),gameLogic(gameLogic),currentMode(m){
+ReversiGame::ReversiGame(const Board *gameBoard, const Player *blackPlayer,const Player *whitePlayer,
+                         GameLogic *gameLogic, mode m, ConnectToServer server):
+    gameBoard(gameBoard),blackPlayer(blackPlayer),whitePlayer(whitePlayer),gameLogic(gameLogic),
+    currentMode(m), serverInfo(server){
+
     this->hisTurn = this->blackPlayer;
     play();
 }
@@ -50,7 +53,7 @@ void ReversiGame::play() {
                 step = getStep(firstTry,v);
 
                 //makes the current player's choice and changes the next player's turn.
-                gameLogic->flipCells(this->hisTurn, step, gameBoard);
+                gameLogic->flipCells(this->hisTurn, step, gameBoard, false);
             }
         }
 
@@ -62,7 +65,7 @@ void ReversiGame::play() {
                 step = this->hisTurn->chooseStep();
 
                 //makes the current player's choice and changes the next player's turn.
-                gameLogic->flipCells(this->hisTurn, step, gameBoard);
+                gameLogic->flipCells(this->hisTurn, step, gameBoard, false);
                 virtualOpponentPlayLastTurn = true;
             }
             else{
