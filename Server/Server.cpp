@@ -7,97 +7,125 @@
 #include <iostream>
 #include <stdio.h>
 using namespace std;
-#define MAX_CONNECTED_CLIENTS 2
 
-Server::Server(int port): port(port), serverSocket(0) {
+/**
+ * constructor.
+ * @param port-port number.
+ */
+Server::Server(int port): port(port), serverSocket(0),openServer(true) {
     cout << "Server" << endl;
 }
+
+/**
+ * initialize server.
+ */
 void Server::start() {
+
     // Create a socket point
     serverSocket = socket(AF_INET, SOCK_STREAM, 0);
+
+    //error with socket.
     if (serverSocket == -1) {
         throw "Error opening socket";
     }
+
     // Assign a local address to the socket
     struct sockaddr_in serverAddress;
-    bzero((void *)&serverAddress,
-          sizeof(serverAddress));
+    bzero((void *)&serverAddress, sizeof(serverAddress));
     serverAddress.sin_family = AF_INET;
     serverAddress.sin_addr.s_addr = INADDR_ANY;
     serverAddress.sin_port = htons(port);
+
+    //error.
     if (bind(serverSocket, (struct sockaddr
     *)&serverAddress, sizeof(serverAddress)) == -1) {
         throw "Error on binding";
     }
+
+
     // Start listening to incoming connections
     listen(serverSocket, MAX_CONNECTED_CLIENTS);
-    // Define the client socket's structures
-    struct sockaddr_in clientAddress;
-    socklen_t clientAddressLen;
-    while (true) {
+
+    int clientSocket[MAX_CONNECTED_CLIENTS];
+
+    //connection all clients.
+    for (int i = 0; i < MAX_CONNECTED_CLIENTS; i++) {
+        // Define the client socket's structures
+        struct sockaddr_in clientAddress;
+        socklen_t clientAddressLen;
+
+        //connection to client.
         cout << "Waiting for client connections..." << endl;
+
         // Accept a new client connection
-        int clientSocket = accept(serverSocket, (struct
+        int clientSocket[i] = accept(serverSocket, (struct
                 sockaddr *)&clientAddress, &clientAddressLen);
         cout << "Client connected" << endl;
-        if (clientSocket == -1)
+
+        if (clientSocket[i] == -1)
             throw "Error on accept";
-        handleClient(clientSocket);
-        // Close communication with the client
-        close(clientSocket);
     }
-}
-// Handle requests from a specific client
-void Server::handleClient(int clientSocket) {
-    int arg1, arg2;
-    char op;
-    while (true) {
-    // Read new exercise arguments
-        int n = read(clientSocket, &arg1, sizeof(arg1));
-        if (n == -1) {
-            cout << "Error reading arg1" << endl;
-            return;
-        }
-        if (n == 0) {
-            cout << "Client disconnected" << endl;
-            return;
-        }
-        n = read(clientSocket, &op, sizeof(op));
-        if (n == -1) {
-            cout << "Error reading operator" << endl;
-            return;
-        }
-        n = read(clientSocket, &arg2, sizeof(arg2));
-        if (n == -1) {
-            cout << "Error reading arg2" << endl;
-            return;
-        }
-        cout << "Got exercise: " << arg1 << op << arg2 <<
-             endl;
-        int result = calc(arg1, op, arg2);
-        // Write the result back to the client
-        n = write(clientSocket, &result, sizeof(result));
+
+    //send to client his number.1- black , 2-white.
+    for (int i = 0; i < MAX_CONNECTED_CLIENTS; i++) {
+        int result =  i+1;
+        int n = write(clientSocket[i], &result, sizeof(result));
         if (n == -1) {
             cout << "Error writing to socket" << endl;
             return;
         }
     }
-}
-int Server::calc(int arg1, const char op, int arg2) const {
-    switch (op) {
-        case '+':
-            return arg1 + arg2;
-        case '-':
-            return arg1 - arg2;
-        case '*':
-            return arg1 * arg2;
-        case '/':
-            return arg1 / arg2;
-        default:
-            cout << "Invalid operator" << endl;
-            return 0;
+
+    //while the game is run.
+    while(openServer){
+        for (int i = 0; i < MAX_CONNECTED_CLIENTS; i++) {
+            handleClient(clientSocket[i] ,clientSocket[(i+1) % 2]);
+        }
+    }
+
+    for (int i = 0; i < MAX_CONNECTED_CLIENTS; i++) {
+        // Close communication with the client
+        close(clientSocket[i]);
     }
 }
+
+/**
+ * Handle requests from a specific client.
+ * @param clientSocket
+ */
+void Server::handleClient(int clientSocket1,int clientSocket2) {
+    string s;
+
+    //read new exercise arguments
+    int n = read(clientSocket1, &s, sizeof(s));
+
+    //the game is over
+    if(s.compare("END")){
+        this->openServer = false;
+        return;
+    }
+
+    if (n == -1) {
+        cout << "Error reading arg1" << endl;
+        return;
+    }
+
+    if (n == 0) {
+        cout << "Client disconnected" << endl;
+        return;
+    }
+
+    // Write the result back to the client.
+    n = write(clientSocket2, &s, sizeof(s));
+    if (n == -1) {
+        cout << "Error writing to socket" << endl;
+        return;
+    }
+}
+
+/**
+ * close server.
+ */
 void Server::stop() {
     close(serverSocket);
 }

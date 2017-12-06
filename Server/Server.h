@@ -1,6 +1,7 @@
 
 #ifndef EX4_SERVER_H
 #define EX4_SERVER_H
+#define MAX_CONNECTED_CLIENTS 2
 
 class Server {
 
@@ -14,7 +15,7 @@ private:
 
     int port;
     int serverSocket; // the socket's file descriptor
-    void handleClient(int clientSocket);
-    int calc(int arg1, const char op, int arg2) const;
+    bool openServer;
+    void handleClient(int clientSocket1,int clientSocket2;
 };
 #endif //EX4_SERVER_H
