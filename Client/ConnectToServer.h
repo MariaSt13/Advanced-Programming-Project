@@ -8,6 +8,7 @@ public:
     ConnectToServer(const char *serverIP, int serverPort);
     void connectToServer();
     int readTypeOfPlayer();
+    int getClientSocket() const;
 private:
     const char *serverIP;
     int serverPort;

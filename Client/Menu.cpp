@@ -83,10 +83,10 @@ void Menu::runGame(const int &mode) {
         // This player connected first so he is black
         if (color == 1) {
             blackActor = new HumanLocalPlayer(b->blackActor);
-            whiteActor = new RemotePlayer(b->whiteActor);
+            whiteActor = new RemotePlayer(b->whiteActor, client.getClientSocket());
         } else if (color == 2) { // this player connected second so he is white
             whiteActor = new HumanLocalPlayer(b->whiteActor);
-            blackActor = new RemotePlayer(b->blackActor);
+            blackActor = new RemotePlayer(b->blackActor, client.getClientSocket());
         }
     }
     ReversiGame game = ReversiGame(b, blackActor, whiteActor, standardGameLogic, currentMode, client);

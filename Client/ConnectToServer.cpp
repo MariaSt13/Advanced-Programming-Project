@@ -57,3 +57,7 @@ int ConnectToServer::readTypeOfPlayer() {
     }
     return result;
 };
+
+int ConnectToServer::getClientSocket() const{
+    return clientSocket;
+}

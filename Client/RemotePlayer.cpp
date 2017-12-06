@@ -19,10 +19,11 @@ Point RemotePlayer::chooseStep() const {
     int n = read(clientSocket,&s, sizeof(s));
 
     if (n == -1) {
-        cout << "Error reading result" << endl;
-       return Point(-1,-1);
+        throw "Error reading result";
     }
-
+    if (s.compare("NoMove") == 0) {
+        return Point(-1,-1);
+    }
     split(vector,s,boost::is_any_of(' '));
 
     if(vector.size() == 2){

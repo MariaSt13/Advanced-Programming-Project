@@ -24,6 +24,10 @@ Point AIPlayer::chooseStep() const {
 
     //Step1 :Given the current board mode, find all possible moves of the AI player.
     v1 = this->gameLogic->returnValidMoves(this,copyBoard);
+    //no possible moves
+    if (v1.size() == 0) {
+        return Point(-1,-1);
+    }
 
     //Step 2: For each possible move m:
     for (vector<Point>::const_iterator it = v1.begin(); it < v1.end(); it++) {
