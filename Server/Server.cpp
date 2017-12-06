@@ -90,8 +90,9 @@ void Server::start() {
 }
 
 /**
- * Handle requests from a specific client.
- * @param clientSocket
+ *  * Handle requests from a specific client.
+ * @param clientSocket1
+ * @param clientSocket2
  */
 void Server::handleClient(int clientSocket1,int clientSocket2) {
     string s;
