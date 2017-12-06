@@ -5,7 +5,6 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <netdb.h>
-#include <string.h>
 #include <unistd.h>
 using namespace std;
 
@@ -60,4 +59,15 @@ int ConnectToServer::readTypeOfPlayer() {
 
 int ConnectToServer::getClientSocket() const{
     return clientSocket;
+}
+
+
+void ConnectToServer::writeToServer(string s, int clientSocket)const{
+    //write to server
+    int n = write(clientSocket, &s, sizeof(s));
+
+    //error
+    if(n == -1) {
+        throw "error writing to socket";
+    }
 }

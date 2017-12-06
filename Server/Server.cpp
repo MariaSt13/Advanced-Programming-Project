@@ -101,7 +101,7 @@ void Server::handleClient(int clientSocket1,int clientSocket2) {
     int n = read(clientSocket1, &s, sizeof(s));
 
     //the game is over
-    if(s.compare("END")){
+    if(s.compare("End")){
         this->openServer = false;
         return;
     }

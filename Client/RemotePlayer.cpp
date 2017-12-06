@@ -21,9 +21,12 @@ Point RemotePlayer::chooseStep() const {
     if (n == -1) {
         throw "Error reading result";
     }
+
+    //if there are no valid.
     if (s.compare("NoMove") == 0) {
         return Point(-1,-1);
     }
+
     split(vector,s,boost::is_any_of(' '));
 
     if(vector.size() == 2){

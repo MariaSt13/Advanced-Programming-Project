@@ -27,8 +27,9 @@ ReversiGame::ReversiGame(const Board *gameBoard, const Player *blackPlayer,const
  */
 void ReversiGame::play() {
     Point step = Point(-1,-1);
+    vector<Point> v;
     bool firstTimeInLoop = (this->hisTurn->getDisk() == gameBoard->blackActor);
-    bool virtualOpponentPlayLastTurn = (this->hisTurn->getDisk() == gameBoard->blackActor);
+    bool virtualOpponentPlayLastTurn = (!this->hisTurn->getDisk() == gameBoard->blackActor);
 
     //running the game
     while(!isGameOver()) {
@@ -37,15 +38,12 @@ void ReversiGame::play() {
         bool ifItIsHumanPLayer = ((this->currentMode == humanAgainstAI && this->hisTurn->getDisk() == this->gameBoard->blackActor) ||
                    this->currentMode == humanAgainsHuman);
 
-        //get a vector of possible points
-        vector<Point> v;
-        if(ifItIsHumanPLayer) {
-            v = this->gameLogic->returnValidMoves(this->hisTurn, this->gameBoard);
-        }
-
-
         //if it is turn of human player.
         if(ifItIsHumanPLayer){
+
+            //get a vector of possible points
+            v = this->gameLogic->returnValidMoves(this->hisTurn, this->gameBoard);
+
             printCurrentBoard();
 
             //if the opponent is a virtual player , print his last move.
@@ -59,42 +57,43 @@ void ReversiGame::play() {
 
                 //makes the current player's choice and changes the next player's turn.
                 gameLogic->flipCells(this->hisTurn, step, gameBoard, false);
-                //send move to server
+
+                //is this is remote game mode.
                 if (this->currentMode == remoteGame) {
                     string s = step.getX() + " " + step.getY();
-                    int n = write(serverInfo.getClientSocket(), &s, sizeof(s));
-                    if(n == -1) {
-                        throw "error writing to socket";
-                    }
+
+                    //send move to server
+                    serverInfo.writeToServer(s,serverInfo.getClientSocket());
                 }
-                //no possible moves
-            } else {
-                if (this->currentMode == remoteGame) {
-                    string s = "NoMove";
-                    int n = write(serverInfo.getClientSocket(), &s, sizeof(s));
-                    if(n == -1) {
-                        throw "error writing to socket";
-                    }
-                }
+
+            //no possible moves and if is remote game.
+            } else if(!printPossibleMoves(v) && this->currentMode == remoteGame){
+                serverInfo.writeToServer("NoMove",serverInfo.getClientSocket());
             }
         }
 
         //if it is virtual player
         else{
+
+            //remote game mode.
             if(this->currentMode == remoteGame) {
                 printCurrentBoard(); // print update board after local player choice
                 cout << "Waiting for other player's move..." << endl;
             }
+
+            //current player choose step.
             step = this->hisTurn->chooseStep();
+
             //if there are possible move to current player.
             if (!(step == Point(-1,-1))){
                 //makes the current player's choice and changes the next player's turn.
                 gameLogic->flipCells(this->hisTurn, step, gameBoard, true);
                 virtualOpponentPlayLastTurn = true;
             }
-            else{
+
+            //if there are no possible move to current player.
+            else
                 virtualOpponentPlayLastTurn = false;
-            }
         }
         changeTurn();
         firstTimeInLoop = false;
@@ -158,6 +157,11 @@ void ReversiGame::gameOver()const{
     }
     else if(countBlack == countWhite){
         cout <<"It's a draw.";
+    }
+
+    //if it is remote game.
+    if(this->currentMode == this->remoteGame){
+        serverInfo.writeToServer("End",serverInfo.getClientSocket())
     }
 }
 
