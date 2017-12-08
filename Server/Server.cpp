@@ -49,49 +49,51 @@ void Server::start() {
     listen(serverSocket, MAX_CONNECTED_CLIENTS);
 
     int clientSocket[MAX_CONNECTED_CLIENTS];
-
-    //connection all clients.
-    for (int i = 0; i < MAX_CONNECTED_CLIENTS; i++) {
-        // Define the client socket's structures
-        struct sockaddr_in clientAddress;
-        socklen_t clientAddressLen;
-
-        //connection to client.
-        cout << "Waiting for client connections..." << endl;
-
-        //accept a new client connection
-        clientSocket[i] = accept(serverSocket, (struct
-                sockaddr *)&clientAddress, &clientAddressLen);
-        cout << "Client connected" << endl;
-
-        if (clientSocket[i] == -1) {
-            char buffer[256];
-            char *errorMessage = strerror_r(errno, buffer, 256); // get string message from errno
-            throw "Error on accept";
-        }
-    }
-
-    //send to client his number.1- black , 2-white.
-    for (int i = 0; i < MAX_CONNECTED_CLIENTS; i++) {
-        int result =  i+1;
-        int n = write(clientSocket[i], &result, sizeof(result));
-        if (n == -1) {
-            cout << "Error writing to socket" << endl;
-            return;
-        }
-    }
-
-    //while the game is run.
-    while(openServer){
+    while(true){
+        //connection all clients.
         for (int i = 0; i < MAX_CONNECTED_CLIENTS; i++) {
-            handleClient(clientSocket[i] ,clientSocket[(i+1) % 2]);
+            // Define the client socket's structures
+            struct sockaddr_in clientAddress;
+            socklen_t clientAddressLen;
+
+            //connection to client.
+            cout << "Waiting for client connections..." << endl;
+
+            //accept a new client connection
+            clientSocket[i] = accept(serverSocket, (struct
+                    sockaddr *)&clientAddress, &clientAddressLen);
+            cout << "Client connected" << endl;
+
+            if (clientSocket[i] == -1) {
+                char buffer[256];
+                char *errorMessage = strerror_r(errno, buffer, 256); // get string message from errno
+                throw "Error on accept";
+            }
+        }
+
+        //send to client his number.1- black , 2-white.
+        for (int i = 0; i < MAX_CONNECTED_CLIENTS; i++) {
+            int result =  i+1;
+            int n = write(clientSocket[i], &result, sizeof(result));
+            if (n == -1) {
+                cout << "Error writing to socket" << endl;
+                return;
+            }
+        }
+
+        //while the game is run.
+        while(openServer){
+            for (int i = 0; i < MAX_CONNECTED_CLIENTS; i++) {
+                handleClient(clientSocket[i] ,clientSocket[(i+1) % 2]);
+            }
+        }
+
+        for (int i = 0; i < MAX_CONNECTED_CLIENTS; i++) {
+            // Close communication with the client
+            close(clientSocket[i]);
         }
     }
 
-    for (int i = 0; i < MAX_CONNECTED_CLIENTS; i++) {
-        // Close communication with the client
-        close(clientSocket[i]);
-    }
 }
 
 /**
