@@ -32,7 +32,7 @@ void Menu::runMenu(){
     // mode of the game
     int chosenMode =  ReversiGame::noMode;
     cin >> chosenMode;
-    while (chosenMode != ReversiGame::humanAgainsHuman && chosenMode !=  ReversiGame::humanAgainstAI) {
+    while (chosenMode != ReversiGame::humanAgainsHuman && chosenMode !=  ReversiGame::humanAgainstAI && chosenMode != ReversiGame::remoteGame) {
         if(cin.fail()) {
             cout << " invalid input. Please try again" << endl;
             // get rid of failure state
@@ -61,7 +61,7 @@ void Menu::runGame(const int &mode) {
     GameLogic* standardGameLogic = new StandardGameLogic();
     GameLogic* standardGameLogic2 = new StandardGameLogic();
 
-    ConnectToServer client("127.0.0.1", 8000);
+    ConnectToServer client("127.0.0.1", 8011);
     try {
         client.connectToServer();
     } catch (const char *msg) {

@@ -16,6 +16,6 @@ private:
     int port;
     int serverSocket; // the socket's file descriptor
     bool openServer;
-    void handleClient(int clientSocket1,int clientSocket2;
+    void handleClient(int clientSocket1,int clientSocket2);
 };
 #endif //EX4_SERVER_H

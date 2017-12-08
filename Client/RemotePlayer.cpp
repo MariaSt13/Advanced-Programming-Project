@@ -27,7 +27,7 @@ Point RemotePlayer::chooseStep() const {
         return Point(-1,-1);
     }
 
-    split(vector,s,boost::is_any_of(' '));
+    split(vector,s,boost::is_any_of(" "));
 
     if(vector.size() == 2){
         istringstream isX (vector.at(0));

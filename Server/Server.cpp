@@ -58,7 +58,7 @@ void Server::start() {
         cout << "Waiting for client connections..." << endl;
 
         // Accept a new client connection
-        int clientSocket[i] = accept(serverSocket, (struct
+        clientSocket[i] = accept(serverSocket, (struct
                 sockaddr *)&clientAddress, &clientAddressLen);
         cout << "Client connected" << endl;
 

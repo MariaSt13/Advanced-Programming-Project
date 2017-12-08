@@ -161,7 +161,7 @@ void ReversiGame::gameOver()const{
 
     //if it is remote game.
     if(this->currentMode == this->remoteGame){
-        serverInfo.writeToServer("End",serverInfo.getClientSocket())
+        serverInfo.writeToServer("End",serverInfo.getClientSocket());
     }
 }
 

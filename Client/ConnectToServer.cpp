@@ -6,6 +6,8 @@
 #include <arpa/inet.h>
 #include <netdb.h>
 #include <unistd.h>
+#include <string.h>
+
 using namespace std;
 
 ConnectToServer::ConnectToServer(const char *serverIP, int serverPort):
@@ -42,8 +44,7 @@ void ConnectToServer::connectToServer() {
     // htons converts values between host and network byte orders
     serverAddress.sin_port = htons(serverPort);
     // Establish a connection with the TCP server
-    if (connect(clientSocket, (struct sockaddr
-    *)&serverAddress, sizeof(serverAddress)) == -1) {
+    if (connect(clientSocket, (struct sockaddr *)&serverAddress, sizeof(serverAddress)) == -1) {
         throw "Error connecting to server";
     }
     cout << "Connected to server" << endl;

@@ -1,7 +1,8 @@
 
 #ifndef EX4_CONECTTOSERVER_H
 #define EX4_CONECTTOSERVER_H
-#include <string.h>
+#include <string>
+using namespace std;
 
 
 class ConnectToServer {
