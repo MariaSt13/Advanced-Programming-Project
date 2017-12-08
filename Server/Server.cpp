@@ -50,6 +50,7 @@ void Server::start() {
 
     int clientSocket[MAX_CONNECTED_CLIENTS];
     while(true){
+        openServer = true;
         //connection all clients.
         for (int i = 0; i < MAX_CONNECTED_CLIENTS; i++) {
             // Define the client socket's structures
