@@ -62,12 +62,6 @@ void Menu::runGame(const int &mode) {
     GameLogic* standardGameLogic2 = new StandardGameLogic();
 
     ConnectToServer client("127.0.0.1", 8001);
-    try {
-        client.connectToServer();
-    } catch (const char *msg) {
-        cout << "Failed to connect to server. Reason:" << msg << endl;
-        exit(-1);
-    }
 
     Player* humanPlayer;
     if ( mode == ReversiGame::humanAgainsHuman) {
@@ -81,6 +75,12 @@ void Menu::runGame(const int &mode) {
         currentMode = ReversiGame::humanAgainstAI;
     } else if(mode == ReversiGame::remoteGame) {
         currentMode = ReversiGame::remoteGame;
+        try {
+            client.connectToServer();
+        } catch (const char *msg) {
+            cout << "Failed to connect to server. Reason:" << msg << endl;
+            exit(-1);
+        }
         int color = client.readTypeOfPlayer();
         // This player connected first so he is black
         if (color == 1) {
