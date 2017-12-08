@@ -70,8 +70,10 @@ void ReversiGame::play() {
                 }
 
             //no possible moves and if is remote game.
-            } else if(!printPossibleMoves(v) && this->currentMode == remoteGame){
-                serverInfo.writeToServer("NoMove",serverInfo.getClientSocket());
+            } else {
+                if(this->currentMode == remoteGame){
+                    serverInfo.writeToServer("NoMove",serverInfo.getClientSocket());
+                }
             }
         }
 
