@@ -12,7 +12,7 @@ public:
     int readTypeOfPlayer();
     int getClientSocket() const;
     //write to server
-    void writeToServer(string s, int clientSocket)const;
+    void writeToServer(char* s, int clientSocket)const;
 
 private:
     const char *serverIP;

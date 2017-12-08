@@ -12,30 +12,29 @@ using namespace std;
 RemotePlayer::RemotePlayer(Board::disk d, int clientSocket): Player(d),clientSocket(clientSocket) {}
 
 Point RemotePlayer::chooseStep() const {
-    string s;
+    char s[7];
     vector<string> vector;
     int x,y;
 
-    int n = read(clientSocket,&s, s.length());
+    int n = read(clientSocket,&s, sizeof(s));
 
     if (n == -1) {
         throw "Error reading result";
     }
 
     //if there are no valid.
-    if (s.compare("NoMove") == 0) {
+    if (strcmp(s, "NoMove") == 0) {
+        memset(s, '\0', 7);
         return Point(-1,-1);
     }
+    
+    x = s[0];
+    y = s[2];
+   /* istringstream isX (vector.at(0));
+    isX >> x;
 
-    split(vector,s,boost::is_any_of(" "));
-
-    if(vector.size() == 2){
-        istringstream isX (vector.at(0));
-        isX >> x;
-
-        istringstream isY (vector.at(1));
-        isY >> y;
-    }
-
+    istringstream isY (vector.at(1));
+    isY >> y;*/
+    memset(s, '\0', 7);
     return Point(x, y);
 }

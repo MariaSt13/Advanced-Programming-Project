@@ -100,33 +100,35 @@ void Server::start() {
  * @param clientSocket2
  */
 void Server::handleClient(int clientSocket1,int clientSocket2) {
-    string s;
+    char s[7] = {0};
 
     //read new exercise arguments
-    int n = read(clientSocket1, &s, s.length());
+    int n = read(clientSocket1, &s, sizeof(s));
 
     //the game is over
-    if(s.compare("End")){
+    if(strcmp(s, "End") == 0){
         this->openServer = false;
         return;
     }
 
     if (n == -1) {
         cout << "Error reading arg1" << endl;
+        this->openServer = false;
         return;
     }
 
     if (n == 0) {
         cout << "Client disconnected" << endl;
+        this->openServer = false;
         return;
     }
-
     // Write the result back to the client.
-    n = write(clientSocket2, s.c_str(), s.length());
+    n = write(clientSocket2, &s, sizeof(s));
     if (n == -1) {
         cout << "Error writing to socket" << endl;
         return;
     }
+    memset(s, '\0', 7);
 }
 
 /**

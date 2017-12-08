@@ -63,12 +63,15 @@ int ConnectToServer::getClientSocket() const{
 }
 
 
-void ConnectToServer::writeToServer(string s, int clientSocket)const{
+void ConnectToServer::writeToServer(char* s, int clientSocket)const{
     //write to server
-    int n = write(clientSocket, s.c_str(), s.length());
+    char s2[7] = {0};
+    strcpy(s2,s);
+    int n = write(clientSocket, &s2, sizeof(s2));
 
     //error
     if(n == -1) {
         throw "error writing to socket";
     }
+    memset(s2, '\0', 7);
 }

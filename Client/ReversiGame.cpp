@@ -60,7 +60,10 @@ void ReversiGame::play() {
 
                 //is this is remote game mode.
                 if (this->currentMode == remoteGame) {
-                    string s = step.getX() + " " + step.getY();
+                    char s[7];
+                    s[0] = (char)step.getX();
+                    s[1]= ' ';
+                    s[2] = (char)step.getY();
 
                     //send move to server
                     serverInfo.writeToServer(s,serverInfo.getClientSocket());

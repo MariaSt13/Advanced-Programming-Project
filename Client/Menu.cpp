@@ -61,7 +61,7 @@ void Menu::runGame(const int &mode) {
     GameLogic* standardGameLogic = new StandardGameLogic();
     GameLogic* standardGameLogic2 = new StandardGameLogic();
 
-    ConnectToServer client("127.0.0.1", 8000);
+    ConnectToServer client("127.0.0.1", 8001);
     try {
         client.connectToServer();
     } catch (const char *msg) {
