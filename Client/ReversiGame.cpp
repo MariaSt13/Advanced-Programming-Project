@@ -14,9 +14,9 @@ using namespace std;
  * @param m - the mode of the game
  */
 ReversiGame::ReversiGame(const Board *gameBoard, const Player *blackPlayer,const Player *whitePlayer,
-                         GameLogic *gameLogic, mode m, ConnectToServer server):
+                         GameLogic *gameLogic, mode m, ConnectToServer server,Player* humanPlayer):
     gameBoard(gameBoard),blackPlayer(blackPlayer),whitePlayer(whitePlayer),gameLogic(gameLogic),
-    currentMode(m), serverInfo(server){
+    currentMode(m), serverInfo(server), humanPlayer(humanPlayer){
 
     this->hisTurn = this->blackPlayer;
     play();
@@ -28,15 +28,15 @@ ReversiGame::ReversiGame(const Board *gameBoard, const Player *blackPlayer,const
 void ReversiGame::play() {
     Point step = Point(-1,-1);
     vector<Point> v;
-    bool firstTimeInLoop = (this->hisTurn->getDisk() == gameBoard->blackActor);
-    bool virtualOpponentPlayLastTurn = (!this->hisTurn->getDisk() == gameBoard->blackActor);
+    bool firstTimeInLoop = true;
+    bool virtualOpponentPlayLastTurn = false;
 
     //running the game
     while(!isGameOver()) {
 
         bool firstTry = true;
         bool ifItIsHumanPLayer = ((this->currentMode == humanAgainstAI && this->hisTurn->getDisk() == this->gameBoard->blackActor) ||
-                   this->currentMode == humanAgainsHuman);
+                   this->currentMode == humanAgainsHuman || (this->currentMode == remoteGame && this->hisTurn->getDisk() == this->humanPlayer->getDisk()));
 
         //if it is turn of human player.
         if(ifItIsHumanPLayer){

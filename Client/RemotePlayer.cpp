@@ -16,7 +16,7 @@ Point RemotePlayer::chooseStep() const {
     vector<string> vector;
     int x,y;
 
-    int n = read(clientSocket,&s, sizeof(s));
+    int n = read(clientSocket,&s, s.length());
 
     if (n == -1) {
         throw "Error reading result";

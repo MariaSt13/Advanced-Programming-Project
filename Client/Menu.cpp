@@ -61,7 +61,7 @@ void Menu::runGame(const int &mode) {
     GameLogic* standardGameLogic = new StandardGameLogic();
     GameLogic* standardGameLogic2 = new StandardGameLogic();
 
-    ConnectToServer client("127.0.0.1", 8011);
+    ConnectToServer client("127.0.0.1", 8000);
     try {
         client.connectToServer();
     } catch (const char *msg) {
@@ -69,6 +69,7 @@ void Menu::runGame(const int &mode) {
         exit(-1);
     }
 
+    Player* humanPlayer;
     if ( mode == ReversiGame::humanAgainsHuman) {
         blackActor = new HumanLocalPlayer(b->blackActor);
         whiteActor = new HumanLocalPlayer(b->whiteActor);
@@ -79,17 +80,21 @@ void Menu::runGame(const int &mode) {
         whiteActor = new AIPlayer(b->whiteActor,standardGameLogic2, b);
         currentMode = ReversiGame::humanAgainstAI;
     } else if(mode == ReversiGame::remoteGame) {
+        currentMode = ReversiGame::remoteGame;
         int color = client.readTypeOfPlayer();
         // This player connected first so he is black
         if (color == 1) {
             blackActor = new HumanLocalPlayer(b->blackActor);
             whiteActor = new RemotePlayer(b->whiteActor, client.getClientSocket());
+            humanPlayer = blackActor;
         } else if (color == 2) { // this player connected second so he is white
             whiteActor = new HumanLocalPlayer(b->whiteActor);
             blackActor = new RemotePlayer(b->blackActor, client.getClientSocket());
+            humanPlayer = whiteActor;
         }
     }
-    ReversiGame game = ReversiGame(b, blackActor, whiteActor, standardGameLogic, currentMode, client);
+
+    ReversiGame game = ReversiGame(b, blackActor, whiteActor, standardGameLogic, currentMode, client,humanPlayer);
 
     //free memory
     delete(b);

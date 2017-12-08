@@ -20,13 +20,14 @@ public:
 
     //constructor.
     ReversiGame(const Board* gameBoard,const Player* whitePlayer,const Player* blackPlayer,GameLogic* gameLogic,
-                mode m, ConnectToServer server);
+                mode m, ConnectToServer server,Player* humanPlayer);
 
 
     //this function run the game.
     void play();
 
 private:
+    Player* humanPlayer;
     const Board* gameBoard;
     const Player* whitePlayer;
     const Player* blackPlayer;

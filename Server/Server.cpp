@@ -6,6 +6,8 @@
 #include <string.h>
 #include <iostream>
 #include <stdio.h>
+#include <cerrno>
+
 using namespace std;
 
 /**
@@ -57,13 +59,16 @@ void Server::start() {
         //connection to client.
         cout << "Waiting for client connections..." << endl;
 
-        // Accept a new client connection
+        //accept a new client connection
         clientSocket[i] = accept(serverSocket, (struct
                 sockaddr *)&clientAddress, &clientAddressLen);
         cout << "Client connected" << endl;
 
-        if (clientSocket[i] == -1)
+        if (clientSocket[i] == -1) {
+            char buffer[256];
+            char *errorMessage = strerror_r(errno, buffer, 256); // get string message from errno
             throw "Error on accept";
+        }
     }
 
     //send to client his number.1- black , 2-white.
@@ -98,7 +103,7 @@ void Server::handleClient(int clientSocket1,int clientSocket2) {
     string s;
 
     //read new exercise arguments
-    int n = read(clientSocket1, &s, sizeof(s));
+    int n = read(clientSocket1, &s, s.length());
 
     //the game is over
     if(s.compare("End")){
@@ -117,7 +122,7 @@ void Server::handleClient(int clientSocket1,int clientSocket2) {
     }
 
     // Write the result back to the client.
-    n = write(clientSocket2, &s, sizeof(s));
+    n = write(clientSocket2, s.c_str(), s.length());
     if (n == -1) {
         cout << "Error writing to socket" << endl;
         return;

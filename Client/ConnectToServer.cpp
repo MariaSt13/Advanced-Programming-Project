@@ -65,7 +65,7 @@ int ConnectToServer::getClientSocket() const{
 
 void ConnectToServer::writeToServer(string s, int clientSocket)const{
     //write to server
-    int n = write(clientSocket, &s, sizeof(s));
+    int n = write(clientSocket, s.c_str(), s.length());
 
     //error
     if(n == -1) {
