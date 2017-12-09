@@ -10,27 +10,37 @@
 
 using namespace std;
 
+/**
+ * constructor.
+ * @param serverIP - ip number.
+ * @param serverPort - port number.
+ */
 ConnectToServer::ConnectToServer(const char *serverIP, int serverPort):
         serverIP(serverIP), serverPort(serverPort),
         clientSocket(0) {
     cout << "Client" << endl;
 }
 
+
+/**
+ * this function connect client to server.
+ */
 void ConnectToServer::connectToServer() {
     // Create a socket point
     clientSocket = socket(AF_INET, SOCK_STREAM, 0);
-    if (clientSocket == -1) {
+    if (clientSocket == -1)
         throw "Error opening socket";
-    }
+
     // Convert the ip string to a network address
     struct in_addr address;
-    if (!inet_aton(serverIP, &address)) {
+    if (!inet_aton(serverIP, &address))
         throw "Can't parse IP address";
-    }
+
     // Get a hostent structure for the given host address
     struct hostent *server;
-    server = gethostbyaddr((const void *)&address, sizeof
-            address, AF_INET);
+    server = gethostbyaddr((const void *)&address, sizeof address, AF_INET);
+
+    //error
     if (server == NULL) {
         throw "Host is unreachable";
     }
@@ -39,30 +49,50 @@ void ConnectToServer::connectToServer() {
     struct sockaddr_in serverAddress;
     bzero((char *)&address, sizeof(address));
     serverAddress.sin_family = AF_INET;
-    memcpy((char *)&serverAddress.sin_addr.s_addr, (char
-    *)server->h_addr, server->h_length);
+    memcpy((char *)&serverAddress.sin_addr.s_addr, (char *)server->h_addr, server->h_length);
+
     // htons converts values between host and network byte orders
     serverAddress.sin_port = htons(serverPort);
+
     // Establish a connection with the TCP server
     if (connect(clientSocket, (struct sockaddr *)&serverAddress, sizeof(serverAddress)) == -1) {
         throw "Error connecting to server";
     }
     cout << "Connected to server" << endl;
 }
+
+
+/**
+ * this function return the color of the player.
+ * 1-black , 2 -white.
+ * @return - int.
+ */
 int ConnectToServer::readTypeOfPlayer() {
     int result;
     int n = read(clientSocket, &result, sizeof(result));
-    if (n == -1) {
+
+    //error
+    if (n == -1)
         throw "Error reading result from socket";
-    }
+
     return result;
 };
 
+
+/**
+ * this function return client socket number.
+ * @return - int socket number.
+ */
 int ConnectToServer::getClientSocket() const{
     return clientSocket;
 }
 
 
+/**
+ * this class get input as parameter and write it  to server.
+ * @param s -string input
+ * @param clientSocket -socket number
+ */
 void ConnectToServer::writeToServer(char* s, int clientSocket)const{
     //write to server
     char s2[7] = {0};

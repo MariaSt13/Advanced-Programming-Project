@@ -9,10 +9,15 @@
 
 using namespace std;
 
-
+/**
+ * this class open a definition file
+ * and create a map of definitions.
+ */
 class ReadDefinitionFile {
 
 public:
+
+    //reaad file and create map
     map<string,string> getVectorDefinition();
 };
 

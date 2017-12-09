@@ -19,9 +19,12 @@ Server::Server(int port): port(port), serverSocket(0),openServer(true) {
 }
 
 /**
- * initialize server.
+ * open server for connecting clients.
  */
 void Server::start() {
+
+    //array of clients socket
+    int clientSocket[MAX_CONNECTED_CLIENTS];
 
     // Create a socket point
     serverSocket = socket(AF_INET, SOCK_STREAM, 0);
@@ -48,11 +51,12 @@ void Server::start() {
     // Start listening to incoming connections
     listen(serverSocket, MAX_CONNECTED_CLIENTS);
 
-    int clientSocket[MAX_CONNECTED_CLIENTS];
     while(true){
         openServer = true;
+
         //connection all clients.
         for (int i = 0; i < MAX_CONNECTED_CLIENTS; i++) {
+
             // Define the client socket's structures
             struct sockaddr_in clientAddress;
             socklen_t clientAddressLen;
@@ -67,12 +71,10 @@ void Server::start() {
 
             if (clientSocket[i] == -1) {
                 char buffer[256];
-                char *errorMessage = strerror_r(errno, buffer, 256); // get string message from errno
-                throw "Error on accept";
             }
         }
 
-        //send to client his number.1- black , 2-white.
+        //send to client his color.1- black , 2-white.
         for (int i = 0; i < MAX_CONNECTED_CLIENTS; i++) {
             int result =  i+1;
             int n = write(clientSocket[i], &result, sizeof(result));
@@ -83,14 +85,13 @@ void Server::start() {
         }
 
         //while the game is run.
-        while(openServer){
-            for (int i = 0; i < MAX_CONNECTED_CLIENTS; i++) {
+        for (int i = 0; i < MAX_CONNECTED_CLIENTS; i++) {
+            if(openServer)
                 handleClient(clientSocket[i] ,clientSocket[(i+1) % 2]);
-            }
         }
 
+        // Close communication with all clients
         for (int i = 0; i < MAX_CONNECTED_CLIENTS; i++) {
-            // Close communication with the client
             close(clientSocket[i]);
         }
     }
@@ -98,9 +99,9 @@ void Server::start() {
 }
 
 /**
- *  * Handle requests from a specific client.
- * @param clientSocket1
- * @param clientSocket2
+ * Handle requests from a specific client.
+ * @param clientSocket1 - the server read from this client.
+ * @param clientSocket2 - the server write to this client.
  */
 void Server::handleClient(int clientSocket1,int clientSocket2) {
     char s[7] = {0};
@@ -114,21 +115,25 @@ void Server::handleClient(int clientSocket1,int clientSocket2) {
         return;
     }
 
+    //error
     if (n == -1) {
         cout << "Error reading arg1" << endl;
         this->openServer = false;
         return;
     }
 
+    //clientSocket1 disconnected
     if (n == 0) {
         cout << "Client disconnected" << endl;
         this->openServer = false;
         return;
     }
-    // Write the result back to the client.
+
+    // Write the result back to clientSocket2.
     n = write(clientSocket2, &s, sizeof(s));
     if (n == -1) {
         cout << "Error writing to socket" << endl;
+        this->openServer = false;
         return;
     }
     memset(s, '\0', 7);

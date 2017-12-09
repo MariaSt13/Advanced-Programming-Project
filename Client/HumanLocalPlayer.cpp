@@ -9,8 +9,9 @@ using namespace std;
  */
 HumanLocalPlayer::HumanLocalPlayer(Board::disk d): Player(d) {}
 
-/*
+/**
  * the player choose his next move in his turn .
+ * @return - point.
  */
 Point HumanLocalPlayer::chooseStep() const {
     int row;

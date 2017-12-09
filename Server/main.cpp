@@ -8,16 +8,27 @@
 using namespace std;
 int main() {
 
+    //get port number and create server.
     ReadDefinitionFile read = ReadDefinitionFile();
-    map<string,string> myMap = read.getVectorDefinition();
+    map<string,string> myMap;
+
+    try{
+        myMap = read.getVectorDefinition();
+    } catch (char const* msg){
+        cout << "Error: " << msg << endl;
+        exit(-1);
+    }
+
+
     int port;
     istringstream isX (myMap.find("port")->second);
     isX >> port;
-
     Server server(port);
+
+    //open server
     try {
         server.start();
-    } catch (const char *msg) {
+    } catch (char const* msg) {
         cout << "Cannot start server. Reason: " << msg << endl;
         exit(-1);
     }

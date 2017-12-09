@@ -1,6 +1,7 @@
 
 #include <iostream>
 #include <unistd.h>
+#include <cstdlib>
 
 using namespace std;
 #include "ReversiGame.h"
@@ -41,7 +42,7 @@ void ReversiGame::play() {
 
         bool firstTry = true;
         bool ifItIsHumanPLayer = ((this->currentMode == humanAgainstAI && this->hisTurn->getDisk() == this->gameBoard->blackActor) ||
-                   this->currentMode == humanAgainsHuman || (this->currentMode == remoteGame && this->hisTurn->getDisk() == this->humanPlayer->getDisk()));
+                   this->currentMode == humanAgainstHuman || (this->currentMode == remoteGame && this->hisTurn->getDisk() == this->humanPlayer->getDisk()));
 
         //if it is turn of human player.
         if(ifItIsHumanPLayer){
@@ -93,7 +94,14 @@ void ReversiGame::play() {
             }
 
             //current player choose step.
-            step = this->hisTurn->chooseStep();
+            try{
+                step = this->hisTurn->chooseStep();
+            }
+            catch(char const* msg){
+                cout << "failed read other player step. Result:" << msg << endl;
+                exit(-1);
+            }
+
 
             //if there are possible move to current player.
             if (!(step == Point(-1,-1))){

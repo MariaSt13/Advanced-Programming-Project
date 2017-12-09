@@ -3,12 +3,20 @@
 #define EX4_SERVER_H
 #define MAX_CONNECTED_CLIENTS 2
 
+/**
+ * server class.
+ */
 class Server {
 
 public:
 
+    //constructor.
     Server(int port);
+
+    //open server for connecting clients.
     void start();
+
+    //close server
     void stop();
 
 private:

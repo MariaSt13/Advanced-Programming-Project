@@ -1,9 +1,7 @@
-//
-// Created by linoy on 08/12/17.
-//
 
-#ifndef EX4_READDEFINIATIONFILE_H
-#define EX4_READDEFINIATIONFILE_H
+
+#ifndef EX4_READDEFINITIONFILE_H
+#define EX4_READDEFINITIONFILE_H
 
 #include <fstream>
 #include <iostream>
@@ -11,12 +9,17 @@
 
 using namespace std;
 
-
+/**
+ * this class open a definition file
+ * and create a map of definitions.
+ */
 class ReadDefinitionFile {
 
 public:
+
+    //reaad file and create map
     map<string,string> getVectorDefinition();
 };
 
 
-#endif //EX4_READDEFINIATIONFILE_H
+#endif //EX4_READDEFINITIONFILE_H
