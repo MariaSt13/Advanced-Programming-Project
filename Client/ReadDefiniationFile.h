@@ -7,13 +7,15 @@
 
 #include <fstream>
 #include <iostream>
+#include <map>
+
 using namespace std;
 
 
 class ReadDefiniationFile {
 
 public:
-    void readiFile();
+    map<string,string> getVectorDefiniation();
 };
 
 

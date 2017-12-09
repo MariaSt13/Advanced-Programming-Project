@@ -5,19 +5,21 @@
 #include <vector>
 #include "ReadDefiniationFile.h"
 #include <boost/algorithm/string.hpp>
+#include <map>
 
 using namespace boost;
+using namespace std;
 
 
-void ReadDefiniationFile::readiFile() {
+map<string,string> ReadDefiniationFile::getVectorDefiniation() {
 
     // open a file in read mode.
     ifstream file;
     file.open("DefiniationFile.txt");
     int pairSize = 2;
     string line;
-    vector v < pair<string,string> >;
-    vector buffer <string>;
+    map<string,string> myMap;
+    vector<string> buffer;
 
     //if the file is open.
     if(file.is_open()){
@@ -28,7 +30,7 @@ void ReadDefiniationFile::readiFile() {
 
             //make pair
             if(buffer.size() == pairSize){
-                v.push_back(make_pair(buffer.at(0),buffer.at(1)));
+                myMap.insert(make_pair(buffer.at(0),buffer.at(1)));
             }
 
         }
@@ -38,5 +40,7 @@ void ReadDefiniationFile::readiFile() {
     //if there is error with open file.
     else
         throw "Error: cannot open file";
+
+    return myMap;
 
 }

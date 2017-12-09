@@ -9,6 +9,7 @@
 #include "AIPlayer.h"
 #include "ReversiGame.h"
 #include "RemotePlayer.h"
+#include "ReadDefiniationFile.h"
 
 using namespace std;
 /*
@@ -61,7 +62,14 @@ void Menu::runGame(const int &mode) {
     GameLogic* standardGameLogic = new StandardGameLogic();
     GameLogic* standardGameLogic2 = new StandardGameLogic();
 
-    ConnectToServer client("127.0.0.1", 8000);
+    ReadDefiniationFile read;
+    map<string,string> myMap = read.getVectorDefiniation();
+    string ip = myMap.find("ip")->second;
+    int port;
+    istringstream isX (myMap.find("port")->second);
+    isX >> port;
+    ConnectToServer client(ip.c_str(),port);
+
 
     Player* humanPlayer;
     if ( mode == ReversiGame::humanAgainsHuman) {
