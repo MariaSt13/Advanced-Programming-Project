@@ -71,16 +71,19 @@ void Menu::runGame(const int &mode) {
     ConnectToServer client(ip.c_str(),port);
 
 
-    Player* humanPlayer;
+    Board::disk humanPlayer;
     if ( mode == ReversiGame::humanAgainsHuman) {
         blackActor = new HumanLocalPlayer(b->blackActor);
         whiteActor = new HumanLocalPlayer(b->whiteActor);
         currentMode = ReversiGame::humanAgainsHuman;
+        ReversiGame game = ReversiGame(b, blackActor, whiteActor, standardGameLogic, currentMode);
     } else if ( mode == ReversiGame::humanAgainstAI) {
         blackActor = new HumanLocalPlayer(b->blackActor);
         // send a copy of the logic to the AI player.
         whiteActor = new AIPlayer(b->whiteActor,standardGameLogic2, b);
         currentMode = ReversiGame::humanAgainstAI;
+        ReversiGame game = ReversiGame(b, blackActor, whiteActor, standardGameLogic, currentMode);
+
     } else if(mode == ReversiGame::remoteGame) {
         currentMode = ReversiGame::remoteGame;
         try {
@@ -94,15 +97,17 @@ void Menu::runGame(const int &mode) {
         if (color == 1) {
             blackActor = new HumanLocalPlayer(b->blackActor);
             whiteActor = new RemotePlayer(b->whiteActor, client.getClientSocket());
-            humanPlayer = blackActor;
+            humanPlayer = b->blackActor;
+            ReversiGame game = ReversiGame(b, blackActor, whiteActor, standardGameLogic, currentMode, client, humanPlayer);
         } else if (color == 2) { // this player connected second so he is white
             whiteActor = new HumanLocalPlayer(b->whiteActor);
             blackActor = new RemotePlayer(b->blackActor, client.getClientSocket());
-            humanPlayer = whiteActor;
+            humanPlayer = b->whiteActor;
+            ReversiGame game = ReversiGame(b, blackActor, whiteActor, standardGameLogic, currentMode, client,humanPlayer);
         }
     }
 
-    ReversiGame game = ReversiGame(b, blackActor, whiteActor, standardGameLogic, currentMode, client,humanPlayer);
+
 
     //free memory
     delete(b);
