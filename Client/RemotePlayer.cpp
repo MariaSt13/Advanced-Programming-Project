@@ -5,7 +5,6 @@
 #include <unistd.h>
 #include <iostream>
 #include "RemotePlayer.h"
-using namespace boost;
 using namespace std;
 
 
@@ -30,11 +29,7 @@ Point RemotePlayer::chooseStep() const {
     
     x = s[0];
     y = s[2];
-   /* istringstream isX (vector.at(0));
-    isX >> x;
 
-    istringstream isY (vector.at(1));
-    isY >> y;*/
     memset(s, '\0', 7);
     return Point(x, y);
 }
