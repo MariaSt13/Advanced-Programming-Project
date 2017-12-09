@@ -4,7 +4,7 @@ project(ex4)
 set(CMAKE_CXX_STANDARD 98)
 
 
-set(SOURCE_FILES Server.cpp Server.h)
+set(SOURCE_FILES Server.cpp Server.h ReadDefinitionFile.h ReadDefinitionFile.cpp)
 #set(TEST_FILES test/ConsoleBoardTest.cpp test/ConsoleBoardTest.h test/StandardGameLogicTest.cpp test/PointTest.cpp test/AIPlayerTest.cpp)
 add_executable(server ${SOURCE_FILES} main.cpp)
 #add_executable(testing ${SOURCE_FILES} ${TEST_FILES} test/gtest_main.cpp)

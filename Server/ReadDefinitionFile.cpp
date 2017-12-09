@@ -11,7 +11,7 @@ map<string,string> ReadDefinitionFile::getVectorDefinition() {
 
     // open a file in read mode.
     ifstream file;
-    file.open("/home/linoy/Desktop/myGIt/Advanced-Programming-Project/Client/clientDefinitionFile.txt");
+    file.open("/home/linoy/Desktop/myGIt/Advanced-Programming-Project/Server/serverDefinitionFile.txt");
     int pairSize = 2;
     string line;
     map<string,string> myMap;
