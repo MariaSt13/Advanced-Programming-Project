@@ -12,10 +12,10 @@
 using namespace std;
 
 
-class ReadDefiniationFile {
+class ReadDefinitionFile {
 
 public:
-    map<string,string> getVectorDefiniation();
+    map<string,string> getVectorDefinition();
 };
 
 

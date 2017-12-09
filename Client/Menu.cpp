@@ -9,7 +9,7 @@
 #include "AIPlayer.h"
 #include "ReversiGame.h"
 #include "RemotePlayer.h"
-#include "ReadDefiniationFile.h"
+#include "ReadDefinitionFile.h"
 
 using namespace std;
 /*
@@ -62,8 +62,8 @@ void Menu::runGame(const int &mode) {
     GameLogic* standardGameLogic = new StandardGameLogic();
     GameLogic* standardGameLogic2 = new StandardGameLogic();
 
-    ReadDefiniationFile read;
-    map<string,string> myMap = read.getVectorDefiniation();
+    ReadDefinitionFile read = ReadDefinitionFile();
+    map<string,string> myMap = read.getVectorDefinition();
     string ip = myMap.find("ip")->second;
     int port;
     istringstream isX (myMap.find("port")->second);
