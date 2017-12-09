@@ -1,9 +1,7 @@
-//
-// Created by linoy on 08/12/17.
-//
 
-#ifndef EX4_READDEFINIATIONFILE_H
-#define EX4_READDEFINIATIONFILE_H
+
+#ifndef EX4_READDEFINITIONFILE_H
+#define EX4_READDEFINITIONFILE_H
 
 #include <fstream>
 #include <iostream>
@@ -19,4 +17,4 @@ public:
 };
 
 
-#endif //EX4_READDEFINIATIONFILE_H
+#endif //EX4_READDEFINITIONFILE_H
