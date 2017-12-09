@@ -79,7 +79,7 @@ void Menu::runGame(const int &mode) {
     ConnectToServer client(ip.c_str(),port);
 
 
-    Player* humanPlayer;
+    Board::disk humanPlayer;
 
     switch(mode){
 
@@ -112,13 +112,13 @@ void Menu::runGame(const int &mode) {
             if (color == 1) {
                 blackActor = new HumanLocalPlayer(b->blackActor);
                 whiteActor = new RemotePlayer(b->whiteActor, client.getClientSocket());
-                humanPlayer = blackActor;
+                humanPlayer = b->blackActor;
 
                 // this player connected second so he is white
             } else if (color == 2) {
                 whiteActor = new HumanLocalPlayer(b->whiteActor);
                 blackActor = new RemotePlayer(b->blackActor, client.getClientSocket());
-                humanPlayer = whiteActor;
+                humanPlayer = b->whiteActor;
             }
             break;
     }

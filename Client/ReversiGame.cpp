@@ -14,18 +14,13 @@ using namespace std;
  * @param gameLogic - the logic of the game
  * @param m - the mode of the game
  */
-
 ReversiGame::ReversiGame(const Board *gameBoard, const Player *blackPlayer,const Player *whitePlayer,
-                         GameLogic *gameLogic, mode m):
+                         GameLogic *gameLogic, mode m, ConnectToServer server,Player* humanPlayer):
         gameBoard(gameBoard),blackPlayer(blackPlayer),whitePlayer(whitePlayer),gameLogic(gameLogic),
-        currentMode(m), serverInfo(nullptr, nullptr){
+        currentMode(m), serverInfo(server), humanPlayer(humanPlayer){
+
     this->hisTurn = this->blackPlayer;
     play();
-}
-ReversiGame::ReversiGame(const Board *gameBoard, const Player *blackPlayer,const Player *whitePlayer,
-                         GameLogic *gameLogic, mode m, ConnectToServer server,Board::disk humanPlayer):
-        serverInfo(server), humanPlayer(humanPlayer){
-    ReversiGame(gameBoard,blackPlayer, whitePlayer,gameLogic, m);
 }
 
 /*

@@ -18,10 +18,7 @@ public:
     //game mode.
     enum mode{noMode = 0, humanAgainstHuman = 1, humanAgainstAI = 2, remoteGame = 3};
 
-    //regular constructor
-    ReversiGame(const Board* gameBoard,const Player* whitePlayer,const Player* blackPlayer,GameLogic* gameLogic,
-                mode m);
-    //constructor fo remote mode
+    //constructor
     ReversiGame(const Board* gameBoard,const Player* whitePlayer,const Player* blackPlayer,GameLogic* gameLogic,
                 mode m, ConnectToServer server,Board::disk humanPlayer);
 
