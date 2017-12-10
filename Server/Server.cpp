@@ -70,7 +70,7 @@ void Server::start() {
             cout << "Client connected" << endl;
 
             if (clientSocket[i] == -1) {
-                char buffer[256];
+                throw "Error on accept";
             }
         }
 
@@ -84,12 +84,12 @@ void Server::start() {
             }
         }
 
-        //while the game is run.
+        //while the game is running.
         while (openServer){
             for (int i = 0; i < MAX_CONNECTED_CLIENTS; i++) {
                 if(openServer)
                     handleClient(clientSocket[i] ,clientSocket[(i+1) % 2]);
-            }   
+            }
         }
 
         // Close communication with all clients
@@ -102,13 +102,13 @@ void Server::start() {
 
 /**
  * Handle requests from a specific client.
- * @param clientSocket1 - the server read from this client.
- * @param clientSocket2 - the server write to this client.
+ * @param clientSocket1 - the server reads from this client.
+ * @param clientSocket2 - the server writes to this client.
  */
 void Server::handleClient(int clientSocket1,int clientSocket2) {
     char s[7] = {0};
 
-    //read new exercise arguments
+    //read a new move
     int n = read(clientSocket1, &s, sizeof(s));
 
     //the game is over

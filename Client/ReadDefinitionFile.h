@@ -17,7 +17,7 @@ class ReadDefinitionFile {
 
 public:
 
-    //reaad file and create map
+    //read file and create map
     map<string,string> getVectorDefinition();
 };
 

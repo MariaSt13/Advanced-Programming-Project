@@ -18,7 +18,6 @@ using namespace std;
 ConnectToServer::ConnectToServer(const char *serverIP, int serverPort):
         serverIP(serverIP), serverPort(serverPort),
         clientSocket(0) {
-    cout << "Client" << endl;
 }
 
 

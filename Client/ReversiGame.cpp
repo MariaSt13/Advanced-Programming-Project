@@ -1,6 +1,5 @@
 
 #include <iostream>
-#include <unistd.h>
 #include <cstdlib>
 
 using namespace std;
@@ -13,6 +12,8 @@ using namespace std;
  * @param whitePlayer - the white player
  * @param gameLogic - the logic of the game
  * @param m - the mode of the game
+ * @param server - info of the server.
+ * @param humanPlayer -the disk of the human player (relevant in remote game).
  */
 ReversiGame::ReversiGame(const Board *gameBoard, const Player *blackPlayer,const Player *whitePlayer,
                          GameLogic *gameLogic, mode m, ConnectToServer server,Board::disk humanPlayer):
