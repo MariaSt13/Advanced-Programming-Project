@@ -2,6 +2,7 @@
 #ifndef EX4_SERVER_H
 #define EX4_SERVER_H
 #define MAX_CONNECTED_CLIENTS 2
+#define ARRAY_SIZE 7
 
 /**
  * server class.
@@ -25,6 +26,5 @@ private:
     bool openServer;
     void handleClient(int clientSocket1,int clientSocket2);
     //maximum number of characters in the array.
-    const int arraySize;
 };
 #endif //EX4_SERVER_H
