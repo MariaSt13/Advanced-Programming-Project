@@ -8,18 +8,19 @@ using namespace std;
  * @param d - disk.
  * @param clientSocket - client socket number.
  */
-RemotePlayer::RemotePlayer(Board::disk d, int clientSocket): Player(d),clientSocket(clientSocket) {}
+RemotePlayer::RemotePlayer(Board::disk d, ConnectToServer client): Player(d),client(client) {}
 
 /**
  * the player gets the move from the server.
  * @return - point.
  */
 Point RemotePlayer::chooseStep() const {
-    char s[7];
+    const int size = this->client.getArraySize();
+    char s[size];
     int x,y;
 
     //read from server
-    int n = read(clientSocket,&s, sizeof(s));
+    int n = read(this->client.getClientSocket(),&s, sizeof(s));
 
     //error
     if (n == -1)
@@ -31,13 +32,13 @@ Point RemotePlayer::chooseStep() const {
 
     //if there are no valid.
     if (strcmp(s, "NoMove") == 0) {
-        memset(s, '\0', 7);
+        memset(s, '\0', size);
         return Point(-1,-1);
     }
     
     x = s[0];
     y = s[2];
 
-    memset(s, '\0', 7);
+    memset(s, '\0', size);
     return Point(x, y);
 }

@@ -20,10 +20,11 @@ public:
     void stop();
 
 private:
-
     int port;
     int serverSocket; // the socket's file descriptor
     bool openServer;
     void handleClient(int clientSocket1,int clientSocket2);
+    //maximum number of characters in the array.
+    const int arraySize;
 };
 #endif //EX4_SERVER_H

@@ -12,7 +12,7 @@ using namespace std;
  * constructor.
  * @param port-port number.
  */
-Server::Server(int port): port(port), serverSocket(0),openServer(true) {
+Server::Server(int port): port(port), serverSocket(0),openServer(true), arraySize(7) {
     cout << "Server" << endl;
 }
 
@@ -104,7 +104,7 @@ void Server::start() {
  * @param clientSocket2 - the server writes to this client.
  */
 void Server::handleClient(int clientSocket1,int clientSocket2) {
-    char s[7] = {0};
+    char s[this->arraySize] = {0};
 
     //read a new move
     int n = read(clientSocket1, &s, sizeof(s));
@@ -136,7 +136,7 @@ void Server::handleClient(int clientSocket1,int clientSocket2) {
         this->openServer = false;
         return;
     }
-    memset(s, '\0', 7);
+    memset(s, '\0', this->arraySize);
 }
 
 /**

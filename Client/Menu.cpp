@@ -113,13 +113,13 @@ void Menu::runGame(const int &mode) {
             // This player connected first so he is black
             if (color == connectedFirst) {
                 blackActor = new HumanLocalPlayer(b->blackActor);
-                whiteActor = new RemotePlayer(b->whiteActor, client.getClientSocket());
+                whiteActor = new RemotePlayer(b->whiteActor, client);
                 humanPlayer = b->blackActor;
 
                 // this player connected second so he is white
             } else if (color == connectedSecond) {
                 whiteActor = new HumanLocalPlayer(b->whiteActor);
-                blackActor = new RemotePlayer(b->blackActor, client.getClientSocket());
+                blackActor = new RemotePlayer(b->blackActor, client);
                 humanPlayer = b->whiteActor;
             }
             break;

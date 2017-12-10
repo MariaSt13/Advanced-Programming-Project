@@ -2,6 +2,7 @@
 #ifndef EX4_CONECTTOSERVER_H
 #define EX4_CONECTTOSERVER_H
 #include <string>
+#define MAX_SIZE 7
 using namespace std;
 
 /**
@@ -25,7 +26,13 @@ public:
     //write to server
     void writeToServer(char* s, int clientSocket)const;
 
+    //return arraySize
+    const int getArraySize()const;
+
 private:
+    //maximum number of characters in the array.
+    const int arraySize;
+
     const char *serverIP;
     int serverPort;
     int clientSocket;

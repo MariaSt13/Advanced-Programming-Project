@@ -17,7 +17,7 @@ using namespace std;
  */
 ConnectToServer::ConnectToServer(const char *serverIP, int serverPort):
         serverIP(serverIP), serverPort(serverPort),
-        clientSocket(0) {
+        clientSocket(0), arraySize(7) {
 }
 
 
@@ -95,7 +95,7 @@ int ConnectToServer::getClientSocket() const{
  */
 void ConnectToServer::writeToServer(char* s, int clientSocket)const{
     //write to server
-    char s2[7] = {0};
+    char s2[this->arraySize] = {0};
     strcpy(s2,s);
     int n = write(clientSocket, &s2, sizeof(s2));
 
@@ -103,5 +103,9 @@ void ConnectToServer::writeToServer(char* s, int clientSocket)const{
     if(n == -1) {
         throw "error writing to socket";
     }
-    memset(s2, '\0', 7);
+    memset(s2, '\0', this->arraySize);
+}
+
+const int ConnectToServer::getArraySize()const {
+    return this->arraySize;
 }
