@@ -1,0 +1,16 @@
+
+height: 220
+ weight:   80
+city : tel aviv
+
+name:bob
+size: 56
+class : h
+telephone: 000-0000
+
+hair color: yellow
+
+eyes color:brown
+
+grade : 60
+

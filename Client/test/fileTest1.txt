@@ -1,0 +1,12 @@
+name:alice
+size:8
+class : b
+height: 155
+weight:50
+school: bar ilan
+
+telephone: 052
+
+grade : 100
+hair color: brown
+eyes color:blue
