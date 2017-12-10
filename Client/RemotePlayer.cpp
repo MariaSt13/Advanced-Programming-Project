@@ -31,13 +31,13 @@ Point RemotePlayer::chooseStep() const {
 
     //if there are no valid.
     if (strcmp(s, "NoMove") == 0) {
-        memset(s, '\0', size);
+        memset(s, '\0', ARRAY_SIZE);
         return Point(-1,-1);
     }
     
     x = s[0];
     y = s[2];
 
-    memset(s, '\0', size);
+    memset(s, '\0', ARRAY_SIZE);
     return Point(x, y);
 }

@@ -105,7 +105,3 @@ void Client::writeToServer(char* s, int clientSocket)const{
     }
     memset(s2, '\0', ARRAY_SIZE);
 }
-
-const int Client::getArraySize()const {
-    return ARRAY_SIZE;
-}
