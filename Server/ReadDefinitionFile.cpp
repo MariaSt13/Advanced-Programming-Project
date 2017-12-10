@@ -20,7 +20,7 @@ map<string,string> ReadDefinitionFile::getVectorDefinition()const {
 
     // open a file in read mode.
     ifstream file;
-    file.open("/exe/Server/serverDefinitionFile.txt");
+    file.open("serverDefinitionFile.txt");
 
     //if the file is open.
     if(file.is_open()){
