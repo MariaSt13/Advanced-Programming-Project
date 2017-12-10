@@ -12,13 +12,14 @@ public:
      * colSize - number of columns in the game board.
      */
     Menu(const int &rowSize,const int &colSize);
+
 private:
     // runs the menu
-    void runMenu();
+    void runMenu()const;
     // runs the game in chosen mode
-    void runGame(const int &mode);
+    void runGame(const int &mode)const;
     //dimensions for the board of the game
-    int rowNumber;
-    int colNumber;
+    const int rowNumber;
+    const int colNumber;
 };
 #endif //EXAM1_MENU_H

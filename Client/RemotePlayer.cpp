@@ -28,7 +28,7 @@ Point RemotePlayer::chooseStep() const {
 
     // other player disconnected
     if(n == 0)
-        throw "Error reading result: other player disconnected";
+        throw "other player disconnected";
 
     //if there are no valid.
     if (strcmp(s, "NoMove") == 0) {

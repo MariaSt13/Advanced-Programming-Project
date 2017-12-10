@@ -17,7 +17,7 @@ public:
     void connectToServer();
 
     //return the color of the player. 1 - black , 2 - white.
-    int readTypeOfPlayer();
+    int readTypeOfPlayer()const;
 
     //return socket number.
     int getClientSocket() const;

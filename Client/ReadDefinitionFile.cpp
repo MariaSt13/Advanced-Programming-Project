@@ -12,7 +12,7 @@ using namespace std;
  * and create a map of definitions.
  * @return - map.
  */
-map<string,string> ReadDefinitionFile::getVectorDefinition() {
+map<string,string> ReadDefinitionFile::getVectorDefinition()const {
     int pairSize = 2;
     string line;
     map<string,string> myMap;

@@ -67,7 +67,7 @@ void Client::connectToServer() {
  * 1 - black , 2 - white.
  * @return - int.
  */
-int Client::readTypeOfPlayer() {
+int Client::readTypeOfPlayer()const {
     int result;
     int n = read(clientSocket, &result, sizeof(result));
 

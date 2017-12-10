@@ -22,7 +22,7 @@ Menu::Menu(const int &rows,const int &cols): rowNumber(rows), colNumber(cols){
 /*
  * runs the menu. show it and get the player choise.
  */
-void Menu::runMenu(){
+void Menu::runMenu()const{
     // print menu
     cout << "Please choose game mode:" << endl;
     cout << "(1) Human player" << endl;
@@ -53,7 +53,7 @@ void Menu::runMenu(){
  * runs the game by the mode choice.
  * mode - the number of the mode chosen.
  */
-void Menu::runGame(const int &mode) {
+void Menu::runGame(const int &mode)const {
     const int connectedFirst = 1;
     const int connectedSecond = 2;
     Board* b =  new ConsoleBoard(rowNumber, colNumber);

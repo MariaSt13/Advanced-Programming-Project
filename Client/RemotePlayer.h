@@ -26,7 +26,7 @@ public:
 
 private:
 
-    Client client;
+    const Client client;
 };
 
 
