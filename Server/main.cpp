@@ -13,7 +13,7 @@ int main() {
     map<string,string> myMap;
 
     try{
-        myMap = read.getVectorDefinition();
+        myMap = read.getVectorDefinition("serverDefinitionFile.txt");
     } catch (char const* msg){
         cout << "Error: " << msg << endl;
         exit(1);

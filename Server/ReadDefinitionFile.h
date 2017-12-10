@@ -18,7 +18,7 @@ class ReadDefinitionFile {
 public:
 
     //read file and create map
-    map<string,string> getVectorDefinition()const;
+    map<string,string> getVectorDefinition(const char* s)const;
 };
 
 

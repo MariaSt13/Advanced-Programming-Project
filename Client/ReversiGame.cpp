@@ -61,7 +61,8 @@ void ReversiGame::play() {
 
                 //is this is remote game mode.
                 if (this->currentMode == remoteGame) {
-                    char s[this->client.getArraySize()];
+                    const int size = this->client.getArraySize();
+                    char s[size];
                     s[0] = (char)step.getX();
                     s[1]= ' ';
                     s[2] = (char)step.getY();
@@ -73,7 +74,8 @@ void ReversiGame::play() {
             //no possible moves and if is remote game.
             } else {
                 if(this->currentMode == remoteGame){
-                    char s[this->client.getArraySize()] = "NoMove";
+                    const int size = this->client.getArraySize();
+                    char s[size] = "NoMove";
                     client.writeToServer(s,client.getClientSocket());
                 }
             }
@@ -175,7 +177,8 @@ void ReversiGame::gameOver()const{
 
     //if it is remote game.
     if(this->currentMode == this->remoteGame){
-        char s[this->client.getArraySize()] = "End";
+        const int size = this->client.getArraySize();
+        char s[size] = "End";
         client.writeToServer(s,client.getClientSocket());
     }
 }

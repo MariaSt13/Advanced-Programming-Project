@@ -67,7 +67,7 @@ void Menu::runGame(const int &mode)const {
     ReadDefinitionFile read = ReadDefinitionFile();
     map<string,string> myMap;
     try{
-        myMap = read.getVectorDefinition();
+        myMap = read.getVectorDefinition("clientDefinitionFile.txt");
     }
     catch (char const* msg){
         cout << "Failed to file. Reason:" << msg << endl;

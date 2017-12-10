@@ -3,6 +3,7 @@
 #define EX4_CLIENT_H
 #include <string>
 #define ARRAY_SIZE 7
+
 using namespace std;
 
 /**
@@ -30,7 +31,6 @@ public:
     const int getArraySize()const;
 
 private:
-
     const char *serverIP;
     int serverPort;
     int clientSocket;
