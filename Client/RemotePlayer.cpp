@@ -15,8 +15,7 @@ RemotePlayer::RemotePlayer(Board::disk d, Client client): Player(d),client(clien
  * @return - point.
  */
 Point RemotePlayer::chooseStep() const {
-    const int size = this->client.getArraySize();
-    char s[size];
+    char s[ARRAY_SIZE];
     int x,y;
 
     //read from server

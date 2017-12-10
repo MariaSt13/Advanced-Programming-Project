@@ -1,6 +1,7 @@
 
 #ifndef EXAM1_REVERSIGAME_H
 #define EXAM1_REVERSIGAME_H
+#define ARRAY_SIZE 7
 #include "Board.h"
 #include "Player.h"
 #include "GameLogic.h"

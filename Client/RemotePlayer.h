@@ -1,5 +1,6 @@
 #ifndef EXAM1_REMOTEPLAYER_H
 #define EXAM1_REMOTEPLAYER_H
+#define ARRAY_SIZE 7
 #include <boost/algorithm/string.hpp>
 #include "Player.h"
 #include "Client.h"

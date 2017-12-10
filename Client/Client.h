@@ -27,9 +27,6 @@ public:
     //write to server
     void writeToServer(char* s, int clientSocket)const;
 
-    //return arraySize
-    const int getArraySize()const;
-
 private:
     const char *serverIP;
     int serverPort;
