@@ -108,7 +108,8 @@ Point StandardGameLogic::ifReverseOpponentDisk(const Player* player,const  Point
 
 /*
  * The function places a disc where the player has selected
- * And calls a function that turns the opponent's disks.
+ * and flips the opponents cells by the map.
+ * bool updateMap - first update the map. (when return valid moves was not called before that.)
  */
 void StandardGameLogic::flipCells(const Player* player,const Point &newPoint, const Board* b, bool updateMap) {
     if ( updateMap == true) {

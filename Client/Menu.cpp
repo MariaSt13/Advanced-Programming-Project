@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <limits>
 #include <cstdlib>
@@ -51,10 +50,12 @@ void Menu::runMenu(){
 
 }
 /*
- * runs the game by the mode choise.
+ * runs the game by the mode choice.
  * mode - the number of the mode chosen.
  */
 void Menu::runGame(const int &mode) {
+    const int connectedFirst = 1;
+    const int connectedSecond = 2;
     Board* b =  new ConsoleBoard(rowNumber, colNumber);
     Player* blackActor;
     Player* whiteActor;
@@ -99,6 +100,7 @@ void Menu::runGame(const int &mode) {
         case ReversiGame::remoteGame:
             currentMode = ReversiGame::remoteGame;
 
+            //connect to server
             try {
                 client.connectToServer();
             } catch (char const* msg) {
@@ -109,13 +111,13 @@ void Menu::runGame(const int &mode) {
             int color = client.readTypeOfPlayer();
 
             // This player connected first so he is black
-            if (color == 1) {
+            if (color == connectedFirst) {
                 blackActor = new HumanLocalPlayer(b->blackActor);
                 whiteActor = new RemotePlayer(b->whiteActor, client.getClientSocket());
                 humanPlayer = b->blackActor;
 
                 // this player connected second so he is white
-            } else if (color == 2) {
+            } else if (color == connectedSecond) {
                 whiteActor = new HumanLocalPlayer(b->whiteActor);
                 blackActor = new RemotePlayer(b->blackActor, client.getClientSocket());
                 humanPlayer = b->whiteActor;
@@ -123,7 +125,7 @@ void Menu::runGame(const int &mode) {
             break;
     }
 
-    ReversiGame game = ReversiGame(b, blackActor, whiteActor, standardGameLogic, currentMode, client,humanPlayer);
+    ReversiGame(b, blackActor, whiteActor, standardGameLogic, currentMode, client,humanPlayer);
 
     //free memory
     delete(b);

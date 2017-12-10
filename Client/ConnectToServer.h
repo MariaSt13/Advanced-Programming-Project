@@ -5,7 +5,7 @@
 using namespace std;
 
 /**
- * this class connect the client to the server.
+ * this class connects the client to the server.
  */
 class ConnectToServer {
 public:
@@ -16,7 +16,7 @@ public:
     //connect player to server.
     void connectToServer();
 
-    //return the color of the player. 1-black , 2 -white.
+    //return the color of the player. 1 - black , 2 - white.
     int readTypeOfPlayer();
 
     //return socket number.

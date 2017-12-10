@@ -1,9 +1,8 @@
 
 #include <iostream>
 #include <cstdlib>
-
-using namespace std;
 #include "ReversiGame.h"
+using namespace std;
 
 /**
  * constructor.

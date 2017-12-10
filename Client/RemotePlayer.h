@@ -1,11 +1,7 @@
-//
-// Created by maria on 04/12/17.
-//
-
-#include "Player.h"
 #ifndef EXAM1_REMOTEPLAYER_H
 #define EXAM1_REMOTEPLAYER_H
 #include <boost/algorithm/string.hpp>
+#include "Player.h"
 
 /*
  * this class extends player class and represent

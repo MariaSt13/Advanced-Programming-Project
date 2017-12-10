@@ -1,4 +1,3 @@
-
 #ifndef EXAM1_PLAYER_H
 #define EXAM1_PLAYER_H
 
@@ -12,7 +11,7 @@
 class Player{
 public:
 
-    // the player choose his next move in his turn .
+    // the player choose his next move in his turn.
     virtual Point chooseStep() const = 0;
 
     //constructor.

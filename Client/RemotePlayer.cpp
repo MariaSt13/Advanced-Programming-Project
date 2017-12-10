@@ -1,7 +1,3 @@
-//
-// Created by maria on 04/12/17.
-//
-
 #include <unistd.h>
 #include <iostream>
 #include "RemotePlayer.h"
@@ -15,12 +11,11 @@ using namespace std;
 RemotePlayer::RemotePlayer(Board::disk d, int clientSocket): Player(d),clientSocket(clientSocket) {}
 
 /**
- * the player choose his next move in his turn .
+ * the player gets the move from the server.
  * @return - point.
  */
 Point RemotePlayer::chooseStep() const {
     char s[7];
-    vector<string> vector;
     int x,y;
 
     //read from server

@@ -62,8 +62,8 @@ void ConnectToServer::connectToServer() {
 
 
 /**
- * this function return the color of the player.
- * 1-black , 2 -white.
+ * this function returns the color of the player.
+ * 1 - black , 2 - white.
  * @return - int.
  */
 int ConnectToServer::readTypeOfPlayer() {
@@ -79,7 +79,7 @@ int ConnectToServer::readTypeOfPlayer() {
 
 
 /**
- * this function return client socket number.
+ * this function returns client socket number.
  * @return - int socket number.
  */
 int ConnectToServer::getClientSocket() const{
@@ -88,9 +88,9 @@ int ConnectToServer::getClientSocket() const{
 
 
 /**
- * this class get input as parameter and write it  to server.
- * @param s -string input
- * @param clientSocket -socket number
+ * this function writes to the server.
+ * @param s - the message to the server.
+ * @param clientSocket - socket number.
  */
 void ConnectToServer::writeToServer(char* s, int clientSocket)const{
     //write to server

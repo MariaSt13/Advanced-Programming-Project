@@ -36,7 +36,7 @@ map<string,string> ReadDefinitionFile::getVectorDefinition() {
         file.close();
     }
 
-    //if there is error with open file.
+    //if there is an error with open file.
     else
         throw "Error: cannot open file";
 

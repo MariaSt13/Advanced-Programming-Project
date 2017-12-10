@@ -5,8 +5,6 @@
 #include <unistd.h>
 #include <string.h>
 #include <iostream>
-#include <stdio.h>
-#include <cerrno>
 
 using namespace std;
 

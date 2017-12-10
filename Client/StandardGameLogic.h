@@ -11,10 +11,12 @@ class StandardGameLogic: public GameLogic {
 
 public:
 
+
     /*
-     * The function places a disc where the player has selected
-     * And calls a function that turns the opponent's disks.
-     */
+    * The function places a disc where the player has selected
+    * and flips the opponents cells by the map.
+    * bool updateMap - first update the map. (when return valid moves was not called before that.)
+    */
     virtual void flipCells (const Player* player,const Point &newPoint, const Board* b, bool updateMap);
 
     //The function returns a vector with all possible steps for the player.
