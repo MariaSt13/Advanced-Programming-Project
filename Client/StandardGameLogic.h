@@ -6,11 +6,13 @@
 #include <vector>
 #include <map>
 
-
+/*
+ * this class extends GameLogic and encapsulates
+ * the standard logic of the reversi game.
+ */
 class StandardGameLogic: public GameLogic {
 
 public:
-
 
     /*
     * The function places a disc where the player has selected

@@ -94,7 +94,7 @@ void ReversiGame::play() {
             }
             catch(char const* msg){
                 cout << "failed read other player step. Result:" << msg << endl;
-                exit(-1);
+                exit(1);
             }
 
 

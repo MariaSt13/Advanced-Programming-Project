@@ -7,14 +7,14 @@ using namespace std;
  * constructor
  */
 ConsoleBoard::ConsoleBoard(const int &rowSize, const int &colSize) : Board(rowSize, colSize) {}
+
 /*
  * copy constructor
  */
 ConsoleBoard::ConsoleBoard(Board* board): Board(board){};
 
 /*
- * The function prints the game board
- * return - void.
+ * The function prints the game board.
  */
 void ConsoleBoard::printBoard() const {
 
@@ -34,7 +34,6 @@ void ConsoleBoard::printBoard() const {
 
 /*
  * The function prints a numbered row above the game board.
- * return:void.
  */
 void ConsoleBoard::printNumberedRow() const {
     for (int k = 1; k < this->colSize ; k++) {
@@ -48,7 +47,6 @@ void ConsoleBoard::printNumberedRow() const {
 /*
  * The function prints a separator line.
  * separator line printed between any two lines in the table.
- * return:void.
  */
 void ConsoleBoard::printSeparator() const {
     cout << "|" << endl;
@@ -58,5 +56,7 @@ void ConsoleBoard::printSeparator() const {
     cout << "--" << endl;
 }
 
-// destructor.
+/**
+ * destructor.
+ */
 ConsoleBoard::~ConsoleBoard(){}

@@ -16,7 +16,7 @@ int main() {
         myMap = read.getVectorDefinition();
     } catch (char const* msg){
         cout << "Error: " << msg << endl;
-        exit(-1);
+        exit(1);
     }
 
 
@@ -30,7 +30,7 @@ int main() {
         server.start();
     } catch (char const* msg) {
         cout << "Cannot start server. Reason: " << msg << endl;
-        exit(-1);
+        exit(1);
     }
 }
 

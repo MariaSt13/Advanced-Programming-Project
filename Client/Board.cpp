@@ -19,7 +19,11 @@ Board::Board(Board* board): rowSize(board->getRowSize()), colSize(board->getColS
     }
 }
 
-//constructor.
+/**
+ * constructor.
+ * @param rowSize - number of rows.
+ * @param colSize - number of columns.
+ */
 Board::Board(const int &rowSize,const int &colSize): rowSize(rowSize+1), colSize(colSize+1) {
 
     //allocate memory
@@ -40,21 +44,22 @@ Board::Board(const int &rowSize,const int &colSize): rowSize(rowSize+1), colSize
     array[x+1][y] = blackActor;
 }
 
-/*
+/**
  * the function get a point and return
  * true if the point is in the board range.
  * else , return false.
- * return : bool.
+ * @param p -the point being checked.
+ * @return true or false.
  */
 bool Board::pointIsInRange(const Point &p) const{
     return p.getX() > 0 && p.getX() < this->rowSize &&
            p.getY()>0 && p.getY() < this->colSize;
 }
 
-
-/*
+/**
  * return number of disks in the board of the player.
- * d - the type of disk to count.
+ * @param d -the type of disk to count.
+ * @return number of disks.
  */
 int Board::numOfPlayerDisks(disk d)const{
     int count = 0;
@@ -67,9 +72,11 @@ int Board::numOfPlayerDisks(disk d)const{
     }
     return count;
 }
-/* if there is no empty cells return true.
+
+/**
+ * if there is no empty cells return true.
  * else return false.
- * return : bool.
+ * @return true or false.
  */
 bool Board::ifBoardIsFull() const {
     for (int i = 1; i < this->rowSize ; i++) {
@@ -82,20 +89,27 @@ bool Board::ifBoardIsFull() const {
     return true;
 }
 
-// return rowSize member.
+/**
+ * @return - rowSize member.
+ */
 const int Board::getRowSize() const {
     return this->rowSize;
 }
 
-// return colSize member.
+/**
+ * @return - colSize member.
+ */
 const int Board::getColSize() const {
     return this->colSize;
 }
 
-// return the board matrix
+/**
+ * @return -the board matrix
+ */
 Board::disk **Board::getArray () const {
     return this->array;
 }
+
 /*
  * allocate the memory for the board
  */
@@ -108,7 +122,9 @@ void Board::allocateBoard() {
     }
 }
 
-//destructor.
+/**
+ * destructor.
+ */
 Board::~Board(){
     //free memory.
     for (int j = 0; j < this->rowSize; j++) {

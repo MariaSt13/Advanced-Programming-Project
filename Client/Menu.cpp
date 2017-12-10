@@ -71,7 +71,7 @@ void Menu::runGame(const int &mode) {
     }
     catch (char const* msg){
         cout << "Failed to file. Reason:" << msg << endl;
-        exit(-1);
+        exit(1);
     }
     string ip = myMap.find("ip")->second;
     int port;
@@ -105,7 +105,7 @@ void Menu::runGame(const int &mode) {
                 client.connectToServer();
             } catch (char const* msg) {
                 cout << "Failed to connect to server. Reason:" << msg << endl;
-                exit(-1);
+                exit(1);
             }
 
             int color = client.readTypeOfPlayer();
