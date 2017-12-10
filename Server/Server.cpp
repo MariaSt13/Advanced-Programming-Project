@@ -85,9 +85,11 @@ void Server::start() {
         }
 
         //while the game is run.
-        for (int i = 0; i < MAX_CONNECTED_CLIENTS; i++) {
-            if(openServer)
-                handleClient(clientSocket[i] ,clientSocket[(i+1) % 2]);
+        while (openServer){
+            for (int i = 0; i < MAX_CONNECTED_CLIENTS; i++) {
+                if(openServer)
+                    handleClient(clientSocket[i] ,clientSocket[(i+1) % 2]);
+            }   
         }
 
         // Close communication with all clients

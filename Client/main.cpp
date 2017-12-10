@@ -4,5 +4,5 @@
 int main() {
 
     //create a new game.
-    Menu menu = Menu(3,3);
+    Menu menu = Menu(8,8);
 }

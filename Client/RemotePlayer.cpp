@@ -25,8 +25,7 @@ Point RemotePlayer::chooseStep() const {
 
     //read from server
     int n = read(clientSocket,&s, sizeof(s));
-    cout << "s-->" <<s;
-    cout << "n-->" <<n;
+
     //error
     if (n == -1)
         throw "Error reading result";
