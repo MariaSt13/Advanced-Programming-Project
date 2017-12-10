@@ -1,18 +1,17 @@
 
-#ifndef EX4_CONECTTOSERVER_H
-#define EX4_CONECTTOSERVER_H
+#ifndef EX4_CLIENT_H
+#define EX4_CLIENT_H
 #include <string>
-#define MAX_SIZE 7
 using namespace std;
 
 /**
  * this class connects the client to the server.
  */
-class ConnectToServer {
+class Client {
 public:
 
     //constructor.
-    ConnectToServer(const char *serverIP, int serverPort);
+    Client(const char *serverIP, int serverPort);
 
     //connect player to server.
     void connectToServer();

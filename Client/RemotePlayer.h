@@ -2,7 +2,7 @@
 #define EXAM1_REMOTEPLAYER_H
 #include <boost/algorithm/string.hpp>
 #include "Player.h"
-#include "ConnectToServer.h"
+#include "Client.h"
 
 /*
  * this class extends player class and represent
@@ -13,7 +13,7 @@ class RemotePlayer: public Player {
 public:
 
     //constructor.
-    RemotePlayer(Board::disk d, ConnectToServer client);
+    RemotePlayer(Board::disk d, Client client);
 
      /*
      * the player in his turn choose point
@@ -26,7 +26,7 @@ public:
 
 private:
 
-    ConnectToServer client;
+    Client client;
 };
 
 

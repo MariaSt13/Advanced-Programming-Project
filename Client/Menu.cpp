@@ -77,7 +77,7 @@ void Menu::runGame(const int &mode) {
     int port;
     istringstream isX (myMap.find("port")->second);
     isX >> port;
-    ConnectToServer client(ip.c_str(),port);
+    Client client(ip.c_str(),port);
 
 
     Board::disk humanPlayer;

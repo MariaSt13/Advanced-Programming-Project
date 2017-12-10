@@ -1,5 +1,5 @@
 
-#include "ConnectToServer.h"
+#include "Client.h"
 #include <iostream>
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -15,7 +15,7 @@ using namespace std;
  * @param serverIP - ip number.
  * @param serverPort - port number.
  */
-ConnectToServer::ConnectToServer(const char *serverIP, int serverPort):
+Client::Client(const char *serverIP, int serverPort):
         serverIP(serverIP), serverPort(serverPort),
         clientSocket(0), arraySize(7) {
 }
@@ -24,7 +24,7 @@ ConnectToServer::ConnectToServer(const char *serverIP, int serverPort):
 /**
  * this function connect client to server.
  */
-void ConnectToServer::connectToServer() {
+void Client::connectToServer() {
     // Create a socket point
     clientSocket = socket(AF_INET, SOCK_STREAM, 0);
     if (clientSocket == -1)
@@ -67,7 +67,7 @@ void ConnectToServer::connectToServer() {
  * 1 - black , 2 - white.
  * @return - int.
  */
-int ConnectToServer::readTypeOfPlayer() {
+int Client::readTypeOfPlayer() {
     int result;
     int n = read(clientSocket, &result, sizeof(result));
 
@@ -83,7 +83,7 @@ int ConnectToServer::readTypeOfPlayer() {
  * this function returns client socket number.
  * @return - int socket number.
  */
-int ConnectToServer::getClientSocket() const{
+int Client::getClientSocket() const{
     return clientSocket;
 }
 
@@ -93,7 +93,7 @@ int ConnectToServer::getClientSocket() const{
  * @param s - the message to the server.
  * @param clientSocket - socket number.
  */
-void ConnectToServer::writeToServer(char* s, int clientSocket)const{
+void Client::writeToServer(char* s, int clientSocket)const{
     //write to server
     char s2[this->arraySize] = {0};
     strcpy(s2,s);
@@ -106,6 +106,6 @@ void ConnectToServer::writeToServer(char* s, int clientSocket)const{
     memset(s2, '\0', this->arraySize);
 }
 
-const int ConnectToServer::getArraySize()const {
+const int Client::getArraySize()const {
     return this->arraySize;
 }

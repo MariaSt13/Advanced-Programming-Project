@@ -15,9 +15,9 @@ using namespace std;
  * @param humanPlayer -the disk of the human player (relevant in remote game).
  */
 ReversiGame::ReversiGame(const Board *gameBoard, const Player *blackPlayer,const Player *whitePlayer,
-                         GameLogic *gameLogic, mode m, ConnectToServer server,Board::disk humanPlayer):
+                         GameLogic *gameLogic, mode m, Client client,Board::disk humanPlayer):
         gameBoard(gameBoard),blackPlayer(blackPlayer),whitePlayer(whitePlayer),gameLogic(gameLogic),
-        currentMode(m), serverInfo(server), humanPlayer(humanPlayer){
+        currentMode(m), client(client), humanPlayer(humanPlayer){
 
     this->hisTurn = this->blackPlayer;
     play();
@@ -61,20 +61,20 @@ void ReversiGame::play() {
 
                 //is this is remote game mode.
                 if (this->currentMode == remoteGame) {
-                    char s[this->serverInfo.getArraySize()];
+                    char s[this->client.getArraySize()];
                     s[0] = (char)step.getX();
                     s[1]= ' ';
                     s[2] = (char)step.getY();
 
                     //send move to server
-                    serverInfo.writeToServer(s,serverInfo.getClientSocket());
+                    client.writeToServer(s,client.getClientSocket());
                 }
 
             //no possible moves and if is remote game.
             } else {
                 if(this->currentMode == remoteGame){
-                    char s[this->serverInfo.getArraySize()] = "NoMove";
-                    serverInfo.writeToServer(s,serverInfo.getClientSocket());
+                    char s[this->client.getArraySize()] = "NoMove";
+                    client.writeToServer(s,client.getClientSocket());
                 }
             }
         }
@@ -175,8 +175,8 @@ void ReversiGame::gameOver()const{
 
     //if it is remote game.
     if(this->currentMode == this->remoteGame){
-        char s[4] = "End";
-        serverInfo.writeToServer(s,serverInfo.getClientSocket());
+        char s[this->client.getArraySize()] = "End";
+        client.writeToServer(s,client.getClientSocket());
     }
 }
 

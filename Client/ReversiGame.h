@@ -4,7 +4,7 @@
 #include "Board.h"
 #include "Player.h"
 #include "GameLogic.h"
-#include "ConnectToServer.h"
+#include "Client.h"
 
 /*
  * this class runs the game. The game ends when the entire
@@ -20,7 +20,7 @@ public:
 
     //constructor
     ReversiGame(const Board* gameBoard,const Player* whitePlayer,const Player* blackPlayer,GameLogic* gameLogic,
-                mode m, ConnectToServer server,Board::disk humanPlayer);
+                mode m, Client client,Board::disk humanPlayer);
 
     //this function run the game.
     void play();
@@ -33,7 +33,7 @@ private:
     GameLogic* gameLogic;
     const Player* hisTurn;
     mode currentMode;
-    ConnectToServer serverInfo;
+    Client client;
 
     // gets the step from the player
     Point getStep(bool firstTry,vector<Point> v);

@@ -8,7 +8,7 @@ using namespace std;
  * @param d - disk.
  * @param clientSocket - client socket number.
  */
-RemotePlayer::RemotePlayer(Board::disk d, ConnectToServer client): Player(d),client(client) {}
+RemotePlayer::RemotePlayer(Board::disk d, Client client): Player(d),client(client) {}
 
 /**
  * the player gets the move from the server.
