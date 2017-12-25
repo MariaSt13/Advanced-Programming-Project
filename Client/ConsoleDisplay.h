@@ -2,13 +2,14 @@
 // Created by maria on 25/12/17.
 //
 
-#ifndef EX4_DISPLAY_H
-#define EX4_DISPLAY_H
+#ifndef EX4_CONSOLEDISPLAY_H
+#define EX4_CONSOLEDISPLAY_H
 
 
-#include "Board.h"
+#include "Display.h"
 
-class Display {
+class ConsoleDisplay: public Display {
+public:
     virtual void waiting() const;
     virtual void currentBoard(Board* b) const;
     virtual void printBoard(Board* b) const;
@@ -23,5 +24,16 @@ class Display {
     virtual void noMoves()const;
     virtual void possibleMoves(const vector<Point> &v) const;
 
+private:
+    //The function prints a numbered row above the game board.
+    void printNumberedRow(int size) const;
+
+    /*
+     * The function prints a separator line.
+     * separator line printed between any two lines in the table.
+     */
+    void printSeparator(int size) const;
 };
-#endif //EX4_DISPLAY_H
+
+
+#endif //EX4_CONSOLEDISPLAY_H
