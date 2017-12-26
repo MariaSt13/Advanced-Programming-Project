@@ -11,8 +11,8 @@
 class ConsoleDisplay: public Display {
 public:
     virtual void waiting() const;
-    virtual void currentBoard(Board* b) const;
-    virtual void printBoard(Board* b) const;
+    virtual void currentBoard(const Board* b) const;
+    virtual void printBoard(const Board* b) const;
     virtual void noMoves(Board::disk d) const;
     virtual void played(Board::disk player, Point step) const;
     virtual void gameOver() const;

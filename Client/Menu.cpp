@@ -9,6 +9,7 @@
 #include "ReversiGame.h"
 #include "RemotePlayer.h"
 #include "ReadDefinitionFile.h"
+#include "ConsoleDisplay.h"
 
 using namespace std;
 /*
@@ -62,12 +63,13 @@ void Menu::runGame(const int &mode)const {
     ReversiGame::mode currentMode;
     GameLogic* standardGameLogic = new StandardGameLogic();
     GameLogic* standardGameLogic2 = new StandardGameLogic();
+    Display* display = new ConsoleDisplay();
 
     //get port and ip number and create client object.
     ReadDefinitionFile read = ReadDefinitionFile();
     map<string,string> myMap;
     try{
-        myMap = read.getVectorDefinition("clientDefinitionFile.txt");
+        myMap = read.getVectorDefinition("/home/maria/Documents/git/Advanced-Programming-Project/Client/clientDefinitionFile.txt");
     }
     catch (char const* msg){
         cout << "Failed to file. Reason:" << msg << endl;
@@ -124,8 +126,7 @@ void Menu::runGame(const int &mode)const {
             }
             break;
     }
-
-    ReversiGame(b, blackActor, whiteActor, standardGameLogic, currentMode, client,humanPlayer);
+    ReversiGame(b, blackActor, whiteActor, standardGameLogic, currentMode, client,humanPlayer, display);
 
     //free memory
     delete(b);

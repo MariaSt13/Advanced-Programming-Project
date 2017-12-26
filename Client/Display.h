@@ -9,19 +9,20 @@
 #include "Board.h"
 
 class Display {
-    virtual void waiting() const;
-    virtual void currentBoard(Board* b) const;
-    virtual void printBoard(Board* b) const;
-    virtual void noMoves(Board::disk d) const;
-    virtual void played(Board::disk player, Point step) const;
-    virtual void gameOver() const;
-    virtual void winner(Board::disk d) const;
-    virtual void draw() const;
-    virtual void invalidInput() const;
-    virtual void askForMove() const;
-    virtual void yourMove(Board::disk d) const;
-    virtual void noMoves()const;
-    virtual void possibleMoves(const vector<Point> &v) const;
+public:
+    virtual void waiting() const = 0;
+    virtual void currentBoard(const Board* b) const = 0;
+    virtual void printBoard(const Board* b) const= 0;
+    virtual void noMoves(Board::disk d) const = 0;
+    virtual void played(Board::disk player, Point step) const = 0;
+    virtual void gameOver() const = 0;
+    virtual void winner(Board::disk d) const= 0;
+    virtual void draw() const = 0;
+    virtual void invalidInput() const = 0;
+    virtual void askForMove() const = 0;
+    virtual void yourMove(Board::disk d) const = 0;
+    virtual void noMoves()const = 0;
+    virtual void possibleMoves(const vector<Point> &v) const = 0;
 
 };
 #endif //EX4_DISPLAY_H

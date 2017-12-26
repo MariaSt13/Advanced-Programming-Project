@@ -9,11 +9,12 @@ void ConsoleDisplay::waiting() const {
     cout << "Waiting for other player's move..." << endl;
 }
 
-void ConsoleDisplay::currentBoard(Board *b) const {
+void ConsoleDisplay::currentBoard(const Board *b) const {
     cout << endl << "current board:" << endl << endl;
+    printBoard(b);
 }
 
-void ConsoleDisplay::printBoard(Board *b) const {
+void ConsoleDisplay::printBoard(const Board *b) const {
     Board::disk** array = b->getArray();
     printNumberedRow(b->getColSize());
 

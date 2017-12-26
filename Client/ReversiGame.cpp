@@ -15,9 +15,9 @@ using namespace std;
  * @param humanPlayer -the disk of the human player (relevant in remote game).
  */
 ReversiGame::ReversiGame(const Board *gameBoard, const Player *blackPlayer,const Player *whitePlayer,
-                         GameLogic *gameLogic, mode m, Client client,Board::disk humanPlayer):
+                         GameLogic *gameLogic, mode m, Client client,Board::disk humanPlayer, Display* display):
         gameBoard(gameBoard),blackPlayer(blackPlayer),whitePlayer(whitePlayer),gameLogic(gameLogic),
-        currentMode(m), client(client), humanPlayer(humanPlayer){
+        currentMode(m), client(client), humanPlayer(humanPlayer), display(display){
 
     this->hisTurn = this->blackPlayer;
     play();
@@ -85,7 +85,7 @@ void ReversiGame::play() {
             //remote game mode.
             if(this->currentMode == remoteGame) {
                 printCurrentBoard(); // print update board after local player choice
-                cout << "Waiting for other player's move..." << endl;
+                display->waiting();
             }
 
             //current player choose step.
@@ -120,8 +120,7 @@ void ReversiGame::play() {
  */
 void ReversiGame::printCurrentBoard()const {
     //print board and current player.
-    cout << endl << "current board:" << endl << endl;
-    this->gameBoard->printBoard();
+    display->currentBoard(this->gameBoard);
 }
 
 /*
@@ -130,12 +129,12 @@ void ReversiGame::printCurrentBoard()const {
  */
 void ReversiGame::printChoosenPoint(Point step,bool virtualOpponentPlayLastTurn){
     changeTurn();
-    char c = (this->hisTurn->getDisk());
+    Board::disk c = (this->hisTurn->getDisk());
     if(!virtualOpponentPlayLastTurn){
-        cout << c << " had no moves" << endl << endl;
+        display->noMoves(c);
     }
     else{
-        cout << c << " played" << step << endl << endl;
+        display->played(c, step);
     }
     changeTurn();
 }
@@ -145,7 +144,7 @@ void ReversiGame::printChoosenPoint(Point step,bool virtualOpponentPlayLastTurn)
  */
 void ReversiGame::gameOver()const{
     printCurrentBoard();
-    cout <<"Game over. ";
+    display->gameOver();
     int countWhite = 0;
     int countBlack = 0;
     Board::disk ** array = gameBoard->getArray();
@@ -164,13 +163,13 @@ void ReversiGame::gameOver()const{
 
     //prints the winning player.
     if(countBlack > countWhite){
-        cout <<"The winner is: the black player.";
+        display->winner(blackPlayer->getDisk());
     }
     else if(countBlack < countWhite){
-        cout <<"The winner is: the white player.";
+        display->winner(whitePlayer->getDisk());
     }
     else if(countBlack == countWhite){
-        cout <<"It's a draw.";
+        display->draw();
     }
 
     //if it is remote game.
@@ -221,10 +220,10 @@ Point ReversiGame:: getStep(bool firstTry,vector<Point> v){
         cout << endl << endl;
         do {
             if(!firstTry){
-                cout << "Invalid input" << endl;
+                display->invalidInput();
             }
             firstTry = false;
-            cout << "please enter your move row col (for example: 1 2):";
+            display->askForMove();
             step = this->hisTurn->chooseStep();
 
         } while (!step.ifThePointIsInVector(v));
@@ -238,24 +237,15 @@ Point ReversiGame:: getStep(bool firstTry,vector<Point> v){
  * @return bool.
  */
 bool ReversiGame::printPossibleMoves(const vector<Point> &v)const {
-    char c = (this->hisTurn->getDisk());
-    cout << c;
-    cout <<  ": It's your move." << endl;
+    Board::disk c = (this->hisTurn->getDisk());
+    display->yourMove(c);
 
     //if there is no possible moves.
     if(v.size() == 0){
-        cout <<  "no possible moves. play passes back to the other player." << endl;
+        display->noMoves();
         return false;
     }
-    cout <<  "your possible moves: ";
-
-    //print possible points
-    for (int i = 0; i < v.size() ; i++) {
-        cout << v.at(i);
-        if(i != v.size() -1){
-            cout << ",";
-        }
-    }
+    display->possibleMoves(v);
     return true;
 }
 
