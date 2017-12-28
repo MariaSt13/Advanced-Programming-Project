@@ -17,22 +17,25 @@ void JoinCommand::execute(vector<string> args) const {
     int secondPlayerSocket;
     is >> secondPlayerSocket;
 
+    bool validChoice = false;
+
     //loop go over games list and look for game with the same name
     for (vector<Game*>::const_iterator it = this->games.begin(); it < this->games.end(); it++) {
         //check a game with this name exists and can be joined
         if((*it)->getName() == name && !(*it)->isRun()){
+            validChoice = true;
             (*it)->joinToGame(secondPlayerSocket);
             // also close sockets and open socket for game and run gameRoom
+        }
+    }
+    // there is no game with this name or its already running
+    if(!validChoice) {
+        char s[1] = {-1};
+        int n = write(secondPlayerSocket, &s, sizeof(s));
 
-            // there is no game with this name or its already running
-        } else {
-            char s[1] = {-1};
-            int n = write(secondPlayerSocket, &s, sizeof(s));
-
-            //error
-            if(n == -1) {
-                throw "error writing to socket";
-            }
+        //error
+        if(n == -1) {
+            throw "error writing to socket";
         }
     }
 }
