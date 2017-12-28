@@ -13,7 +13,7 @@ void StartCommand::execute(vector<string> args) const {
     istringstream is(args.at(1));
     int firstPlayerSocket;
     is >> firstPlayerSocket;
-    char returnVal=0;
+    char returnVal = 0;
 
     //loop go over games list and look for game with the same name
     for (vector<Game*>::const_iterator it = this->games.begin(); it < this->games.end(); it++) {
@@ -24,7 +24,7 @@ void StartCommand::execute(vector<string> args) const {
     }
 
     //create a new game and push to games list
-    if(returnVal==0){
+    if(returnVal == 0){
         Game* g = new Game(name,firstPlayerSocket);
         this->games.push_back(g);
     }

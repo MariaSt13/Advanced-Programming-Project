@@ -19,6 +19,8 @@ public:
 
     const string getName()const;
 
+    bool isRun() const;
+
 private:
     bool run;
     string name;

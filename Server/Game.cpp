@@ -24,3 +24,7 @@ void Game::joinToGame(int socketPLayer) {
 const string Game::getName()const {
     return this->name;
 }
+
+bool Game::isRun() const {
+    return run;
+}
