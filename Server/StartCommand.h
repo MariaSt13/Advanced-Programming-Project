@@ -10,7 +10,7 @@
 
 class StartCommand: public Command {
 public:
-    StartCommand();
+    StartCommand(){};
 
     //execute client request.
     virtual void execute(vector<string> args) const;

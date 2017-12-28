@@ -6,13 +6,15 @@
 #define EX4_COMMAND_H
 #include <string>
 #include <vector>
+#include "Game.h"
+
 using namespace std;
 
 
 class Command {
-private:
+protected:
     //list of games names that player can join.
-    vector<string> games;
+    vector<Game*> games;
 
 public:
     //execute client request.
