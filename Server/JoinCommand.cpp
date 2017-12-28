@@ -26,6 +26,8 @@ void JoinCommand::execute(vector<string> args) const {
             validChoice = true;
             (*it)->joinToGame(secondPlayerSocket);
             // also close sockets and open socket for game and run gameRoom
+
+            break;
         }
     }
     // there is no game with this name or its already running
