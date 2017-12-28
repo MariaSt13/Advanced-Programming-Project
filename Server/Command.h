@@ -10,9 +10,13 @@ using namespace std;
 
 
 class Command {
+private:
+    //list of games names that player can join.
+    vector<string> games;
+
 public:
     //execute client request.
-    virtual void execute(vector<string> args) = 0;
+    virtual void execute(vector<string> args)const = 0;
 
     //destructor.
     virtual ~Command(){};

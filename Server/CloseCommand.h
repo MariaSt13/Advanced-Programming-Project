@@ -10,6 +10,8 @@
 
 class CloseCommand: public Command {
 public:
+    CloseCommand();
+
     //execute client request.
     virtual void execute(vector<string> args) const;
 };

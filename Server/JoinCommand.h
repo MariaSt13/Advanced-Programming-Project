@@ -10,6 +10,8 @@
 
 class JoinCommand: public Command {
 public:
+    JoinCommand();
+
     //execute client request.
     virtual void execute(vector<string> args) const;
 };

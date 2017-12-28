@@ -3,3 +3,11 @@
 //
 
 #include "JoinCommand.h"
+
+JoinCommand::JoinCommand() {
+
+}
+
+void JoinCommand::execute(vector<string> args) const {
+
+}

@@ -5,7 +5,6 @@
 #include <unistd.h>
 #include <string.h>
 #include <iostream>
-#include <cstdlib>
 
 using namespace std;
 
@@ -50,23 +49,8 @@ void Server::start() {
     // Start listening to incoming connections
     listen(serverSocket, MAX_CONNECTED_CLIENTS);
 
-    //create new thread
-    int rc = pthread_create(&this->threads.at(0), NULL, serverFlow, &clientSocket);
-
-    if (rc) {
-        cout << "Error:unable to create thread," << rc << endl;
-        exit(-1);
-    }
-}
-
-
-
-static void* Server::serverFlow(void* clientSocketArg){
     while(true){
         openServer = true;
-        int* clientSocket = (int*) clientSocketArg;
-
-
 
         //connection all clients.
         for (int i = 0; i < MAX_CONNECTED_CLIENTS; i++) {
@@ -111,9 +95,8 @@ static void* Server::serverFlow(void* clientSocketArg){
             close(clientSocket[i]);
         }
     }
+
 }
-
-
 
 /**
  * Handle requests from a specific client.

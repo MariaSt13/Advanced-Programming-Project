@@ -10,6 +10,8 @@
 
 class PlayCommand: public Command {
 public:
+    PlayCommand();
+
     //execute client request.
     virtual void execute(vector<string> args) const;
 };

@@ -3,3 +3,11 @@
 //
 
 #include "CloseCommand.h"
+
+CloseCommand::CloseCommand() {
+
+}
+
+void CloseCommand::execute(vector<string> args) const {
+
+}

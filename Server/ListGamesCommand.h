@@ -10,6 +10,7 @@
 
 class ListGamesCommand: public Command {
 public:
+    ListGamesCommand();
     //execute client request.
     virtual void execute(vector<string> args) const;
 };
