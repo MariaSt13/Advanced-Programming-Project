@@ -10,7 +10,7 @@
 #include "RemotePlayer.h"
 #include "ReadDefinitionFile.h"
 #include "ConsoleDisplay.h"
-
+#include "CommandMenu.h"
 using namespace std;
 /*
  * constructor. runs the menu of the game.
@@ -109,6 +109,9 @@ void Menu::runGame(const int &mode)const {
                 cout << "Failed to connect to server. Reason:" << msg << endl;
                 exit(1);
             }
+
+            CommandMenu menu = CommandMenu();
+            menu.runMenu(client.getClientSocket());
 
             int color = client.readTypeOfPlayer();
 
