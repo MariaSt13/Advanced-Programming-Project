@@ -27,7 +27,7 @@ private:
     int port;
     int serverSocket; // the socket's file descriptor
     bool openServer;
-    void handleClient(int clientSocket,CommandsManager commandManager);
+    void handleClient(int clientSocket,CommandsManager* commandManager);
     //maximum number of characters in the array.
 };
 #endif //EX4_SERVER_H

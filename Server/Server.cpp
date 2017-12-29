@@ -50,7 +50,7 @@ void Server::start() {
     //Start listening to incoming connections
     listen(serverSocket, MAX_CONNECTED_CLIENTS);
 
-    CommandsManager commandManager = new CommandsManager();
+    CommandsManager *commandManager = new CommandsManager();
 
     while(true){
         openServer = true;
@@ -96,7 +96,7 @@ void Server::start() {
  * @param clientSocket1 - the server reads from this client.
  * @param clientSocket2 - the server writes to this client.
  */
-void Server::handleClient(int clientSocket,CommandsManager commandManager) {
+void Server::handleClient(int clientSocket,CommandsManager* commandManager) {
     char s[ARRAY_SIZE] = {0};
     string command;
     vector<string> args;
