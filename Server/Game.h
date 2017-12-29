@@ -19,6 +19,12 @@ public:
 
     const string getName()const;
 
+    void setRun(bool run);
+
+    const int getSocketFirstPLayer()const;
+
+    const int getSocketSecondPLayer()const;
+
     bool isRun() const;
 
 private:
@@ -26,7 +32,6 @@ private:
     string name;
     int socketFirstPLayer;
     int socketSecondPLayer;
-
 };
 
 

@@ -21,10 +21,22 @@ void Game::joinToGame(int socketPLayer) {
     this->run = true;
 }
 
+void Game::setRun(bool run){
+    this->run = run;
+}
+
 const string Game::getName()const {
     return this->name;
 }
 
 bool Game::isRun() const {
     return run;
+}
+
+const int Game::getSocketFirstPLayer() const {
+    return this->socketFirstPLayer;
+}
+
+const int Game::getSocketSecondPLayer() const {
+    return this->socketSecondPLayer;
 }

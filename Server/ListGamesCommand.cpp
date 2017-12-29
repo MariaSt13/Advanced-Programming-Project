@@ -14,19 +14,23 @@ void ListGamesCommand::execute(vector<string> args) const {
     istringstream is(args.at(0));
     int playerSocket;
     is >> playerSocket;
+    string result;
 
-    //loop go over games list and look fot games that can be joined
+    //loop go over games list and look for games that can be joined
     for (vector<Game*>::const_iterator it = this->games.begin(); it < this->games.end(); it++) {
         //if the game is not running yet
         if(!(*it)->isRun()){
             string name = (*it)->getName();
-            const char* s = name.c_str();
-            int n = write(playerSocket, &s, name.length());
-
-            //error
-            if(n == -1) {
-                throw "error writing to socket";
-            }
+            result = result + name;
         }
+    }
+
+    //write result to client socket
+    const char* s = result.c_str();
+    int n = write(playerSocket, &s, result.length());
+
+    //error
+    if(n == -1) {
+        throw "error writing to socket";
     }
 }

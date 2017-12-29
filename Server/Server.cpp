@@ -5,7 +5,8 @@
 #include <unistd.h>
 #include <string.h>
 #include <iostream>
-
+#include <boost/algorithm/string.hpp>
+using namespace boost;
 using namespace std;
 
 /**
@@ -46,8 +47,10 @@ void Server::start() {
     }
 
 
-    // Start listening to incoming connections
+    //Start listening to incoming connections
     listen(serverSocket, MAX_CONNECTED_CLIENTS);
+
+    CommandsManager commandManager = new CommandsManager();
 
     while(true){
         openServer = true;
@@ -72,21 +75,11 @@ void Server::start() {
             }
         }
 
-        //send to client his color.1- black , 2-white.
-        for (int i = 0; i < MAX_CONNECTED_CLIENTS; i++) {
-            int result =  i+1;
-            int n = write(clientSocket[i], &result, sizeof(result));
-            if (n == -1) {
-                cout << "Error writing to socket" << endl;
-                return;
-            }
-        }
-
-        //while the game is running.
+        //while the server is open
         while (openServer){
             for (int i = 0; i < MAX_CONNECTED_CLIENTS; i++) {
                 if(openServer)
-                    handleClient(clientSocket[i] ,clientSocket[(i+1) % 2]);
+                    handleClient(clientSocket[i],commandManager);
             }
         }
 
@@ -103,11 +96,13 @@ void Server::start() {
  * @param clientSocket1 - the server reads from this client.
  * @param clientSocket2 - the server writes to this client.
  */
-void Server::handleClient(int clientSocket1,int clientSocket2) {
+void Server::handleClient(int clientSocket,CommandsManager commandManager) {
     char s[ARRAY_SIZE] = {0};
+    string command;
+    vector<string> args;
 
     //read a new move
-    int n = read(clientSocket1, &s, sizeof(s));
+    int n = read(clientSocket, &s, sizeof(s));
 
     //the game is over
     if(strcmp(s, "End") == 0){
@@ -122,20 +117,17 @@ void Server::handleClient(int clientSocket1,int clientSocket2) {
         return;
     }
 
-    //clientSocket1 disconnected
+    //clientSocket disconnected
     if (n == 0) {
         cout << "Client disconnected" << endl;
         this->openServer = false;
         return;
     }
 
-    // Write the result back to clientSocket2.
-    n = write(clientSocket2, &s, sizeof(s));
-    if (n == -1) {
-        cout << "Error writing to socket" << endl;
-        this->openServer = false;
-        return;
-    }
+    split(args,s,is_any_of(" "));
+    command = args.at(0);
+    args.erase(args.begin());
+    commandManager.executeCommand(command,args);
     memset(s, '\0', ARRAY_SIZE);
 }
 

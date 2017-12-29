@@ -20,6 +20,7 @@ void StartCommand::execute(vector<string> args) const {
         //if equal set returnVal to -1
         if((*it)->getName() == name){
             returnVal = -1;
+            break;
         }
     }
 
