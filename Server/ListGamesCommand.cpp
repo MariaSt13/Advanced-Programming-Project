@@ -21,7 +21,7 @@ void ListGamesCommand::execute(vector<string> args) const {
         //if the game is not running yet
         if(!(*it)->getStatus() == Game::waiting){
             string name = (*it)->getName();
-            result = result + name;
+            result = result + name + "\n";
         }
     }
 
