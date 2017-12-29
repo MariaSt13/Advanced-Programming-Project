@@ -23,7 +23,8 @@ int main() {
     int port;
     istringstream isX (myMap.find("port")->second);
     isX >> port;
-    Server server(port);
+    CommandsManager *commandsManager = new CommandsManager();
+    Server server(port,commandsManager);
 
     //open server
     try {

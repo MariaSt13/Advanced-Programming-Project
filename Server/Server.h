@@ -15,7 +15,7 @@ class Server {
 public:
 
     //constructor.
-    Server(int port);
+    Server(int port,CommandsManager *commandManager);
 
     //open server for connecting clients.
     void start();
@@ -27,7 +27,8 @@ private:
     int port;
     int serverSocket; // the socket's file descriptor
     bool openServer;
-    void handleClient(int clientSocket,CommandsManager* commandManager);
+    CommandsManager *commandManager;
+    void handleClient(int clientSocket);
     //maximum number of characters in the array.
 };
 #endif //EX4_SERVER_H

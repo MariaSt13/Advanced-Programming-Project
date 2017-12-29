@@ -13,7 +13,7 @@ using namespace std;
  * constructor.
  * @param port-port number.
  */
-Server::Server(int port): port(port), serverSocket(0),openServer(true){
+Server::Server(int port,CommandsManager *commandManager): port(port),commandManager(commandManager), serverSocket(0),openServer(true){
     cout << "Server" << endl;
 }
 
@@ -50,8 +50,6 @@ void Server::start() {
     //Start listening to incoming connections
     listen(serverSocket, MAX_CONNECTED_CLIENTS);
 
-    CommandsManager *commandManager = new CommandsManager();
-
     while(true){
         openServer = true;
 
@@ -79,7 +77,7 @@ void Server::start() {
         while (openServer){
             for (int i = 0; i < MAX_CONNECTED_CLIENTS; i++) {
                 if(openServer)
-                    handleClient(clientSocket[i],commandManager);
+                    handleClient(clientSocket[i]);
             }
         }
 
@@ -96,7 +94,7 @@ void Server::start() {
  * @param clientSocket1 - the server reads from this client.
  * @param clientSocket2 - the server writes to this client.
  */
-void Server::handleClient(int clientSocket,CommandsManager* commandManager) {
+void Server::handleClient(int clientSocket) {
     char s[ARRAY_SIZE] = {0};
     string command;
     vector<string> args;
@@ -128,7 +126,6 @@ void Server::handleClient(int clientSocket,CommandsManager* commandManager) {
     command = args.at(0);
     args.erase(args.begin());
     commandManager->executeCommand(command,args);
-    memset(s, '\0', ARRAY_SIZE);
 }
 
 /**
