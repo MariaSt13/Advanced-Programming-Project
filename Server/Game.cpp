@@ -9,7 +9,7 @@
  * @param name - name of the game
  * @param socketFirstPLayer - number socket of the first player.
  */
-Game::Game(string name, int socketFirstPLayer):name(name),socketFirstPLayer(socketFirstPLayer),run(false) {}
+Game::Game(string name, int socketFirstPLayer):name(name),socketFirstPLayer(socketFirstPLayer),cureentStatus(waiting) {}
 
 
 /**
@@ -18,19 +18,19 @@ Game::Game(string name, int socketFirstPLayer):name(name),socketFirstPLayer(sock
  */
 void Game::joinToGame(int socketPLayer) {
     this->socketSecondPLayer = socketPLayer;
-    this->run = true;
+    this->cureentStatus = running;
 }
 
-void Game::setRun(bool run){
-    this->run = run;
+void Game::setStatus(status s) {
+    this->cureentStatus = s;
 }
 
 const string Game::getName()const {
     return this->name;
 }
 
-bool Game::isRun() const {
-    return run;
+Game::status Game::getStatus() const {
+    return cureentStatus;
 }
 
 const int Game::getSocketFirstPLayer() const {

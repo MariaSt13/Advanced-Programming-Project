@@ -19,7 +19,7 @@ void ListGamesCommand::execute(vector<string> args) const {
     //loop go over games list and look for games that can be joined
     for (vector<Game*>::const_iterator it = this->games.begin(); it < this->games.end(); it++) {
         //if the game is not running yet
-        if(!(*it)->isRun()){
+        if(!(*it)->getStatus() == Game::waiting){
             string name = (*it)->getName();
             result = result + name;
         }

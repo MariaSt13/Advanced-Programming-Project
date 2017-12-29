@@ -27,9 +27,9 @@ void GameManager::run() {
     }
 
     //while the game is running.
-    while (game.isRun()) {
+    while (game.getStatus() == Game::running) {
         for (int i = 0; i < MAX_CONNECTED_CLIENTS; i++) {
-            if (game.isRun())
+            if (game.getStatus() == Game::running)
                 handleClient(clientSocket[i], clientSocket[(i + 1) % 2]);
         }
     }
@@ -49,21 +49,21 @@ void GameManager::handleClient(int clientSocket1,int clientSocket2) {
 
         //the game is over
         if(strcmp(s, "End") == 0){
-            game.setRun(false);
+            game.setStatus(Game::finished);
             return;
         }
 
         //error
         if (n == -1) {
             cout << "Error reading arg1" << endl;
-            game.setRun(false);
+            game.setStatus(Game::finished);
             return;
         }
 
         //clientSocket1 disconnected
         if (n == 0) {
             cout << "Client disconnected" << endl;
-            game.setRun(false);
+            game.setStatus(Game::finished);
             return;
         }
 
@@ -71,7 +71,7 @@ void GameManager::handleClient(int clientSocket1,int clientSocket2) {
         n = write(clientSocket2, &s, sizeof(s));
         if (n == -1) {
             cout << "Error writing to socket" << endl;
-            game.setRun(false);
+            game.setStatus(Game::finished);
             return;
         }
         memset(s, '\0', ARRAY_SIZE);

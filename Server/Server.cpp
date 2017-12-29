@@ -127,7 +127,7 @@ void Server::handleClient(int clientSocket,CommandsManager* commandManager) {
     split(args,s,is_any_of(" "));
     command = args.at(0);
     args.erase(args.begin());
-    commandManager.executeCommand(command,args);
+    commandManager->executeCommand(command,args);
     memset(s, '\0', ARRAY_SIZE);
 }
 

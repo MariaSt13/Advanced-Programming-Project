@@ -11,6 +11,7 @@ using namespace std;
 
 class Game {
 public:
+    enum status {waiting, running, finished};
     //constructor
     Game(string name,int socketFirstPLayer);
 
@@ -19,17 +20,17 @@ public:
 
     const string getName()const;
 
-    void setRun(bool run);
+    void setStatus(status s);
 
     const int getSocketFirstPLayer()const;
 
     const int getSocketSecondPLayer()const;
 
-    bool isRun() const;
+    status getStatus() const;
 
 private:
-    bool run;
     string name;
+    status cureentStatus;
     int socketFirstPLayer;
     int socketSecondPLayer;
 };

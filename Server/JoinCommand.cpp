@@ -22,7 +22,7 @@ void JoinCommand::execute(vector<string> args) const {
     //loop go over games list and look for game with the same name
     for (vector<Game*>::const_iterator it = this->games.begin(); it < this->games.end(); it++) {
         //check a game with this name exists and can be joined
-        if((*it)->getName() == name && !(*it)->isRun()){
+        if((*it)->getName() == name && !(*it)->getStatus() == Game::waiting){
             validChoice = true;
             (*it)->joinToGame(secondPlayerSocket);
             // also close sockets and open socket for game and run gameRoom
