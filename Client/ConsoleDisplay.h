@@ -23,6 +23,9 @@ public:
     virtual void yourMove(Board::disk d) const;
     virtual void noMoves()const;
     virtual void possibleMoves(const vector<Point> &v) const;
+    virtual void mainMenu() const;
+    virtual void invalidTryAgain() const;
+    virtual void commandMenu()const;
 
 private:
     //The function prints a numbered row above the game board.

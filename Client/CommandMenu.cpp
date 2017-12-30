@@ -8,11 +8,11 @@
 
 using namespace std;
 
+CommandMenu::CommandMenu(Display *display): display(display) {
+
+}
 void CommandMenu::runMenu(int clientSocket) {
-    cout << "Please select an option:" << endl;
-    cout << "start <name> - to start a new game with that name " << endl;
-    cout << "list_games - to see games that can be joined" <<  endl;
-    cout << "join <name> - to join a game with that name" << endl;
+    display->commandMenu();
 
     string input;
     cin >> input;

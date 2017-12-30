@@ -17,7 +17,7 @@ using namespace std;
  * rows - number of rows in the board game.
  * cols - number of columns in the board game.
  */
-Menu::Menu(const int &rows,const int &cols): rowNumber(rows), colNumber(cols){
+Menu::Menu(const int &rows,const int &cols, Display* display): rowNumber(rows), colNumber(cols), display(display){
     runMenu();
 }
 /*
@@ -25,17 +25,14 @@ Menu::Menu(const int &rows,const int &cols): rowNumber(rows), colNumber(cols){
  */
 void Menu::runMenu()const{
     // print menu
-    cout << "Please choose game mode:" << endl;
-    cout << "(1) Human player" << endl;
-    cout << "(2) AI player" << endl;
-    cout << "(3) Remote player" << endl;
+    display->mainMenu();
 
     // mode of the game
     int chosenMode =  ReversiGame::noMode;
     cin >> chosenMode;
     while (chosenMode != ReversiGame::humanAgainstHuman && chosenMode !=  ReversiGame::humanAgainstAI && chosenMode != ReversiGame::remoteGame) {
         if(cin.fail()) {
-            cout << " invalid input. Please try again" << endl;
+            display->invalidTryAgain();
             // get rid of failure state
             cin.clear();
 
@@ -43,7 +40,7 @@ void Menu::runMenu()const{
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
         }
         else {
-            cout << " invalid input. Please try again" << endl;
+            display->invalidTryAgain();
         }
         cin >> chosenMode;
     }
@@ -63,7 +60,6 @@ void Menu::runGame(const int &mode)const {
     ReversiGame::mode currentMode;
     GameLogic* standardGameLogic = new StandardGameLogic();
     GameLogic* standardGameLogic2 = new StandardGameLogic();
-    Display* display = new ConsoleDisplay();
 
     //get port and ip number and create client object.
     ReadDefinitionFile read = ReadDefinitionFile();
@@ -110,7 +106,7 @@ void Menu::runGame(const int &mode)const {
                 exit(1);
             }
 
-            CommandMenu menu = CommandMenu();
+            CommandMenu menu = CommandMenu(display);
             menu.runMenu(client.getClientSocket());
 
             int color = client.readTypeOfPlayer();

@@ -1,8 +1,10 @@
 
 #include "Menu.h"
+#include "ConsoleDisplay.h"
 
 int main() {
 
     //create a new game.
-    Menu menu = Menu(8,8);
+    Display* display = new ConsoleDisplay();
+    Menu menu = Menu(8,8, display);
 }

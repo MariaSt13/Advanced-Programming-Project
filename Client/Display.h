@@ -23,6 +23,9 @@ public:
     virtual void yourMove(Board::disk d) const = 0;
     virtual void noMoves()const = 0;
     virtual void possibleMoves(const vector<Point> &v) const = 0;
+    virtual void mainMenu() const = 0;
+    virtual void invalidTryAgain() const = 0;
+    virtual void commandMenu()const = 0;
 
 };
 #endif //EX4_DISPLAY_H

@@ -6,10 +6,15 @@
 #define EX4_COMMANDMENU_H
 
 
+#include "Display.h"
+
 class CommandMenu {
 public:
+    CommandMenu(Display* display);
     void runMenu(int clientSocket);
 
+private:
+    Display* display;
 };
 
 

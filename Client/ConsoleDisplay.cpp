@@ -103,3 +103,19 @@ void ConsoleDisplay::possibleMoves(const vector<Point> &v) const {
         }
     }
 }
+
+void ConsoleDisplay::mainMenu() const {
+    cout << "Please choose game mode:" << endl;
+    cout << "(1) Human player" << endl;
+    cout << "(2) AI player" << endl;
+    cout << "(3) Remote player" << endl;
+}
+void ConsoleDisplay::invalidTryAgain() const {
+    cout << " invalid input. Please try again" << endl;
+}
+void ConsoleDisplay::commandMenu() const {
+    cout << "Please select an option:" << endl;
+    cout << "start <name> - to start a new game with that name " << endl;
+    cout << "list_games - to see games that can be joined" <<  endl;
+    cout << "join <name> - to join a game with that name" << endl;
+}

@@ -1,6 +1,8 @@
 #ifndef EXAM1_MENU_H
 #define EXAM1_MENU_H
 
+#include "Display.h"
+
 /*
  * runs a menu for the game.
  */
@@ -11,7 +13,7 @@ public:
      * rowSize - number of rows in the game board.
      * colSize - number of columns in the game board.
      */
-    Menu(const int &rowSize,const int &colSize);
+    Menu(const int &rowSize,const int &colSize, Display * display);
 
 private:
     // runs the menu
@@ -21,5 +23,6 @@ private:
     //dimensions for the board of the game
     const int rowNumber;
     const int colNumber;
+    Display* display;
 };
 #endif //EXAM1_MENU_H
