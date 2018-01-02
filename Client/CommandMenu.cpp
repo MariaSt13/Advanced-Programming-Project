@@ -17,6 +17,7 @@ void CommandMenu::runMenu() {
 
 
     string command;
+    cin.ignore();
    do {
        //connect to server
        try {
@@ -28,10 +29,8 @@ void CommandMenu::runMenu() {
        int clientSocket = client->getClientSocket();
        display->commandMenu();
 
-       char input[56];
-       cin.ignore();
+       char input[ARRAY_SIZE] = {0};
        cin.getline(input, sizeof(input));
-       cin.ignore();
 
        //const char *s = input.c_str();
        int n = write(clientSocket, &input, sizeof(input));
@@ -43,5 +42,6 @@ void CommandMenu::runMenu() {
        vector<string> args;
        split(args,input,is_any_of(" "));
        command = args.at(0);
+
    } while (command == "list_games");
 }

@@ -15,7 +15,7 @@ RemotePlayer::RemotePlayer(Board::disk d, Client client): Player(d),client(clien
  * @return - point.
  */
 Point RemotePlayer::chooseStep() const {
-    char s[ARRAY_SIZE];
+    char s[MAX_ARRAY_SIZE];
     int x,y;
 
     //read from server
@@ -31,13 +31,13 @@ Point RemotePlayer::chooseStep() const {
 
     //if there are no valid.
     if (strcmp(s, "NoMove") == 0) {
-        memset(s, '\0', ARRAY_SIZE);
+        memset(s, '\0', MAX_ARRAY_SIZE);
         return Point(-1,-1);
     }
     
     x = s[0];
     y = s[2];
 
-    memset(s, '\0', ARRAY_SIZE);
+    memset(s, '\0', MAX_ARRAY_SIZE);
     return Point(x, y);
 }

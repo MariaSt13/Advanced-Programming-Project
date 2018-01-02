@@ -2,7 +2,7 @@
 #ifndef EX4_CLIENT_H
 #define EX4_CLIENT_H
 #include <string>
-#define ARRAY_SIZE 7
+#define ARRAY_SIZE 56
 
 using namespace std;
 

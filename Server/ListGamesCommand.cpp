@@ -4,6 +4,7 @@
 
 #include <unistd.h>
 #include <sstream>
+#include <iostream>
 #include "ListGamesCommand.h"
 
 ListGamesCommand::ListGamesCommand() {
@@ -27,6 +28,7 @@ void ListGamesCommand::execute(vector<string> args) {
 
     //write result to client socket
     const char* s = result.c_str();
+    cout << "list games!!";
     int n = write(playerSocket, &s, result.length());
 
     //error

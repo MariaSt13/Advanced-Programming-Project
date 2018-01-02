@@ -6,6 +6,8 @@
 #include <string.h>
 #include <iostream>
 #include <boost/algorithm/string.hpp>
+#include <sstream>
+
 using namespace boost;
 using namespace std;
 
@@ -21,10 +23,7 @@ Server::Server(int port,CommandsManager *commandManager): port(port),commandMana
  * open server for connecting clients.
  */
 void Server::start() {
-
-    //array of clients socket
-    int clientSocket[MAX_CONNECTED_CLIENTS];
-
+    
     // Create a socket point
     serverSocket = socket(AF_INET, SOCK_STREAM, 0);
 
@@ -110,6 +109,9 @@ void Server::handleClient(int clientSocket) {
     split(args,s,is_any_of(" "));
     command = args.at(0);
     args.erase(args.begin());
+    stringstream ss;
+    ss << clientSocket;
+    args.push_back(ss.str());
     commandManager->executeCommand(command,args);
 }
 
