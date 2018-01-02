@@ -15,7 +15,7 @@ CommandMenu::CommandMenu(Display *display, Client* client): display(display), cl
 }
 void CommandMenu::runMenu() {
 
-    int clientSocket = client->getClientSocket();
+
     string command;
    do {
        //connect to server
@@ -25,7 +25,7 @@ void CommandMenu::runMenu() {
            cout << "Failed to connect to server. Reason:" << msg << endl;
            exit(1);
        }
-
+       int clientSocket = client->getClientSocket();
        display->commandMenu();
 
        char input[56];
