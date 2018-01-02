@@ -10,7 +10,7 @@ ListGamesCommand::ListGamesCommand() {
 
 }
 
-void ListGamesCommand::execute(vector<string> args) const {
+void ListGamesCommand::execute(vector<string> args) {
     istringstream is(args.at(0));
     int playerSocket;
     is >> playerSocket;

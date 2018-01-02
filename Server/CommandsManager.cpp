@@ -17,8 +17,6 @@ CommandsManager::CommandsManager() {
     this->commandsMap["start"] = new StartCommand();
     this->commandsMap["list_games"] = new ListGamesCommand();
     this->commandsMap["join"] = new JoinCommand();
-    this->commandsMap["play"] = new PlayCommand();
-    this->commandsMap["close"] = new CloseCommand();
 }
 
 /**

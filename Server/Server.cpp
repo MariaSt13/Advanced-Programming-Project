@@ -49,43 +49,28 @@ void Server::start() {
 
     //Start listening to incoming connections
     listen(serverSocket, MAX_CONNECTED_CLIENTS);
+    // Define the client socket's structures
+    struct sockaddr_in clientAddress;
+    socklen_t clientAddressLen = sizeof((struct sockaddr*) &clientAddress);
 
     while(true){
         openServer = true;
+        //connection to client.
+        cout << "Waiting for client connections..." << endl;
 
-        //connection all clients.
-        for (int i = 0; i < MAX_CONNECTED_CLIENTS; i++) {
+        //accept a new client connection
+        int clientSocket = accept(serverSocket, (struct sockaddr *)&clientAddress, &clientAddressLen);
+        cout << "Client connected" << endl;
 
-            // Define the client socket's structures
-            struct sockaddr_in clientAddress;
-            socklen_t clientAddressLen = sizeof((struct sockaddr*) &clientAddress);
-
-            //connection to client.
-            cout << "Waiting for client connections..." << endl;
-
-            //accept a new client connection
-            clientSocket[i] = accept(serverSocket, (struct
-                    sockaddr *)&clientAddress, &clientAddressLen);
-            cout << "Client connected" << endl;
-
-            if (clientSocket[i] == -1) {
-                throw "Error on accept";
-            }
+        if (clientSocket == -1) {
+            throw "Error on accept";
         }
 
-        //while the server is open
-        while (openServer){
-            for (int i = 0; i < MAX_CONNECTED_CLIENTS; i++) {
-                if(openServer)
-                    handleClient(clientSocket[i]);
-            }
+        handleClient(clientSocket);
+
+        close(clientSocket);
         }
 
-        // Close communication with all clients
-        for (int i = 0; i < MAX_CONNECTED_CLIENTS; i++) {
-            close(clientSocket[i]);
-        }
-    }
 
 }
 

@@ -18,7 +18,7 @@ protected:
 
 public:
     //execute client request.
-    virtual void execute(vector<string> args)const = 0;
+    virtual void execute(vector<string> args) = 0;
 
     //destructor.
     virtual ~Command(){};

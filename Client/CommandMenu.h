@@ -7,14 +7,16 @@
 
 
 #include "Display.h"
+#include "Client.h"
 
 class CommandMenu {
 public:
-    CommandMenu(Display* display);
-    void runMenu(int clientSocket);
+    CommandMenu(Display* display, Client* client);
+    void runMenu();
 
 private:
     Display* display;
+    Client* client;
 };
 
 

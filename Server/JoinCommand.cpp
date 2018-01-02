@@ -11,7 +11,7 @@ JoinCommand::JoinCommand() {
 
 }
 
-void JoinCommand::execute(vector<string> args) const {
+void JoinCommand::execute(vector<string> args){
 
     string name = args.at(0);
     istringstream is(args.at(1));
@@ -23,9 +23,9 @@ void JoinCommand::execute(vector<string> args) const {
     //loop go over games list and look for game with the same name
     for (vector<Game*>::const_iterator it = this->games.begin(); it < this->games.end(); it++) {
         //check a game with this name exists and can be joined
-        if((**it)->getName() == name && !(**it)->getStatus() == Game::waiting){
+        if((*it)->getName() == name && !(*it)->getStatus() == Game::waiting){
             validChoice = true;
-            (**it)->joinToGame(secondPlayerSocket);
+            (*it)->joinToGame(secondPlayerSocket);
             //close sockets and open socket for game
 
             //run the game

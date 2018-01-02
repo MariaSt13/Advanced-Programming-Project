@@ -5,10 +5,11 @@
 #include "StartCommand.h"
 #include <sstream>
 #include <unistd.h>
+#include <iostream>
 
 using namespace std;
 
-void StartCommand::execute(vector<string> args) const {
+void StartCommand::execute(vector<string> args){
     string name = args.at(0);
     istringstream is(args.at(1));
     int firstPlayerSocket;
@@ -28,6 +29,7 @@ void StartCommand::execute(vector<string> args) const {
     if(returnVal == 0){
         Game* g = new Game(name,firstPlayerSocket);
         this->games.push_back(g);
+        cout << "game started";
     }
 
     char s[1] = {returnVal};
