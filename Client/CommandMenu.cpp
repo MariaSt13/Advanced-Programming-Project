@@ -32,7 +32,6 @@ void CommandMenu::runMenu() {
        char input[ARRAY_SIZE] = {0};
        cin.getline(input, sizeof(input));
 
-       //const char *s = input.c_str();
        int n = write(clientSocket, &input, sizeof(input));
        //error
        if (n == -1) {
@@ -42,6 +41,18 @@ void CommandMenu::runMenu() {
        vector<string> args;
        split(args,input,is_any_of(" "));
        command = args.at(0);
+
+       if (command == "start") {
+           int returnValue;
+           int n = read(clientSocket, &returnValue, sizeof(returnValue));
+           //error
+           if (n == -1) {
+               throw "Error reading from socket";
+           }
+           if(returnValue == -1) {
+               cout << "This name is already taken. please try a different name" << endl;
+           }
+       }
 
    } while (command == "list_games");
 }

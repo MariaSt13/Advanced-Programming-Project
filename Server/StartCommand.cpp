@@ -14,7 +14,7 @@ void StartCommand::execute(vector<string> args){
     istringstream is(args.at(1));
     int firstPlayerSocket;
     is >> firstPlayerSocket;
-    char returnVal = 0;
+    int returnVal = 0;
 
     //loop go over games list and look for game with the same name
     for (vector<Game*>::const_iterator it = this->games.begin(); it < this->games.end(); it++) {
@@ -32,8 +32,8 @@ void StartCommand::execute(vector<string> args){
         cout << "game started";
     }
 
-    char s[1] = {returnVal};
-    int n = write(firstPlayerSocket, &s, sizeof(s));
+
+    int n = write(firstPlayerSocket, &returnVal, sizeof(returnVal));
 
     //error
     if(n == -1) {
