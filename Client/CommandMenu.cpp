@@ -96,7 +96,7 @@ void CommandMenu::runMenu() {
            if (n == -1) {
                throw "Error reading from socket";
            }
-           cout << list << endl;
+           cout << list;
        }
 
    } while (!gameStarted);
