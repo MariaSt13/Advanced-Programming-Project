@@ -72,6 +72,23 @@ void CommandMenu::runMenu() {
                gameStarted = true;
            }
        }
+       
+       if (command == "list_games") {
+           // read the length of the list
+           int length;
+           int n = read(clientSocket, &length, sizeof(length));
+           
+           if (n == -1) {
+               throw "Error reading from socket";
+           }
+           //read the list
+           char list[length];
+           n = read(clientSocket, &list, sizeof(list));
+           if (n == -1) {
+               throw "Error reading from socket";
+           }
+           cout << list << endl;
+       }
 
    } while (!gameStarted);
 }

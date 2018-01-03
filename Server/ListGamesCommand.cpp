@@ -21,7 +21,7 @@ void ListGamesCommand::execute(vector<string> args) {
     //loop go over games list and look for games that can be joined
     for (vector<Game*>::const_iterator it = listGames.begin(); it < listGames.end(); it++) {
         //if the game is not running yet
-        if(!(*it)->getStatus() == Game::waiting){
+        if((*it)->getStatus() == Game::waiting){
             string name = (*it)->getName();
             result = result + name + "\n";
         }
@@ -29,8 +29,15 @@ void ListGamesCommand::execute(vector<string> args) {
 
     //write result to client socket
     const char* s = result.c_str();
-    cout << "list games!!";
-    int n = write(clientSocket, &s, result.length());
+    int length = result.length();
+    // send length of list
+    int n = write(clientSocket, &length, sizeof(length));
+    //error
+    if(n == -1) {
+        throw "error writing to socket";
+    }
+    // send the list
+    n = write(clientSocket, &s, result.length());
 
     //error
     if(n == -1) {
