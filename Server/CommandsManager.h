@@ -27,6 +27,8 @@ private:
     //a singleton
     static CommandsManager* instance;
 
+    static pthread_mutex_t lock;
+
     //constructor
     CommandsManager();
     

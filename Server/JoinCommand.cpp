@@ -7,6 +7,7 @@
 #include <iostream>
 #include "JoinCommand.h"
 #include "GameManager.h"
+#include "GameListManager.h"
 
 JoinCommand::JoinCommand() {
 
@@ -21,20 +22,19 @@ void JoinCommand::execute(vector<string> args){
     int returnVal = -1;
     GameManager gameManager = NULL;
 
-    cout <<"list size: "<<listGames.size()<<" ";
-    //loop go over games list and look for game with the same name
-    for (vector<Game*>::const_iterator it = listGames.begin(); it < listGames.end(); it++) {
+    Game* g = GameListManager::getInstance()->getGame(name);
+    //check if the game is exist
+    if(g != NULL){
 
-        //check a game with this name exists and can be joined
-        cout  <<"status: "<< (*it)->getStatus();
-        if((*it)->getName() == name && (*it)->getStatus() == Game::waiting){
+        //check if the player can join to the game
+        if( g->getStatus() == Game::waiting){
             returnVal = 0;
-            (*it)->joinToGame(secondPlayerSocket);
+            g->joinToGame(secondPlayerSocket);
             //close sockets and open socket for game
 
-            gameManager = GameManager(*it);
-            break;
+            gameManager = GameManager(g);
         }
+
     }
 
     int n = write(secondPlayerSocket, &returnVal, sizeof(returnVal));

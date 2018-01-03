@@ -3,6 +3,7 @@
 //
 
 #include "StartCommand.h"
+#include "GameListManager.h"
 #include <sstream>
 #include <unistd.h>
 #include <iostream>
@@ -16,23 +17,18 @@ void StartCommand::execute(vector<string> args){
     is >> firstPlayerSocket;
     int returnVal = 0;
 
-    //loop go over games list and look for game with the same name
-    cout <<"list size: "<< listGames.size()<<" ";
-    for (vector<Game*>::const_iterator it = listGames.begin(); it < listGames.end(); it++) {
-        //if equal set returnVal to -1
-        if((*it)->getName() == name){
-            returnVal = -1;
-            break;
-        }
+    //if there is no game with this name
+    if(GameListManager::getInstance()->getGame(name) == NULL){
+       //create a new game and push to games list
+       Game* g = new Game(name,firstPlayerSocket);
+       GameListManager::getInstance()->addGame(g);
+       cout << "game started";
     }
 
-    //create a new game and push to games list
-    if(returnVal == 0){
-        Game* g = new Game(name,firstPlayerSocket);
-        listGames.push_back(g);
-        cout << "game started";
+    //if game with this name is already exist
+    else{
+       returnVal = -1;
     }
-
 
     int n = write(firstPlayerSocket, &returnVal, sizeof(returnVal));
 

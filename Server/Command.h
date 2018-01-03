@@ -10,9 +10,6 @@
 
 using namespace std;
 
-//list of games names that player can join.
-extern vector<Game*> listGames;
-
 class Command {
 public:
     //execute client request.

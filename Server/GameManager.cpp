@@ -7,6 +7,7 @@
 #include <cstring>
 #include "GameManager.h"
 #include "Command.h"
+#include "GameListManager.h"
 
 GameManager::GameManager(Game* game) : game(game) {}
 
@@ -56,14 +57,8 @@ void GameManager::handleClient(int clientSocket1,int clientSocket2) {
 
         //the game is over
         if(strcmp(s, "End") == 0){
-
-            //remove from list
-            for (int i = 0; i < listGames.size(); ++i) {
-                if(this->game->getName() == listGames.at(i)->getName()){
-                    listGames.erase(listGames.begin() + i);
-                }
-            }
             game->setStatus(Game::finished);
+            GameListManager::getInstance()->removeGame(game);
             return;
         }
 

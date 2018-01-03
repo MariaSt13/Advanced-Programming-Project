@@ -10,6 +10,7 @@
 #include "CloseCommand.h"
 
 CommandsManager* CommandsManager::instance = 0;
+pthread_mutex_t  CommandsManager::lock;
 
 /**
  * constructor
@@ -48,9 +49,11 @@ CommandsManager::~CommandsManager() {
  */
 CommandsManager *CommandsManager::getInstance() {
     if(instance == 0){
+        pthread_mutex_lock(&lock);
         if(instance == 0){
             instance = new CommandsManager();
         }
+        pthread_mutex_unlock(&lock);
     }
     return instance;
 }
