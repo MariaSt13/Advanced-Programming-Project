@@ -15,16 +15,24 @@ using namespace std;
 class CommandsManager {
 
 public:
-    //constructor
-    CommandsManager();
-
+    
+    //get instance
+    static CommandsManager* getInstance();
+    
     //find Command object in the map and calls his execute function.
     void executeCommand(string command, vector<string>args);
 
+
+private:
+    //a singleton
+    static CommandsManager* instance;
+
+    //constructor
+    CommandsManager();
+    
     //destructor
     ~CommandsManager();
 
-private:
     map <string, Command*> commandsMap;
 };
 

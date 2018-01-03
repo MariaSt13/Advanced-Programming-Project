@@ -9,6 +9,8 @@
 #include "PlayCommand.h"
 #include "CloseCommand.h"
 
+CommandsManager* CommandsManager::instance = 0;
+
 /**
  * constructor
  */
@@ -39,4 +41,16 @@ CommandsManager::~CommandsManager() {
     //free memory
     for (it = commandsMap.begin(); it != commandsMap.end(); it++)
         delete it->second;
+}
+
+/**
+ * @return instance of command manager.
+ */
+CommandsManager *CommandsManager::getInstance() {
+    if(instance == 0){
+        if(instance == 0){
+            instance = new CommandsManager();
+        }
+    }
+    return instance;
 }

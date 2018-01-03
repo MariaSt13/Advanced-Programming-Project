@@ -11,13 +11,11 @@
 using namespace boost;
 using namespace std;
 
-struct Server::arguments Server::args;
 /**
  * constructor.
  * @param port-port number.
  */
-Server::Server(int port,CommandsManager *commandManager): port(port),commandManager(commandManager), serverSocket(0), serverThreadId(0){
-    args.manager = commandManager;
+Server::Server(int port): port(port), serverSocket(0), serverThreadId(0){
     cout << "Server" << endl;
 }
 
@@ -85,7 +83,7 @@ void* Server::handleClient(void* socket) {
     ss << clientSocket;
     argsToCommand.push_back(ss.str());
 
-    args.manager->executeCommand(command,argsToCommand);
+    CommandsManager::getInstance()->executeCommand(command,argsToCommand);
 }
 
 void* Server::acceptClients(void *socket) {
@@ -106,7 +104,7 @@ void* Server::acceptClients(void *socket) {
         }
 
         pthread_t threadId;
-        pthread_create(&threadId, NULL, &handleClient, reinterpret_cast<void *>(clientSocket));
+        pthread_create(&threadId, NULL,(&handleClient), reinterpret_cast<void *>(clientSocket));
     }
 }
 /**

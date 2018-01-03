@@ -15,7 +15,7 @@ class Server {
 public:
 
     //constructor.
-    Server(int port,CommandsManager *commandManager);
+    Server(int port);
 
     //open server for connecting clients.
     void start();
@@ -23,17 +23,10 @@ public:
     //close server
     void stop();
 
-    struct arguments{
-        CommandsManager* manager;
-        int socket;
-    };
-    static arguments args;
-
 private:
     int port;
     int serverSocket; // the socket's file descriptor
     pthread_t serverThreadId;
-    CommandsManager *commandManager;
     static void* handleClient(void * socket);
     static void* acceptClients(void *socket);
     //maximum number of characters in the array.
