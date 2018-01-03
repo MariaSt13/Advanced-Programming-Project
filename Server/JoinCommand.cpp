@@ -19,28 +19,34 @@ void JoinCommand::execute(vector<string> args){
     int secondPlayerSocket;
     is >> secondPlayerSocket;
     int returnVal = -1;
+    GameManager gameManager = NULL;
 
     cout <<"list size: "<<listGames.size()<<" ";
     //loop go over games list and look for game with the same name
     for (vector<Game*>::const_iterator it = listGames.begin(); it < listGames.end(); it++) {
 
         //check a game with this name exists and can be joined
-        if((*it)->getName() == name && !(*it)->getStatus() == Game::waiting){
+        cout  <<"status: "<< (*it)->getStatus();
+        if((*it)->getName() == name && (*it)->getStatus() == Game::waiting){
             returnVal = 0;
             (*it)->joinToGame(secondPlayerSocket);
             //close sockets and open socket for game
 
-            //run the game
-            GameManager gameManager = GameManager(*it);
-            gameManager.run();
+            gameManager = GameManager(*it);
             break;
         }
     }
-    // there is no game with this name or its already running
+
     int n = write(secondPlayerSocket, &returnVal, sizeof(returnVal));
 
     //error
     if(n == -1) {
         throw "error writing to socket";
     }
+
+    if(returnVal == 0){
+        //run the game
+        gameManager.run();
+    }
+
 }
