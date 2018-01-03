@@ -4,6 +4,7 @@
 
 #include <sstream>
 #include <unistd.h>
+#include <iostream>
 #include "JoinCommand.h"
 #include "GameManager.h"
 
@@ -17,31 +18,29 @@ void JoinCommand::execute(vector<string> args){
     istringstream is(args.at(1));
     int secondPlayerSocket;
     is >> secondPlayerSocket;
+    int returnVal = -1;
 
-    bool validChoice = false;
-
+    cout <<"list size: "<<listGames.size()<<" ";
     //loop go over games list and look for game with the same name
-    for (vector<Game*>::const_iterator it = this->games.begin(); it < this->games.end(); it++) {
+    for (vector<Game*>::const_iterator it = listGames.begin(); it < listGames.end(); it++) {
+
         //check a game with this name exists and can be joined
         if((*it)->getName() == name && !(*it)->getStatus() == Game::waiting){
-            validChoice = true;
+            returnVal = 0;
             (*it)->joinToGame(secondPlayerSocket);
             //close sockets and open socket for game
 
             //run the game
-            GameManager *gameManager = new GameManager(**it);
-            gameManager->run();
+            GameManager gameManager = GameManager(*it);
+            gameManager.run();
             break;
         }
     }
     // there is no game with this name or its already running
-    if(!validChoice) {
-        char s[1] = {-1};
-        int n = write(secondPlayerSocket, &s, sizeof(s));
+    int n = write(secondPlayerSocket, &returnVal, sizeof(returnVal));
 
-        //error
-        if(n == -1) {
-            throw "error writing to socket";
-        }
+    //error
+    if(n == -1) {
+        throw "error writing to socket";
     }
 }

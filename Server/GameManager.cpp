@@ -6,15 +6,16 @@
 #include <iostream>
 #include <cstring>
 #include "GameManager.h"
+#include "Command.h"
 
-GameManager::GameManager(Game game):game(game) {}
+GameManager::GameManager(Game* game) : game(game) {}
 
 void GameManager::run() {
 
     //array of clients socket
     int clientSocket[MAX_CONNECTED_CLIENTS];
-    clientSocket[0] = game.getSocketFirstPLayer();
-    clientSocket[1] = game.getSocketSecondPLayer();
+    clientSocket[0] = game->getSocketFirstPLayer();
+    clientSocket[1] = game->getSocketSecondPLayer();
 
     //send to client his color.1- black , 2-white.
     for (int i = 0; i < MAX_CONNECTED_CLIENTS; i++) {
@@ -27,9 +28,9 @@ void GameManager::run() {
     }
 
     //while the game is running.
-    while (game.getStatus() == Game::running) {
+    while (game->getStatus() == Game::running) {
         for (int i = 0; i < MAX_CONNECTED_CLIENTS; i++) {
-            if (game.getStatus() == Game::running)
+            if (game->getStatus() == Game::running)
                 handleClient(clientSocket[i], clientSocket[(i + 1) % 2]);
         }
     }
@@ -49,21 +50,34 @@ void GameManager::handleClient(int clientSocket1,int clientSocket2) {
 
         //the game is over
         if(strcmp(s, "End") == 0){
-            game.setStatus(Game::finished);
+            game->setStatus(Game::finished);
+            return;
+        }
+
+        //the game is over
+        if(strcmp(s, "End") == 0){
+
+            //remove from list
+            for (int i = 0; i < listGames.size(); ++i) {
+                if(this->game->getName() == listGames.at(i)->getName()){
+                    listGames.erase(listGames.begin() + i);
+                }
+            }
+            game->setStatus(Game::finished);
             return;
         }
 
         //error
         if (n == -1) {
             cout << "Error reading arg1" << endl;
-            game.setStatus(Game::finished);
+            game->setStatus(Game::finished);
             return;
         }
 
         //clientSocket1 disconnected
         if (n == 0) {
             cout << "Client disconnected" << endl;
-            game.setStatus(Game::finished);
+            game->setStatus(Game::finished);
             return;
         }
 
@@ -71,7 +85,7 @@ void GameManager::handleClient(int clientSocket1,int clientSocket2) {
         n = write(clientSocket2, &s, sizeof(s));
         if (n == -1) {
             cout << "Error writing to socket" << endl;
-            game.setStatus(Game::finished);
+            game->setStatus(Game::finished);
             return;
         }
         memset(s, '\0', ARRAY_SIZE);

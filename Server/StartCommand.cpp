@@ -17,7 +17,8 @@ void StartCommand::execute(vector<string> args){
     int returnVal = 0;
 
     //loop go over games list and look for game with the same name
-    for (vector<Game*>::const_iterator it = this->games.begin(); it < this->games.end(); it++) {
+    cout <<"list size: "<<listGames.size()<<" ";
+    for (vector<Game*>::const_iterator it = listGames.begin(); it < listGames.end(); it++) {
         //if equal set returnVal to -1
         if((*it)->getName() == name){
             returnVal = -1;
@@ -28,7 +29,7 @@ void StartCommand::execute(vector<string> args){
     //create a new game and push to games list
     if(returnVal == 0){
         Game* g = new Game(name,firstPlayerSocket);
-        this->games.push_back(g);
+        listGames.push_back(g);
         cout << "game started";
     }
 
@@ -38,5 +39,10 @@ void StartCommand::execute(vector<string> args){
     //error
     if(n == -1) {
         throw "error writing to socket";
+    }
+
+    if(returnVal == -1){
+        //close client socket
+        close(firstPlayerSocket);
     }
 }

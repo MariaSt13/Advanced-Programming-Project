@@ -10,12 +10,10 @@
 
 using namespace std;
 
+//list of games names that player can join.
+vector<Game*> listGames;
 
 class Command {
-protected:
-    //list of games names that player can join.
-    vector<Game*> games;
-
 public:
     //execute client request.
     virtual void execute(vector<string> args) = 0;

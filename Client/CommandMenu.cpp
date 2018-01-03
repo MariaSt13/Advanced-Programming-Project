@@ -14,6 +14,7 @@ CommandMenu::CommandMenu(Display *display, Client* client): display(display), cl
 
 }
 void CommandMenu::runMenu() {
+    bool gameStarted = false;
 
 
     string command;
@@ -52,7 +53,25 @@ void CommandMenu::runMenu() {
            if(returnValue == -1) {
                cout << "This name is already taken. please try a different name" << endl;
            }
+           else{
+               gameStarted = true;
+           }
        }
 
-   } while (command == "list_games");
+       if (command == "join") {
+           int returnValue;
+           int n = read(clientSocket, &returnValue, sizeof(returnValue));
+           //error
+           if (n == -1) {
+               throw "Error reading from socket";
+           }
+           if(returnValue == -1) {
+               cout << "game not exist, please choose an exist game" << endl;
+           }
+           else{
+               gameStarted = true;
+           }
+       }
+
+   } while (!gameStarted);
 }

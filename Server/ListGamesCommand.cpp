@@ -6,6 +6,7 @@
 #include <sstream>
 #include <iostream>
 #include "ListGamesCommand.h"
+using namespace std;
 
 ListGamesCommand::ListGamesCommand() {
 
@@ -13,12 +14,12 @@ ListGamesCommand::ListGamesCommand() {
 
 void ListGamesCommand::execute(vector<string> args) {
     istringstream is(args.at(0));
-    int playerSocket;
-    is >> playerSocket;
+    int clientSocket;
+    is >> clientSocket;
     string result;
 
     //loop go over games list and look for games that can be joined
-    for (vector<Game*>::const_iterator it = this->games.begin(); it < this->games.end(); it++) {
+    for (vector<Game*>::const_iterator it = listGames.begin(); it < listGames.end(); it++) {
         //if the game is not running yet
         if(!(*it)->getStatus() == Game::waiting){
             string name = (*it)->getName();
@@ -29,10 +30,13 @@ void ListGamesCommand::execute(vector<string> args) {
     //write result to client socket
     const char* s = result.c_str();
     cout << "list games!!";
-    int n = write(playerSocket, &s, result.length());
+    int n = write(clientSocket, &s, result.length());
 
     //error
     if(n == -1) {
         throw "error writing to socket";
     }
+
+    //close client socket
+    close(clientSocket);
 }

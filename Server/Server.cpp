@@ -66,8 +66,6 @@ void Server::start() {
         }
 
         handleClient(clientSocket);
-
-        close(clientSocket);
         }
 
 
@@ -83,14 +81,8 @@ void Server::handleClient(int clientSocket) {
     string command;
     vector<string> args;
 
-    //read a new move
+    //read a new command
     int n = read(clientSocket, &s, sizeof(s));
-
-    //the game is over
-    if(strcmp(s, "End") == 0){
-        this->openServer = false;
-        return;
-    }
 
     //error
     if (n == -1) {

@@ -8,15 +8,17 @@
 #define ARRAY_SIZE 7
 
 
+#include <vector>
 #include "Game.h"
+using namespace std;
 
 class GameManager {
 private:
-    Game game;
+    Game* game;
 
 public:
     //constructor
-    GameManager(Game game);
+    GameManager(Game* game);
 
     void run();
 
