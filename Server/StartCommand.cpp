@@ -17,7 +17,7 @@ void StartCommand::execute(vector<string> args){
     int returnVal = 0;
 
     //loop go over games list and look for game with the same name
-    cout <<"list size: "<<listGames.size()<<" ";
+    cout <<"list size: "<< listGames.size()<<" ";
     for (vector<Game*>::const_iterator it = listGames.begin(); it < listGames.end(); it++) {
         //if equal set returnVal to -1
         if((*it)->getName() == name){

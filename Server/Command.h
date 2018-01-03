@@ -11,7 +11,7 @@
 using namespace std;
 
 //list of games names that player can join.
-vector<Game*> listGames;
+extern vector<Game*> listGames;
 
 class Command {
 public:
