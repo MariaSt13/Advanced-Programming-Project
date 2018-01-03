@@ -13,7 +13,7 @@ int main() {
     map<string,string> myMap;
 
     try{
-        myMap = read.getVectorDefinition("/home/linoy/Desktop/myGIt/Advanced-Programming-Project/Server/serverDefinitionFile.txt");
+        myMap = read.getVectorDefinition("/home/maria/Documents/git/Advanced-Programming-Project/Server/serverDefinitionFile.txt");
     } catch (char const* msg){
         cout << "Error: " << msg << endl;
         exit(1);

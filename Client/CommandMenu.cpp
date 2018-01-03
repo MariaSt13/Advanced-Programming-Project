@@ -83,7 +83,7 @@ void CommandMenu::runMenu() {
            }
 
            //read the list
-           char list[length];
+           char list[length+1] = {0};
            n = read(clientSocket, &list, sizeof(list));
            if (n == -1) {
                throw "Error reading from socket";

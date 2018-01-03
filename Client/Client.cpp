@@ -57,7 +57,7 @@ void Client::connectToServer() {
     if (connect(clientSocket, (struct sockaddr *)&serverAddress, sizeof(serverAddress)) == -1) {
         throw "Error connecting to server";
     }
-    cout << "Connected to server" << endl;
+    //cout << "Connected to server" << endl;
     //cout << "Waiting for other player to join..." << endl;
 }
 

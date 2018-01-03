@@ -128,5 +128,5 @@ void ConsoleDisplay::noSuchGame() const {
 }
 
 void ConsoleDisplay::printListGames(char *list) const {
-    cout << list;
+    cout << list << endl;
 }
