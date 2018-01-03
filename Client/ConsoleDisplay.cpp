@@ -119,3 +119,14 @@ void ConsoleDisplay::commandMenu() const {
     cout << "list_games - to see games that can be joined" <<  endl;
     cout << "join <name> - to join a game with that name" << endl;
 }
+void ConsoleDisplay::nameTaken() const {
+    cout << "This name is already taken. Please try a different name" << endl;
+}
+
+void ConsoleDisplay::noSuchGame() const {
+    cout << "A game with this name doesn't exist. Please choose an existing game" << endl;
+}
+
+void ConsoleDisplay::printListGames(char *list) const {
+    cout << list;
+}

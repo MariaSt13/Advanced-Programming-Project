@@ -26,6 +26,9 @@ public:
     virtual void mainMenu() const;
     virtual void invalidTryAgain() const;
     virtual void commandMenu()const;
+    virtual void nameTaken()const;
+    virtual void noSuchGame() const;
+    virtual void printListGames(char* list)const;
 
 private:
     //The function prints a numbered row above the game board.

@@ -51,7 +51,7 @@ void CommandMenu::runMenu() {
                throw "Error reading from socket";
            }
            if(returnValue == -1) {
-               cout << "This name is already taken. please try a different name" << endl;
+               display->nameTaken();
            }
            else{
                gameStarted = true;
@@ -66,7 +66,7 @@ void CommandMenu::runMenu() {
                throw "Error reading from socket";
            }
            if(returnValue == -1) {
-               cout << "game not exist, please choose an exist game" << endl;
+               display->noSuchGame();
            }
            else{
                gameStarted = true;
@@ -88,7 +88,7 @@ void CommandMenu::runMenu() {
            if (n == -1) {
                throw "Error reading from socket";
            }
-           cout << list;
+           display->printListGames(list);
        }
 
    } while (!gameStarted);

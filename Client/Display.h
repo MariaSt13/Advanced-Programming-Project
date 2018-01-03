@@ -26,6 +26,9 @@ public:
     virtual void mainMenu() const = 0;
     virtual void invalidTryAgain() const = 0;
     virtual void commandMenu()const = 0;
+    virtual void nameTaken()const =0;
+    virtual void noSuchGame() const=0;
+    virtual void printListGames(char* list)const=0;
 
 };
 #endif //EX4_DISPLAY_H

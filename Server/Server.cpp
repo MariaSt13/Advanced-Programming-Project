@@ -50,7 +50,7 @@ void Server::start() {
 
     //Start listening to incoming connections
     listen(serverSocket, MAX_CONNECTED_CLIENTS);
-    pthread_create(&serverThreadId, NULL, &acceptClients, (void *)serverSocket);
+    pthread_create(&serverThreadId, NULL, &acceptClients, reinterpret_cast<void *>(serverSocket));
 }
 
 /**
@@ -106,12 +106,13 @@ void* Server::acceptClients(void *socket) {
         }
 
         pthread_t threadId;
-        pthread_create(&threadId, NULL, &handleClient, (void *)clientSocket);
+        pthread_create(&threadId, NULL, &handleClient, reinterpret_cast<void *>(clientSocket));
     }
 }
 /**
  * close server.
  */
 void Server::stop() {
+    pthread_cancel(this->serverThreadId);
     close(serverSocket);
 }
