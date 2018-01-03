@@ -11,11 +11,13 @@
 using namespace boost;
 using namespace std;
 
+struct Server::arguments Server::args;
 /**
  * constructor.
  * @param port-port number.
  */
-Server::Server(int port,CommandsManager *commandManager): port(port),commandManager(commandManager), serverSocket(0),openServer(true){
+Server::Server(int port,CommandsManager *commandManager): port(port),commandManager(commandManager), serverSocket(0), serverThreadId(0){
+    args.manager = commandManager;
     cout << "Server" << endl;
 }
 
@@ -48,12 +50,50 @@ void Server::start() {
 
     //Start listening to incoming connections
     listen(serverSocket, MAX_CONNECTED_CLIENTS);
-    // Define the client socket's structures
+    pthread_create(&serverThreadId, NULL, &acceptClients, (void *)serverSocket);
+}
+
+/**
+ * Handle requests from a specific client.
+ * @param clientSocket - the server reads from this client.
+ */
+void* Server::handleClient(void* socket) {
+    long clientSocket = (long) socket;
+    char s[ARRAY_SIZE] = {0};
+    string command;
+    vector<string> argsToCommand;
+
+    //read a new command
+    int n = read(clientSocket, &s, sizeof(s));
+
+    //error
+    if (n == -1) {
+        cout << "Error reading command" << endl;
+        return NULL;
+    }
+
+    //clientSocket disconnected
+    if (n == 0) {
+        cout << "Client disconnected" << endl;
+        return NULL;
+    }
+
+    split(argsToCommand,s,is_any_of(" "));
+    command = argsToCommand.at(0);
+    argsToCommand.erase(argsToCommand.begin());
+    stringstream ss;
+    ss << clientSocket;
+    argsToCommand.push_back(ss.str());
+
+    args.manager->executeCommand(command,argsToCommand);
+}
+
+void* Server::acceptClients(void *socket) {
+    long serverSocket = (long) socket;
     struct sockaddr_in clientAddress;
     socklen_t clientAddressLen = sizeof((struct sockaddr*) &clientAddress);
 
     while(true){
-        openServer = true;
         //connection to client.
         cout << "Waiting for client connections..." << endl;
 
@@ -65,48 +105,10 @@ void Server::start() {
             throw "Error on accept";
         }
 
-        handleClient(clientSocket);
-        }
-
-
-}
-
-/**
- * Handle requests from a specific client.
- * @param clientSocket1 - the server reads from this client.
- * @param clientSocket2 - the server writes to this client.
- */
-void Server::handleClient(int clientSocket) {
-    char s[ARRAY_SIZE] = {0};
-    string command;
-    vector<string> args;
-
-    //read a new command
-    int n = read(clientSocket, &s, sizeof(s));
-
-    //error
-    if (n == -1) {
-        cout << "Error reading arg1" << endl;
-        this->openServer = false;
-        return;
+        pthread_t threadId;
+        pthread_create(&threadId, NULL, &handleClient, (void *)clientSocket);
     }
-
-    //clientSocket disconnected
-    if (n == 0) {
-        cout << "Client disconnected" << endl;
-        this->openServer = false;
-        return;
-    }
-
-    split(args,s,is_any_of(" "));
-    command = args.at(0);
-    args.erase(args.begin());
-    stringstream ss;
-    ss << clientSocket;
-    args.push_back(ss.str());
-    commandManager->executeCommand(command,args);
 }
-
 /**
  * close server.
  */
