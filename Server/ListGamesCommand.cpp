@@ -36,8 +36,17 @@ void ListGamesCommand::execute(vector<string> args) {
     if(n == -1) {
         throw "error writing to socket";
     }
+
+    //verify that client read length
+    int answer;
+    n = read(clientSocket, &answer, sizeof(answer));
+
+    if (n == -1) {
+        throw "Error reading from socket";
+    }
+
     // send the list
-    n = write(clientSocket, &s, result.length());
+    n = write(clientSocket, s, result.length());
 
     //error
     if(n == -1) {

@@ -72,14 +72,23 @@ void CommandMenu::runMenu() {
                gameStarted = true;
            }
        }
-       
+
        if (command == "list_games") {
            // read the length of the list
            int length;
            int n = read(clientSocket, &length, sizeof(length));
-           
+
            if (n == -1) {
                throw "Error reading from socket";
+           }
+
+           // tell the server that reading is done
+           int approve = 0;
+           n = write(clientSocket, &approve, sizeof(approve));
+
+           //error
+           if (n == -1) {
+               throw "error writing to socket";
            }
            //read the list
            char list[length];
