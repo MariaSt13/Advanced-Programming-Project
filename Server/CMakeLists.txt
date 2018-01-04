@@ -8,4 +8,8 @@ set(SOURCE_FILES Server.cpp Server.h ReadDefinitionFile.h ReadDefinitionFile.cpp
         Command.h StartCommand.cpp StartCommand.h ListGamesCommand.cpp ListGamesCommand.h JoinCommand.cpp JoinCommand.h
         Game.cpp Game.h GameManager.cpp GameManager.h GameListManager.cpp GameListManager.h
         ServerDataManager.cpp ServerDataManager.h)
+<<<<<<< HEAD
 add_executable(server ${SOURCE_FILES} main.cpp)
+=======
+add_executable(server ${SOURCE_FILES} main.cpp)
+>>>>>>> a336b15a087674cdbaaffef33fd9cea2f6023b81
