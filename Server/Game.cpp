@@ -7,36 +7,51 @@
 /**
  * constructor
  * @param name - name of the game
- * @param socketFirstPLayer - number socket of the first player.
+ * @param socketFirstPLayer - socket number of the first player.
  */
 Game::Game(string name, int socketFirstPLayer):name(name),socketFirstPLayer(socketFirstPLayer),cureentStatus(waiting) {}
 
 
 /**
  * join second player to the game.
- * @param socketPLayer - number socket of the second player.
+ * @param socketPLayer - socket number of the second player.
  */
 void Game::joinToGame(int socketPLayer) {
     this->socketSecondPLayer = socketPLayer;
-    this->cureentStatus = running;
+    this->currentStatus = running;
 }
 
+/**
+ * @param s - new status.
+ */
 void Game::setStatus(status s) {
-    this->cureentStatus = s;
+    this->currentStatus = s;
 }
 
+/**
+ * @return - name of the game.
+ */
 const string Game::getName()const {
     return this->name;
 }
 
+/**
+ * @return current status of the game.
+ */
 Game::status Game::getStatus() const {
-    return cureentStatus;
+    return currentStatus;
 }
 
+/**
+ * @return - socket number of the first player.
+ */
 const int Game::getSocketFirstPLayer() const {
     return this->socketFirstPLayer;
 }
 
+/**
+ * @return - socket number of the second player.
+ */
 const int Game::getSocketSecondPLayer() const {
     return this->socketSecondPLayer;
 }

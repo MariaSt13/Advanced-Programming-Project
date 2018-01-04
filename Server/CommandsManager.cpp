@@ -1,13 +1,7 @@
-//
-// Created by linoy on 27/12/17.
-//
-
 #include "CommandsManager.h"
 #include "StartCommand.h"
 #include "ListGamesCommand.h"
 #include "JoinCommand.h"
-#include "PlayCommand.h"
-#include "CloseCommand.h"
 
 CommandsManager* CommandsManager::instance = 0;
 pthread_mutex_t  CommandsManager::lock;
@@ -23,10 +17,10 @@ CommandsManager::CommandsManager() {
 }
 
 /**
- * this function find Command object in the map
- * and calls his execute function.
- * @param command- string of the command.
- * @param args - vector of arguments to execute.
+ * this function searches for the requested command
+ * in the map calls its execute function.
+ * @param command- string of the command name.
+ * @param args - vector of arguments to execute function.
  */
 void CommandsManager::executeCommand(string command, vector<string> args) {
     Command *commandObj = commandsMap[command];
@@ -42,10 +36,12 @@ CommandsManager::~CommandsManager() {
     //free memory
     for (it = commandsMap.begin(); it != commandsMap.end(); it++)
         delete it->second;
+    delete instance;
 }
 
 /**
- * @return instance of command manager.
+ * get instance of a singleton.
+ * @return instance of CommandsManager object.
  */
 CommandsManager *CommandsManager::getInstance() {
     if(instance == 0){

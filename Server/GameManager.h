@@ -1,7 +1,3 @@
-//
-// Created by linoy on 29/12/17.
-//
-
 #ifndef EX4_GAMEMANAGER_H
 #define EX4_GAMEMANAGER_H
 #define MAX_CONNECTED_CLIENTS 2
@@ -12,6 +8,9 @@
 #include "Game.h"
 using namespace std;
 
+/**
+ * this class manages one game and connected between the players.
+ */
 class GameManager {
 private:
     Game* game;
@@ -23,7 +22,6 @@ public:
     void run();
 
     void handleClient(int clientSocket1,int clientSocket2);
-
 };
 
 

@@ -1,7 +1,3 @@
-//
-// Created by linoy on 27/12/17.
-//
-
 #ifndef EX4_COMMAND_H
 #define EX4_COMMAND_H
 #include <string>
@@ -10,14 +6,15 @@
 
 using namespace std;
 
+/**
+ * an abstract command class.
+ */
 class Command {
 public:
-    //execute client request.
+    //execute command requested by the user.
     virtual void execute(vector<string> args) = 0;
 
     //destructor.
     virtual ~Command(){};
 };
-
-
 #endif //EX4_COMMAND_H

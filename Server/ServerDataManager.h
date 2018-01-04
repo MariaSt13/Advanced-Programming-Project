@@ -28,13 +28,19 @@ private:
     static pthread_mutex_t lock;
 
 public:
+    //get instance of singleton
     static ServerDataManager* getInstance();
 
+    //add pthread to list
     void addPthread(pthread_t pthread);
 
-    void removePhtread(pthread_t pthread);
+    //remove pthread from list
+    void removePthread(pthread_t pthread);
 
+    //add socket to list
     void addSocket(int socket);
+
+    //remove socket from list
     void removeSocket(int socket);
 };
 

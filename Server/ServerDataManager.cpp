@@ -9,9 +9,10 @@
 ServerDataManager* ServerDataManager::instance = 0;
 pthread_mutex_t  ServerDataManager::lock;
 
+
 /**
  * get instance of singleton.
- * @return instance.
+ * @return instance - instance of ServerDataManager class.
  */
 ServerDataManager *ServerDataManager::getInstance() {
     if(instance == 0){
@@ -25,18 +26,39 @@ ServerDataManager *ServerDataManager::getInstance() {
     return instance;
 }
 
+/**
+ * this function add pthread to pthreads vector.
+ * @param pthread - pthread id number.
+ */
 void ServerDataManager::addPthread(pthread_t pthread) {
     this->pthreadList.push_back(pthread);
 }
 
+/**
+ * this function add socket to sockets vector.
+ * @param socket - socket number.
+ */
 void ServerDataManager::addSocket(int socket) {
     this->sockets.push_back(socket);
 }
 
-void ServerDataManager::removePhtread(pthread_t pthread) {
+/**
+ * this function remove pthread from pthreads vector.
+ * @param pthread - pthread id number.
+ */
+void ServerDataManager::removePthread(pthread_t pthread) {
     pthread_cancel(pthread);
 }
 
+/**
+ * this function remove socket from sockets vector.
+ * @param socket - socket number.
+ */
 void ServerDataManager::removeSocket(int socket) {
     close(socket);
 }
+
+/**
+ * constructor.
+ */
+ServerDataManager::ServerDataManager() {}

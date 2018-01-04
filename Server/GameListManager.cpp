@@ -1,15 +1,11 @@
-//
-// Created by linoy on 03/01/18.
-//
-
 #include "GameListManager.h"
 
 GameListManager* GameListManager::instance = 0;
 pthread_mutex_t  GameListManager::lock;
 
 /**
- * get instance of singleton.
- * @return instance.
+ * get instance of a singleton.
+ * @return instance - instance of GameListManager object.
  */
 GameListManager *GameListManager::getInstance() {
     if(instance == 0){
@@ -49,9 +45,9 @@ void GameListManager::removeGame(Game *game) {
 /**
  * this function get a name and return
  * pointer to the game with that name.
- * @param gameName -name of the game.
- * @return - pointer to the game if it
- * is exist. otherwise NULL.
+ * @param gameName - name of the game.
+ * @return - pointer to the game if it is exist.
+ * otherwise return NULL.
  */
 Game *GameListManager::getGame(string gameName) {
 
@@ -66,7 +62,7 @@ Game *GameListManager::getGame(string gameName) {
 }
 
 /**
- * return string names of all waiting games.
+ * return string which is a list of all the games that are waiting.
  * @return
  */
 string GameListManager::getListOfWaitingGames() {
