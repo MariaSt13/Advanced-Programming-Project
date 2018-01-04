@@ -49,7 +49,7 @@ void ServerDataManager::removePthread(pthread_t pthread) {
             pthreadList.erase(pthreadList.begin() + i);
         }
     }
-    pthread_cancel(pthread);
+    pthread_exit(NULL);
 }
 
 /**
