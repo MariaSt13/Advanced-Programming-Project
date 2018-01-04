@@ -38,4 +38,6 @@ void ListGamesCommand::execute(vector<string> args) {
 
     //close client socket
     ServerDataManager::getInstance()->removeSocket(clientSocket);
+
+    ServerDataManager::getInstance()->removePthread(pthread_self());
 }

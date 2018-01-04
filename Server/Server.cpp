@@ -86,7 +86,6 @@ void* Server::handleClient(void* socket) {
     argsToCommand.push_back(ss.str());
 
     CommandsManager::getInstance()->executeCommand(command,argsToCommand);
-    ServerDataManager::getInstance()->removePthread(pthread_self());
 }
 
 void* Server::acceptClients(void *socket) {

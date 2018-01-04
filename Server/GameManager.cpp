@@ -39,6 +39,7 @@ void GameManager::run() {
     GameListManager::getInstance()->removeGame(game);
     ServerDataManager::getInstance()->removeSocket(clientSocket[0]);
     ServerDataManager::getInstance()->removeSocket(clientSocket[1]);
+    ServerDataManager::getInstance()->removePthread(pthread_self());
 }
 
 
