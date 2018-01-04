@@ -13,7 +13,6 @@
 class Server {
 
 public:
-
     //constructor.
     Server(int port);
 
@@ -29,6 +28,5 @@ private:
     pthread_t serverThreadId;
     static void* handleClient(void * socket);
     static void* acceptClients(void *socket);
-    //maximum number of characters in the array.
 };
 #endif //EX4_SERVER_H

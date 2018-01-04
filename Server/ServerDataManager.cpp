@@ -87,11 +87,6 @@ void ServerDataManager::removeAllSockets() {
 }
 
 /**
- * constructor.
- */
-ServerDataManager::ServerDataManager() {}
-
-/**
  * destructor.
  */
 ServerDataManager::~ServerDataManager() {

@@ -7,10 +7,15 @@
 
 using namespace std;
 
+/**
+ * A singleton class that manages data for
+ * the server: a the vector of pthreads and
+ * a vector of clients sockets.
+ */
 class ServerDataManager {
 private:
     //constructor
-    ServerDataManager();
+    ServerDataManager(){};
 
     //destructor
      ~ServerDataManager();

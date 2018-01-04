@@ -7,6 +7,11 @@
 
 using namespace std;
 
+/**
+ * Execute client request: create a
+ * new game and add it to the games list.
+ * @param args - arguments vector.
+ */
 void StartCommand::execute(vector<string> args){
     string name = args.at(0);
     istringstream is(args.at(1));

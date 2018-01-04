@@ -13,7 +13,7 @@
 class GameListManager {
 private:
     //constructor
-    GameListManager();
+    GameListManager(){};
 
     //destructor
     ~GameListManager();

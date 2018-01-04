@@ -87,13 +87,6 @@ string GameListManager::getListOfWaitingGames() {
 }
 
 /**
- * constructor
- */
-GameListManager::GameListManager() {
-
-}
-
-/**
  * destructor
  */
 GameListManager::~GameListManager() {
