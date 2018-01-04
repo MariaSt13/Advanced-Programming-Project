@@ -92,3 +92,14 @@ string GameListManager::getListOfWaitingGames() {
 GameListManager::GameListManager() {
 
 }
+
+/**
+ * destructor
+ */
+GameListManager::~GameListManager() {
+    //free memory
+    for (vector<Game*>::const_iterator it = listGames.begin(); it < listGames.end(); it++) {
+        delete (*it);
+    }
+    delete instance;
+}

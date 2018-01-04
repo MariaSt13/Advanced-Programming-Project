@@ -1,15 +1,16 @@
-//
-// Created by linoy on 27/12/17.
-//
-
 #ifndef EX4_JOINCOMMAND_H
 #define EX4_JOINCOMMAND_H
 
 
 #include "Command.h"
-
+/**
+ * this class extends Command.
+ * the join command is responsible for adding the
+ * second player to the game.
+ */
 class JoinCommand: public Command {
 public:
+    //constructor
     JoinCommand();
 
     //execute client request.

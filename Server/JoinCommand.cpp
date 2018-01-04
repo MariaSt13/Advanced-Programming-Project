@@ -9,10 +9,17 @@
 #include "GameManager.h"
 #include "GameListManager.h"
 
+/**
+ * constructor.
+ */
 JoinCommand::JoinCommand() {
 
 }
 
+/**
+ * execute client request: adding him to the game.
+ * @param args - arguments vector.
+ */
 void JoinCommand::execute(vector<string> args){
 
     string name = args.at(0);
@@ -22,17 +29,16 @@ void JoinCommand::execute(vector<string> args){
     int returnVal = -1;
     GameManager gameManager = NULL;
 
-    Game* g = GameListManager::getInstance()->getGame(name);
+    Game* game = GameListManager::getInstance()->getGame(name);
+
     //check if the game is exist
-    if(g != NULL){
+    if(game != NULL){
 
         //check if the player can join to the game
-        if( g->getStatus() == Game::waiting){
+        if(game->getStatus() == Game::waiting){
             returnVal = 0;
-            g->joinToGame(secondPlayerSocket);
-            //close sockets and open socket for game
-
-            gameManager = GameManager(g);
+            game->joinToGame(secondPlayerSocket);
+            gameManager = GameManager(game);
         }
 
     }
@@ -44,6 +50,7 @@ void JoinCommand::execute(vector<string> args){
         throw "error writing to socket";
     }
 
+    //if the process ended successfully
     if(returnVal == 0){
         //run the game
         gameManager.run();

@@ -1,16 +1,14 @@
-//
-// Created by linoy on 29/12/17.
-//
-
 #include <unistd.h>
 #include <iostream>
 #include <cstring>
 #include "GameManager.h"
-#include "Command.h"
 #include "GameListManager.h"
 
 GameManager::GameManager(Game* game) : game(game) {}
 
+/**
+ * this function start game communication.
+ */
 void GameManager::run() {
 
     //array of clients socket
@@ -38,9 +36,9 @@ void GameManager::run() {
 }
 
 
-    /**
+/**
  * Handle requests from a specific client.
- * @param clientSocket1 - the server reads from this client.
+ * @param clientSocket1- the server reads from this client.
  * @param clientSocket2 - the server writes to this client.
  */
 void GameManager::handleClient(int clientSocket1,int clientSocket2) {
@@ -49,13 +47,7 @@ void GameManager::handleClient(int clientSocket1,int clientSocket2) {
         //read a new move
         int n = read(clientSocket1, &s, sizeof(s));
 
-        //the game is over
-        if(strcmp(s, "End") == 0){
-            game->setStatus(Game::finished);
-            return;
-        }
-
-        //the game is over
+        //if the game is over
         if(strcmp(s, "End") == 0){
             game->setStatus(Game::finished);
             GameListManager::getInstance()->removeGame(game);

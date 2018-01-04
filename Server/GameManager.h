@@ -19,8 +19,10 @@ public:
     //constructor
     GameManager(Game* game);
 
+    //start game communication
     void run();
 
+    //handle clients request
     void handleClient(int clientSocket1,int clientSocket2);
 };
 
