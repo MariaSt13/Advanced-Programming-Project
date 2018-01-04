@@ -22,7 +22,7 @@ private:
     //list of threads
     vector<pthread_t> pthreadList;
 
-    vector<int> sockets;
+    vector<int> socketsList;
 
     static ServerDataManager* instance;
     static pthread_mutex_t lock;

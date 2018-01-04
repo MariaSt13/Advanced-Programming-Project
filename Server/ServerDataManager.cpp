@@ -39,22 +39,34 @@ void ServerDataManager::addPthread(pthread_t pthread) {
  * @param socket - socket number.
  */
 void ServerDataManager::addSocket(int socket) {
-    this->sockets.push_back(socket);
+    this->socketsList.push_back(socket);
 }
 
 /**
- * this function remove pthread from pthreads vector.
+ * this function remove pthread from pthreads vector and closes it.
  * @param pthread - pthread id number.
  */
 void ServerDataManager::removePthread(pthread_t pthread) {
+    //remove from list
+    for (int i = 0; i < pthreadList.size(); ++i) {
+        if(pthread == pthreadList.at(i)){
+            pthreadList.erase(pthreadList.begin() + i);
+        }
+    }
     pthread_cancel(pthread);
 }
 
 /**
- * this function remove socket from sockets vector.
+ * this function remove socket from sockets vector and closes it.
  * @param socket - socket number.
  */
 void ServerDataManager::removeSocket(int socket) {
+    //remove from list
+    for (int i = 0; i < socketsList.size(); ++i) {
+        if(socket == socketsList.at(i)){
+            socketsList.erase(socketsList.begin() + i);
+        }
+    }
     close(socket);
 }
 
