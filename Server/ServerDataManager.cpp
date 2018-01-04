@@ -1,7 +1,3 @@
-//
-// Created by maria on 04/01/18.
-//
-
 #include <pthread.h>
 #include <unistd.h>
 #include "ServerDataManager.h"
@@ -11,7 +7,7 @@ pthread_mutex_t  ServerDataManager::lock;
 
 
 /**
- * get instance of singleton.
+ * Get the instance of the singleton.
  * @return instance - instance of ServerDataManager class.
  */
 ServerDataManager *ServerDataManager::getInstance() {
@@ -27,7 +23,7 @@ ServerDataManager *ServerDataManager::getInstance() {
 }
 
 /**
- * this function add pthread to pthreads vector.
+ * This function adds pthread to pthreads vector.
  * @param pthread - pthread id number.
  */
 void ServerDataManager::addPthread(pthread_t pthread) {
@@ -35,7 +31,7 @@ void ServerDataManager::addPthread(pthread_t pthread) {
 }
 
 /**
- * this function add socket to sockets vector.
+ * This function adds socket to sockets list.
  * @param socket - socket number.
  */
 void ServerDataManager::addSocket(int socket) {
@@ -43,7 +39,7 @@ void ServerDataManager::addSocket(int socket) {
 }
 
 /**
- * this function remove pthread from pthreads vector and closes it.
+ * This function removes pthread from pthreads list and closes it.
  * @param pthread - pthread id number.
  */
 void ServerDataManager::removePthread(pthread_t pthread) {
@@ -57,7 +53,7 @@ void ServerDataManager::removePthread(pthread_t pthread) {
 }
 
 /**
- * this function remove socket from sockets vector and closes it.
+ * This function removes socket from sockets vector and closes it.
  * @param socket - socket number.
  */
 void ServerDataManager::removeSocket(int socket) {
@@ -71,6 +67,33 @@ void ServerDataManager::removeSocket(int socket) {
 }
 
 /**
+ * This function closes all the pthreads in the list and clears the list.
+ */
+void ServerDataManager::removeAllPthreads() {
+    for (vector<pthread_t>::const_iterator it = pthreadList.begin(); it < pthreadList.end(); it++) {
+        pthread_cancel(*it);
+    }
+    pthreadList.clear();
+}
+/**
+ * This function closes all the sockets in the list and clears the list.
+ */
+void ServerDataManager::removeAllSockets() {
+    for (vector<int>::const_iterator it = socketsList.begin(); it < socketsList.end(); it++) {
+        close(*it);
+    }
+
+    socketsList.clear();
+}
+
+/**
  * constructor.
  */
 ServerDataManager::ServerDataManager() {}
+
+/**
+ * destructor.
+ */
+ServerDataManager::~ServerDataManager() {
+    delete(instance);
+}

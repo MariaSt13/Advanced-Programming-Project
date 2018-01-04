@@ -3,11 +3,12 @@
 #include <cstring>
 #include "GameManager.h"
 #include "GameListManager.h"
+#include "ServerDataManager.h"
 
 GameManager::GameManager(Game* game) : game(game) {}
 
 /**
- * this function start game communication.
+ * This function starts a game communication.
  */
 void GameManager::run() {
 
@@ -33,6 +34,11 @@ void GameManager::run() {
                 handleClient(clientSocket[i], clientSocket[(i + 1) % 2]);
         }
     }
+
+    // Close the game and remove it fro list. also close sockets and remove them.
+    GameListManager::getInstance()->removeGame(game);
+    ServerDataManager::getInstance()->removeSocket(clientSocket[0]);
+    ServerDataManager::getInstance()->removeSocket(clientSocket[1]);
 }
 
 
@@ -50,7 +56,6 @@ void GameManager::handleClient(int clientSocket1,int clientSocket2) {
         //if the game is over
         if(strcmp(s, "End") == 0){
             game->setStatus(Game::finished);
-            GameListManager::getInstance()->removeGame(game);
             return;
         }
 

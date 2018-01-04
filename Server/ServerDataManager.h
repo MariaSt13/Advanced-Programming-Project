@@ -1,7 +1,3 @@
-//
-// Created by maria on 04/01/18.
-//
-
 #ifndef EX4_SERVERDATEMANAGER_H
 #define EX4_SERVERDATEMANAGER_H
 
@@ -37,11 +33,15 @@ public:
     //remove pthread from list
     void removePthread(pthread_t pthread);
 
+    void removeAllPthreads();
+
     //add socket to list
     void addSocket(int socket);
 
     //remove socket from list
     void removeSocket(int socket);
+
+    void removeAllSockets();
 };
 
 

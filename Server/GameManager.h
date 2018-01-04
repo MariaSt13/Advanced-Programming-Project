@@ -9,7 +9,7 @@
 using namespace std;
 
 /**
- * this class manages one game and connected between the players.
+ * This class manages one game and connected between the players.
  */
 class GameManager {
 private:

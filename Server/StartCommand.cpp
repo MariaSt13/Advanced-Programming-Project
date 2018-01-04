@@ -1,9 +1,6 @@
-//
-// Created by linoy on 27/12/17.
-//
-
 #include "StartCommand.h"
 #include "GameListManager.h"
+#include "ServerDataManager.h"
 #include <sstream>
 #include <unistd.h>
 #include <iostream>
@@ -39,6 +36,6 @@ void StartCommand::execute(vector<string> args){
 
     if(returnVal == -1){
         //close client socket
-        close(firstPlayerSocket);
+        ServerDataManager::getInstance()->removeSocket(firstPlayerSocket);
     }
 }

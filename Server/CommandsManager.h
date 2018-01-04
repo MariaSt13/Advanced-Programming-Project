@@ -9,7 +9,7 @@ using namespace std;
 
 
 /**
- * a singleton class that connects the server with
+ * A singleton class that connects the server with
  * the requested command.
  */
 class CommandsManager {

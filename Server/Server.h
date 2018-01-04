@@ -8,7 +8,7 @@
 #define ARRAY_SIZE 56
 
 /**
- * server class.
+ * Server class.
  */
 class Server {
 

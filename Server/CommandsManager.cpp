@@ -17,7 +17,7 @@ CommandsManager::CommandsManager() {
 }
 
 /**
- * this function searches for the requested command
+ * This function searches for the requested command
  * in the map calls its execute function.
  * @param command- string of the command name.
  * @param args - vector of arguments to execute function.
@@ -40,7 +40,7 @@ CommandsManager::~CommandsManager() {
 }
 
 /**
- * get instance of a singleton.
+ * Get the instance of the singleton.
  * @return instance of CommandsManager object.
  */
 CommandsManager *CommandsManager::getInstance() {

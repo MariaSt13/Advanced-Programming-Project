@@ -1,5 +1,6 @@
 
 #include "Server.h"
+#include "ServerDataManager.h"
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <unistd.h>
@@ -20,7 +21,7 @@ Server::Server(int port): port(port), serverSocket(0), serverThreadId(0){
 }
 
 /**
- * open server for connecting clients.
+ * Open server for connecting clients.
  */
 void Server::start() {
     
@@ -56,6 +57,7 @@ void Server::start() {
  * @param clientSocket - the server reads from this client.
  */
 void* Server::handleClient(void* socket) {
+    ServerDataManager::getInstance()->addPthread(pthread_self());
     long clientSocket = (long) socket;
     char s[ARRAY_SIZE] = {0};
     string command;
@@ -84,6 +86,7 @@ void* Server::handleClient(void* socket) {
     argsToCommand.push_back(ss.str());
 
     CommandsManager::getInstance()->executeCommand(command,argsToCommand);
+    ServerDataManager::getInstance()->removePthread(pthread_self());
 }
 
 void* Server::acceptClients(void *socket) {
@@ -98,6 +101,7 @@ void* Server::acceptClients(void *socket) {
         //accept a new client connection
         int clientSocket = accept(serverSocket, (struct sockaddr *)&clientAddress, &clientAddressLen);
         cout << "Client connected" << endl;
+        ServerDataManager::getInstance()->addSocket(clientSocket);
 
         if (clientSocket == -1) {
             throw "Error on accept";
@@ -111,6 +115,8 @@ void* Server::acceptClients(void *socket) {
  * close server.
  */
 void Server::stop() {
+    ServerDataManager::getInstance()->removeAllSockets();
+    ServerDataManager::getInstance()->removeAllPthreads();
     pthread_cancel(this->serverThreadId);
     close(serverSocket);
 }

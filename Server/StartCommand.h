@@ -1,7 +1,3 @@
-//
-// Created by linoy on 27/12/17.
-//
-
 #ifndef EX4_STARTCOMMAND_H
 #define EX4_STARTCOMMAND_H
 

@@ -1,19 +1,15 @@
-//
-// Created by linoy on 28/12/17.
-//
-
 #include "Game.h"
 
 /**
- * constructor
- * @param name - name of the game
+ * constructor.
+ * @param name - name of the game.
  * @param socketFirstPLayer - socket number of the first player.
  */
 Game::Game(string name, int socketFirstPLayer):name(name),socketFirstPLayer(socketFirstPLayer),currentStatus(waiting) {}
 
 
 /**
- * join second player to the game.
+ * Join a second player to the game.
  * @param socketPLayer - socket number of the second player.
  */
 void Game::joinToGame(int socketPLayer) {
@@ -22,6 +18,7 @@ void Game::joinToGame(int socketPLayer) {
 }
 
 /**
+ * Sets the status of the game.
  * @param s - new status.
  */
 void Game::setStatus(status s) {
@@ -29,14 +26,14 @@ void Game::setStatus(status s) {
 }
 
 /**
- * @return - name of the game.
+ * @return - the name of the game.
  */
 const string Game::getName()const {
     return this->name;
 }
 
 /**
- * @return current status of the game.
+ * @return - current status of the game.
  */
 Game::status Game::getStatus() const {
     return currentStatus;

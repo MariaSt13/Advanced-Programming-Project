@@ -4,7 +4,7 @@ GameListManager* GameListManager::instance = 0;
 pthread_mutex_t  GameListManager::lock;
 
 /**
- * get instance of a singleton.
+ * Get the instance of the singleton.
  * @return instance - instance of GameListManager object.
  */
 GameListManager *GameListManager::getInstance() {
@@ -20,8 +20,8 @@ GameListManager *GameListManager::getInstance() {
 }
 
 /**
- * this function add game to list.
- * @param game - pointer to game.
+ * This function adds a game to the list.
+ * @param game - the pointer to the game.
  */
 void GameListManager::addGame(Game *game) {
     pthread_mutex_lock(&lock);
@@ -31,9 +31,9 @@ void GameListManager::addGame(Game *game) {
 
 
 /**
- * this function get pointer to game
- * and remove this game from the list.
- * @param game - pointer to game.
+ * This function gets a pointer to a game
+ * and removes the game from the list.
+ * @param game - pointer to a game.
  */
 void GameListManager::removeGame(Game *game) {
     //remove from list
@@ -47,8 +47,8 @@ void GameListManager::removeGame(Game *game) {
 }
 
 /**
- * this function get a name and return
- * pointer to the game with that name.
+ * This function gets a name and returns
+ * a pointer to the game with that name.
  * @param gameName - name of the game.
  * @return - pointer to the game if it is exist.
  * otherwise return NULL.
@@ -67,8 +67,7 @@ Game *GameListManager::getGame(string gameName) {
 }
 
 /**
- * return string which is a list of all the games that are waiting.
- * @return
+ * @return - a string which is a list of all the games that are waiting.
  */
 string GameListManager::getListOfWaitingGames() {
     string result;

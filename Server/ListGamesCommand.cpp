@@ -1,12 +1,9 @@
-//
-// Created by linoy on 27/12/17.
-//
 
 #include <unistd.h>
 #include <sstream>
-#include <iostream>
 #include "ListGamesCommand.h"
 #include "GameListManager.h"
+#include "ServerDataManager.h"
 
 using namespace std;
 
@@ -40,5 +37,5 @@ void ListGamesCommand::execute(vector<string> args) {
     }
 
     //close client socket
-    close(clientSocket);
+    ServerDataManager::getInstance()->removeSocket(clientSocket);
 }

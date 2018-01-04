@@ -5,7 +5,7 @@
 #include "Game.h"
 
 /**
- * a singleton class that manages the games list.
+ * A singleton class that manages the games list.
  * this class perform actions on the list such as
  * adding or removing game, searching game in the list
  * and return list of waiting games.

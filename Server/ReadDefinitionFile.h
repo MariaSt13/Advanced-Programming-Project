@@ -10,8 +10,8 @@
 using namespace std;
 
 /**
- * this class open a definition file
- * and create a map of definitions.
+ * This class opens a definition file
+ * and creates a map of definitions.
  */
 class ReadDefinitionFile {
 

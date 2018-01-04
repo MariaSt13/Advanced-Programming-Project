@@ -1,10 +1,5 @@
-//
-// Created by linoy on 27/12/17.
-//
-
 #include <sstream>
 #include <unistd.h>
-#include <iostream>
 #include "JoinCommand.h"
 #include "GameManager.h"
 #include "GameListManager.h"
@@ -17,7 +12,7 @@ JoinCommand::JoinCommand() {
 }
 
 /**
- * execute client request: adding him to the game.
+ * Execute client request: adding him to the game.
  * @param args - arguments vector.
  */
 void JoinCommand::execute(vector<string> args){
