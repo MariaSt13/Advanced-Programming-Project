@@ -100,5 +100,7 @@ GameListManager::~GameListManager() {
     for (vector<Game*>::const_iterator it = listGames.begin(); it < listGames.end(); it++) {
         delete (*it);
     }
-    delete instance;
+    if(instance!=0){
+        delete instance;
+    }
 }

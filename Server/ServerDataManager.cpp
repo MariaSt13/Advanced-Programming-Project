@@ -95,5 +95,7 @@ ServerDataManager::ServerDataManager() {}
  * destructor.
  */
 ServerDataManager::~ServerDataManager() {
-    delete(instance);
+    if(instance!=0){
+        delete(instance);
+    }
 }

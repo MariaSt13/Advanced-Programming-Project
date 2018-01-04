@@ -36,7 +36,9 @@ CommandsManager::~CommandsManager() {
     //free memory
     for (it = commandsMap.begin(); it != commandsMap.end(); it++)
         delete it->second;
-    delete instance;
+    if(instance!=0){
+        delete instance;
+    }
 }
 
 /**
