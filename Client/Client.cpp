@@ -94,7 +94,7 @@ int Client::getClientSocket() const{
  */
 void Client::writeToServer(char* s, int clientSocket)const{
     //write to server
-    char s2[ARRAY_SIZE] = {0};
+    char s2[ARRAY_SMALL_SIZE] = {0};
     strcpy(s2,s);
     int n = write(clientSocket, &s2, sizeof(s2));
 
@@ -102,5 +102,4 @@ void Client::writeToServer(char* s, int clientSocket)const{
     if(n == -1) {
         throw "error writing to socket";
     }
-    memset(s2, '\0', ARRAY_SIZE);
 }
