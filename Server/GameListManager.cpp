@@ -24,7 +24,9 @@ GameListManager *GameListManager::getInstance() {
  * @param game - pointer to game.
  */
 void GameListManager::addGame(Game *game) {
+    pthread_mutex_lock(&lock);
     this->listGames.push_back(game);
+    pthread_mutex_unlock(&lock);
 }
 
 
@@ -35,11 +37,13 @@ void GameListManager::addGame(Game *game) {
  */
 void GameListManager::removeGame(Game *game) {
     //remove from list
+    pthread_mutex_lock(&lock);
     for (int i = 0; i < listGames.size(); ++i) {
         if(game->getName() == listGames.at(i)->getName()){
             listGames.erase(listGames.begin() + i);
         }
     }
+    pthread_mutex_unlock(&lock);
 }
 
 /**
@@ -50,14 +54,15 @@ void GameListManager::removeGame(Game *game) {
  * otherwise return NULL.
  */
 Game *GameListManager::getGame(string gameName) {
-
     //go over list
+    pthread_mutex_lock(&lock);
     for (vector<Game*>::const_iterator it = listGames.begin(); it < listGames.end(); it++) {
 
         //check if a game with this name i s exist
         if((*it)->getName() == gameName)
             return *it;
     }
+    pthread_mutex_unlock(&lock);
     return NULL;
 }
 
@@ -69,6 +74,7 @@ string GameListManager::getListOfWaitingGames() {
     string result;
 
     //loop go over games list and look for games that can be joined
+    pthread_mutex_lock(&lock);
     for (vector<Game*>::const_iterator it = listGames.begin(); it < listGames.end(); it++) {
         //if the game is not running yet
         if((*it)->getStatus() == Game::waiting){
@@ -76,7 +82,7 @@ string GameListManager::getListOfWaitingGames() {
             result = result + name + "\n";
         }
     }
-
+    pthread_mutex_unlock(&lock);
     return result;
 }
 

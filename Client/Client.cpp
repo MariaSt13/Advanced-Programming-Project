@@ -58,7 +58,6 @@ void Client::connectToServer() {
         throw "Error connecting to server";
     }
     //cout << "Connected to server" << endl;
-    //cout << "Waiting for other player to join..." << endl;
 }
 
 

@@ -9,7 +9,7 @@
  * @param name - name of the game
  * @param socketFirstPLayer - socket number of the first player.
  */
-Game::Game(string name, int socketFirstPLayer):name(name),socketFirstPLayer(socketFirstPLayer),cureentStatus(waiting) {}
+Game::Game(string name, int socketFirstPLayer):name(name),socketFirstPLayer(socketFirstPLayer),currentStatus(waiting) {}
 
 
 /**
