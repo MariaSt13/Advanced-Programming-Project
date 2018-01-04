@@ -54,16 +54,17 @@ void GameListManager::removeGame(Game *game) {
  * otherwise return NULL.
  */
 Game *GameListManager::getGame(string gameName) {
+    Game* returnValue = NULL;
     //go over list
     pthread_mutex_lock(&lock);
     for (vector<Game*>::const_iterator it = listGames.begin(); it < listGames.end(); it++) {
 
         //check if a game with this name i s exist
         if((*it)->getName() == gameName)
-            return *it;
+            returnValue = *it;
     }
     pthread_mutex_unlock(&lock);
-    return NULL;
+    return returnValue;
 }
 
 /**

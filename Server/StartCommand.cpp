@@ -38,5 +38,5 @@ void StartCommand::execute(vector<string> args){
         //close client socket
         ServerDataManager::getInstance()->removeSocket(firstPlayerSocket);
     }
-    ServerDataManager::getInstance()->removePthread(pthread_self());
+   // ServerDataManager::getInstance()->removePthread(pthread_self());
 }
