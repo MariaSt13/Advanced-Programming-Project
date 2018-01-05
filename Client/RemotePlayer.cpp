@@ -23,7 +23,7 @@ Point RemotePlayer::chooseStep(UserInterface* userInterface) const {
 
     //error
     if (n == -1)
-        throw "Error reading result";
+        throw "Error reading step";
 
     // other player disconnected
     if(n == 0)

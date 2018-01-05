@@ -119,13 +119,14 @@ void ConsoleInterface::draw() const {
  * Prints an error message of invalid input.
  */
 void ConsoleInterface::invalidInput() const {
-    cout << "Invalid input" << endl;
+    cout << "Invalid input";
 }
 
 /**
  * Prints to the user that he need to choose step.
  */
 void ConsoleInterface::askForMove() const {
+    cout << endl << endl;
     cout << "please enter your move row col (for example: 1 2):";
 }
 

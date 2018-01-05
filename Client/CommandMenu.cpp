@@ -27,14 +27,8 @@ void CommandMenu::runMenu() {
    //loop run while the game is not start
    do {
        //connect to server
-       try {
-           client->connectToServer();
-       } catch (char const *msg) {
-           cout << "Failed to connect to server. Reason:" << msg << endl;
-           exit(1);
-       }
-
-
+       client->connectToServer();
+           
        int clientSocket = client->getClientSocket();
        userInterface->commandMenu();
        string input = userInterface->getCommand();
@@ -44,12 +38,18 @@ void CommandMenu::runMenu() {
        if (n == -1) {
            throw "error writing to socket";
        }
+       if (n == 0) {
+           throw "disconnected";
+       }
 
        int invalidInput;
        n = read(clientSocket, &invalidInput, sizeof(invalidInput));
        //error
        if (n == -1) {
            throw "Error reading from socket";
+       }
+       if (n == 0) {
+           throw "disconnected";
        }
 
        vector<string> args;
@@ -65,6 +65,9 @@ void CommandMenu::runMenu() {
                //error
                if (n == -1) {
                    throw "Error reading from socket";
+               }
+               if (n == 0) {
+                   throw "disconnected";
                }
                if(returnValue == -1) {
                    userInterface->nameTaken();
@@ -83,6 +86,9 @@ void CommandMenu::runMenu() {
                //error
                if (n == -1) {
                    throw "Error reading from socket";
+               }
+               if (n == 0) {
+                   throw "disconnected";
                }
                if(returnValue == -1) {
                    userInterface->noSuchGame();
@@ -103,12 +109,18 @@ void CommandMenu::runMenu() {
                if (n == -1) {
                    throw "Error reading from socket";
                }
+               if (n == 0) {
+                   throw "disconnected";
+               }
 
                //read the list
                char list[length+1] = {0};
                n = read(clientSocket, &list, sizeof(list));
                if (n == -1) {
                    throw "Error reading from socket";
+               }
+               if (n == 0) {
+                   throw "disconnected";
                }
                userInterface->printListGames(list);
            }

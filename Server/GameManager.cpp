@@ -62,7 +62,7 @@ void GameManager::handleClient(int clientSocket1,int clientSocket2) {
 
         //error
         if (n == -1) {
-            cout << "Error reading arg1" << endl;
+            cout << "Error reading" << endl;
             game->setStatus(Game::finished);
             return;
         }

@@ -51,13 +51,9 @@ void Menu::runGame(const int &mode)const {
     //get port and ip number and create client object.
     ReadDefinitionFile read = ReadDefinitionFile();
     map<string,string> myMap;
-    try{
-        myMap = read.getVectorDefinition("/home/maria/Documents/git/Advanced-Programming-Project/Client/clientDefinitionFile.txt");
-    }
-    catch (char const* msg){
-        cout << "Failed to file. Reason:" << msg << endl;
-        exit(1);
-    }
+    
+    myMap = read.getVectorDefinition("/home/maria/Documents/git/Advanced-Programming-Project/Client/clientDefinitionFile.txt");
+    
     string ip = myMap.find("ip")->second;
     int port;
     istringstream isX (myMap.find("port")->second);
@@ -100,7 +96,7 @@ void Menu::runGame(const int &mode)const {
             } else if (color == connectedSecond) {
                 whiteActor = new HumanLocalPlayer(b->whiteActor);
                 blackActor = new RemotePlayer(b->blackActor, client);
-                humanPlayer = b->whiteActor;
+                humanPlayer = b->whiteActor; 
             }
             break;
     }

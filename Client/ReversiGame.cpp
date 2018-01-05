@@ -90,14 +90,7 @@ void ReversiGame::play() {
             }
 
             //current player choose step.
-            try{
-                step = this->hisTurn->chooseStep(userInterface);
-            }
-            catch(char const* msg){
-                cout << "failed read other player step. Result:" << msg << endl;
-                exit(1);
-            }
-
+            step = this->hisTurn->chooseStep(userInterface);
 
             //if there are possible move to current player.
             if (!(step == Point(-1,-1))){
@@ -220,7 +213,6 @@ bool ReversiGame::isGameOver() {
 Point ReversiGame:: getStep(bool firstTry,vector<Point> v){
     //get input from the player.
     Point step = Point(-1, -1);
-        cout << endl << endl;
         do {
             if(!firstTry){
                 userInterface->invalidInput();

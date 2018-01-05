@@ -1,12 +1,12 @@
 
 #include "Client.h"
-#include <iostream>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <netdb.h>
 #include <unistd.h>
 #include <string.h>
+#include <cstdlib>
 
 using namespace std;
 
@@ -57,7 +57,6 @@ void Client::connectToServer() {
     if (connect(clientSocket, (struct sockaddr *)&serverAddress, sizeof(serverAddress)) == -1) {
         throw "Error connecting to server";
     }
-    //cout << "Connected to server" << endl;
 }
 
 
@@ -71,9 +70,12 @@ int Client::readTypeOfPlayer()const {
     int n = read(clientSocket, &result, sizeof(result));
 
     //error
-    if (n == -1)
-        throw "Error reading result from socket";
-
+    if (n == -1){
+        throw "Error reading color from socket";
+    }
+    if ( n == 0) {
+        throw "disconnected";
+    }
     return result;
 };
 
@@ -101,5 +103,8 @@ void Client::writeToServer(char* s, int clientSocket)const{
     //error
     if(n == -1) {
         throw "error writing to socket";
+    }
+    if ( n == 0) {
+        throw "disconnected";
     }
 }
