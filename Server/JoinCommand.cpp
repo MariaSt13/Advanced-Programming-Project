@@ -5,13 +5,6 @@
 #include "GameListManager.h"
 
 /**
- * constructor.
- */
-JoinCommand::JoinCommand() {
-
-}
-
-/**
  * Execute client request: adding him to the game.
  * @param args - arguments vector.
  */

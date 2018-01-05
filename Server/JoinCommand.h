@@ -11,7 +11,7 @@
 class JoinCommand: public Command {
 public:
     //constructor
-    JoinCommand();
+    JoinCommand(){};
 
     //execute client request.
     virtual void execute(vector<string> args);

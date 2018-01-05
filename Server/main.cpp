@@ -5,6 +5,10 @@
 #include "ReadDefinitionFile.h"
 
 using namespace std;
+/**
+ * main function
+ * @return int.
+ */
 int main() {
 
     //get port number and create server.

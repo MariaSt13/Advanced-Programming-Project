@@ -7,10 +7,11 @@
 
 using namespace std;
 
-ListGamesCommand::ListGamesCommand() {
-
-}
-
+/**
+ * Execute client request: return a list
+ * of games that the user can join them.
+ * @param args - arguments vector.
+ */
 void ListGamesCommand::execute(vector<string> args) {
     istringstream is(args.at(0));
     int clientSocket;
@@ -20,15 +21,17 @@ void ListGamesCommand::execute(vector<string> args) {
 
     //write result to client socket
     const char* s = result.c_str();
+
+    //send length of list
     int length = result.length();
-    // send length of list
     int n = write(clientSocket, &length, sizeof(length));
+
     //error
     if(n == -1) {
         throw "error writing to socket";
     }
 
-    // send the list
+    //send the list
     n = write(clientSocket, s, result.length());
 
     //error
@@ -39,5 +42,6 @@ void ListGamesCommand::execute(vector<string> args) {
     //close client socket
     ServerDataManager::getInstance()->removeSocket(clientSocket);
 
+    //close pthread
     ServerDataManager::getInstance()->removePthread(pthread_self());
 }

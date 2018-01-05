@@ -4,9 +4,16 @@
 
 #include "Command.h"
 
+/**
+ * This class extends Command.
+ * The List Games command is responsible for returning a list
+ * of games that the user can join them.
+ */
 class ListGamesCommand: public Command {
 public:
-    ListGamesCommand();
+    //constructor
+    ListGamesCommand(){};
+
     //execute client request.
     virtual void execute(vector<string> args) ;
 };
