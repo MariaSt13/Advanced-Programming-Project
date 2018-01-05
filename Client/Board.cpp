@@ -1,12 +1,15 @@
 
 #include <iostream>
 #include "Board.h"
+#include "UserInterface.h"
 using namespace std;
 
-/*
+/**
  * Deep copy constructor.
+ * @param board - the board to copy.
  */
-Board::Board(Board* board): rowSize(board->getRowSize()), colSize(board->getColSize()){
+Board::Board(Board* board): rowSize(board->getRowSize()), colSize(board->getColSize()),
+                            userInterface(board->getUserInterface()){
 
     allocateBoard();
     disk** arrToCopy = board->getArray();
@@ -23,8 +26,10 @@ Board::Board(Board* board): rowSize(board->getRowSize()), colSize(board->getColS
  * constructor.
  * @param rowSize - number of rows.
  * @param colSize - number of columns.
+ * @param - userInterface -the type of userInterface.
  */
-Board::Board(const int &rowSize,const int &colSize): rowSize(rowSize+1), colSize(colSize+1) {
+Board::Board(const int &rowSize,const int &colSize, UserInterface* userInterface):
+        rowSize(rowSize+1), colSize(colSize+1), userInterface(userInterface) {
 
     //allocate memory
     allocateBoard();
@@ -45,8 +50,8 @@ Board::Board(const int &rowSize,const int &colSize): rowSize(rowSize+1), colSize
 }
 
 /**
- * the function get a point and return
- * true if the point is in the board range.
+ * This function gets a point and return
+ * true if the point is in the board range
  * else , return false.
  * @param p -the point being checked.
  * @return true or false.
@@ -57,9 +62,9 @@ bool Board::pointIsInRange(const Point &p) const{
 }
 
 /**
- * return number of disks in the board of the player.
+ * Return the number of disks in the board of the given player.
  * @param d -the type of disk to count.
- * @return number of disks.
+ * @return - number of disks.
  */
 int Board::numOfPlayerDisks(disk d)const{
     int count = 0;
@@ -74,7 +79,8 @@ int Board::numOfPlayerDisks(disk d)const{
 }
 
 /**
- * if there is no empty cells return true.
+ * This function checks if the board is full.
+ * If there is no empty cells return true.
  * else return false.
  * @return true or false.
  */
@@ -110,8 +116,8 @@ Board::disk **Board::getArray () const {
     return this->array;
 }
 
-/*
- * allocate the memory for the board
+/**
+ * Allocate the memory for the board
  */
 void Board::allocateBoard() {
     //create new matrix.
@@ -123,6 +129,12 @@ void Board::allocateBoard() {
 }
 
 /**
+ * Display the board.
+ */
+void Board::displayBoard() const {
+    userInterface->printBoard(this);
+}
+/**
  * destructor.
  */
 Board::~Board(){
@@ -132,4 +144,8 @@ Board::~Board(){
     }
 
     delete[] array;
+}
+
+UserInterface *Board::getUserInterface() const {
+    return userInterface;
 }

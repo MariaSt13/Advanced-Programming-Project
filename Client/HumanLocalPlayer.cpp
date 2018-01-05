@@ -1,10 +1,7 @@
 
 #include "HumanLocalPlayer.h"
 
-
 using namespace std;
-#include <iostream>
-#include <limits>
 
 /*
  * constructor.

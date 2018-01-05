@@ -9,10 +9,10 @@
 #include "UserInterface.h"
 
 
-/*
- * this class runs the game. The game ends when the entire
- * board is filled or when there are no further possible
- * moves to both sides.
+/**
+ * This class runs the game. The game ends when the entire
+ * board is full or when there are no further possible
+ * moves for both sides.
  */
 class ReversiGame {
 
@@ -42,7 +42,7 @@ private:
     // gets the step from the player
     Point getStep(bool firstTry,vector<Point> v);
 
-    /*
+    /**
      * if the game end  - return true
      * else return false.
      */

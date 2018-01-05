@@ -22,7 +22,7 @@ Client::Client(const char *serverIP, int serverPort):
 
 
 /**
- * this function connect client to server.
+ * This function connects client to server.
  */
 void Client::connectToServer() {
     // Create a socket point
@@ -62,7 +62,7 @@ void Client::connectToServer() {
 
 
 /**
- * this function returns the color of the player.
+ * This function returns the color of the player.
  * 1 - black , 2 - white.
  * @return - int.
  */
@@ -79,7 +79,7 @@ int Client::readTypeOfPlayer()const {
 
 
 /**
- * this function returns client socket number.
+ * This function returns client socket number.
  * @return - int socket number.
  */
 int Client::getClientSocket() const{
@@ -88,7 +88,7 @@ int Client::getClientSocket() const{
 
 
 /**
- * this function writes to the server.
+ * This function writes to the server.
  * @param s - the message to the server.
  * @param clientSocket - socket number.
  */

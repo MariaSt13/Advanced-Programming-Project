@@ -32,6 +32,9 @@ void JoinCommand::execute(vector<string> args){
             }
 
         }
+    // not enough arguments
+    } else {
+        returnVal = -2;
     }
 
 

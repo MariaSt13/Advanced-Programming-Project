@@ -5,8 +5,8 @@
 #include "Board.h"
 #include "UserInterface.h"
 
-/*
- * player class.
+/**
+ * Player class.
  * a player can choose his moves.
  */
 class Player{

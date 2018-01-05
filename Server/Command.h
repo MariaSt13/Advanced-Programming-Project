@@ -7,7 +7,7 @@
 using namespace std;
 
 /**
- * an abstract command class.
+ * An interface command.
  */
 class Command {
 public:

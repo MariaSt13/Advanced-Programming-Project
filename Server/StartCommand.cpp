@@ -3,7 +3,6 @@
 #include "ServerDataManager.h"
 #include <sstream>
 #include <unistd.h>
-#include <iostream>
 
 using namespace std;
 
@@ -28,9 +27,10 @@ void StartCommand::execute(vector<string> args){
             Game* g = new Game(name,firstPlayerSocket);
             GameListManager::getInstance()->addGame(g);
             returnVal = 0;
-            cout << "game started";
         }
-
+    // not enough arguments
+    } else {
+        returnVal = -2;
     }
 
     int n = write(firstPlayerSocket, &returnVal, sizeof(returnVal));
@@ -40,7 +40,7 @@ void StartCommand::execute(vector<string> args){
         throw "error writing to socket";
     }
 
-    if(returnVal == -1){
+    if(returnVal != 0){
         //close client socket
         ServerDataManager::getInstance()->removeSocket(firstPlayerSocket);
     }

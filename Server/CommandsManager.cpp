@@ -21,7 +21,7 @@ CommandsManager::CommandsManager() {
 
 /**
  * This function searches for the requested command
- * in the map calls its execute function.
+ * in the map and calls its execute function.
  * @param command- string of the command name.
  * @param args - vector of arguments to execute function.
  */

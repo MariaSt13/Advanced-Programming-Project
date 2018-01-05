@@ -6,7 +6,7 @@
 
 /**
  * This class are responsible for interaction
- * with the user: prints output and get input.
+ * with the user: input and output.
  */
 class UserInterface {
 public:
@@ -31,6 +31,7 @@ public:
     virtual void noSuchGame() const=0;
     virtual void printListGames(char* list)const=0;
     virtual void wrongMode() = 0;
+    virtual void nameNotEntered() const =0;
 
     //get input
     virtual int chooseMode() =0;

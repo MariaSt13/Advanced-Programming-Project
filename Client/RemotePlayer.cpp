@@ -11,7 +11,7 @@ using namespace std;
 RemotePlayer::RemotePlayer(Board::disk d, Client client): Player(d),client(client) {}
 
 /**
- * the player gets the move from the server.
+ * The player gets the move from the server.
  * @return - point.
  */
 Point RemotePlayer::chooseStep(UserInterface* userInterface) const {

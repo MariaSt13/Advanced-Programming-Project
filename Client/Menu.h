@@ -3,12 +3,12 @@
 
 #include "UserInterface.h"
 
-/*
- * runs a menu for the game.
+/**
+ * Runs a menu for the game.
  */
 class Menu {
 public:
-    /*
+    /**
      * constructor.
      * rowSize - number of rows in the game board.
      * colSize - number of columns in the game board.

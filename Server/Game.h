@@ -5,7 +5,7 @@
 using namespace std;
 
 /**
- * game class that hold all the properties of the game
+ * Game class that hold all the properties of the game
  * such as game name, game status and clients sockets.
  */
 class Game {

@@ -54,10 +54,11 @@ void Server::start() {
 
 /**
  * Handle requests from a specific client.
- * @param clientSocket - the server reads from this client.
+ * @param socket - the server reads from this client.
  */
 void* Server::handleClient(void* socket) {
     ServerDataManager::getInstance()->addPthread(pthread_self());
+
     long clientSocket = (long) socket;
     char s[ARRAY_SIZE] = {0};
     string command;
@@ -87,7 +88,10 @@ void* Server::handleClient(void* socket) {
 
     CommandsManager::getInstance()->executeCommand(command,argsToCommand);
 }
-
+/**
+ * this function is waiting to clients connenction and accepts them.
+ * @param socket - server socket.
+ */
 void* Server::acceptClients(void *socket) {
     long serverSocket = (long) socket;
     struct sockaddr_in clientAddress;
@@ -111,7 +115,7 @@ void* Server::acceptClients(void *socket) {
     }
 }
 /**
- * close server.
+ * Close server.
  */
 void Server::stop() {
     ServerDataManager::getInstance()->removeAllSockets();

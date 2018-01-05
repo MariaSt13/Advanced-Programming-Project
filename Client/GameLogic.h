@@ -9,8 +9,8 @@
 
 using namespace std;
 
-/*
- * this class encapsulates the logic of the reversi game.
+/**
+ * This class encapsulates the logic of the reversi game.
  */
 class GameLogic{
 

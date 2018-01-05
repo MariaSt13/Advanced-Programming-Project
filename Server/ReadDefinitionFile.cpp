@@ -9,6 +9,7 @@ using namespace std;
 /**
  * This class opens a definition file
  * and creates a map of definitions.
+ * @param s - the path to the difintion file.
  * @return - map.
  */
 map<string,string> ReadDefinitionFile::getVectorDefinition(const char* s)const {

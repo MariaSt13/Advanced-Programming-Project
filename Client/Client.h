@@ -7,7 +7,7 @@
 using namespace std;
 
 /**
- * this class connects the client to the server.
+ * This class connects the client to the server.
  */
 class Client {
 public:

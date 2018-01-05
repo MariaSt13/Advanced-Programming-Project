@@ -5,7 +5,7 @@
 #include "Command.h"
 
 /**
- * This class extends Command.
+ * This class implements Command.
  * The List Games command is responsible for returning a list
  * of games that the user can join them.
  */

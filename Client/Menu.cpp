@@ -1,15 +1,12 @@
 #include <iostream>
-#include <limits>
 #include <cstdlib>
 #include "Menu.h"
-#include "ConsoleBoard.h"
 #include "HumanLocalPlayer.h"
 #include "StandardGameLogic.h"
 #include "AIPlayer.h"
 #include "ReversiGame.h"
 #include "RemotePlayer.h"
 #include "ReadDefinitionFile.h"
-#include "ConsoleInterface.h"
 #include "CommandMenu.h"
 using namespace std;
 /*
@@ -44,7 +41,7 @@ void Menu::runMenu()const{
 void Menu::runGame(const int &mode)const {
     const int connectedFirst = 1;
     const int connectedSecond = 2;
-    Board* b =  new ConsoleBoard(rowNumber, colNumber);
+    Board* b =  new Board(rowNumber, colNumber,userInterface);
     Player* blackActor;
     Player* whiteActor;
     ReversiGame::mode currentMode;
@@ -55,7 +52,7 @@ void Menu::runGame(const int &mode)const {
     ReadDefinitionFile read = ReadDefinitionFile();
     map<string,string> myMap;
     try{
-        myMap = read.getVectorDefinition("/home/linoy/Desktop/myGIt/Advanced-Programming-Project/Client/clientDefinitionFile.txt");
+        myMap = read.getVectorDefinition("/home/maria/Documents/git/Advanced-Programming-Project/Client/clientDefinitionFile.txt");
     }
     catch (char const* msg){
         cout << "Failed to file. Reason:" << msg << endl;

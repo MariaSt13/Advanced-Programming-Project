@@ -1,9 +1,8 @@
 
 #include "StandardGameLogic.h"
 using namespace std;
-#include <iostream>
 
-/*
+/**
  * The function returns a vector with all possible steps for the player.
  */
 vector<Point> StandardGameLogic::returnValidMoves(const Player* p ,const Board* b) {
@@ -21,9 +20,12 @@ vector<Point> StandardGameLogic::returnValidMoves(const Player* p ,const Board* 
     return v;
 }
 
-/*
- * the function get a point and check if it is a valid point
- * (possible move) for the player.
+/**
+ * The function get a point and check if it is a valid point (possible move) for the player.
+ * @param player - current player.
+ * @param p - the point that is checked.
+ * @param b - current board.
+ * @param vec - vector of possible points.
  */
 void StandardGameLogic::checkPoint(const Player* player, const Point &p, const Board* b, vector<Point> &vec) {
     Board::disk** array = b->getArray();
@@ -60,11 +62,17 @@ void StandardGameLogic::checkPoint(const Player* player, const Point &p, const B
     }
 }
 
-/*
- * the function get a points and check if selecting this point
- * will reverse the opponent disks.
+/**
+ * The function get a points and check if selecting this point will reverse the opponent disks.
+ * @param player - current player.
+ * @param p - the point that is checked.
+ * @param b - current board.
+ * @param i - index
+ * @param j - index
+ * @return - possible point.
  */
-Point StandardGameLogic::ifReverseOpponentDisk(const Player* player,const  Point &p,  const Board* b,const int &i,const int &j) {
+Point StandardGameLogic::ifReverseOpponentDisk(const Player* player,const  Point &p,  const Board* b,
+                                               const int &i,const int &j) {
     Board::disk** array = b->getArray();
     Point currentPoint = p;
     vector<Point> v;
@@ -106,10 +114,13 @@ Point StandardGameLogic::ifReverseOpponentDisk(const Player* player,const  Point
     return Point(-1,-1);
 }
 
-/*
+/**
  * The function places a disc where the player has selected
  * and flips the opponents cells by the map.
- * bool updateMap - first update the map. (when return valid moves was not called before that.)
+ * @param player - current player.
+ * @param newPoint - the placed point.
+ * @param b - board.
+ * @param updateMap - first update the map. (when return valid moves was not called before that.)
  */
 void StandardGameLogic::flipCells(const Player* player,const Point &newPoint, const Board* b, bool updateMap) {
     if ( updateMap == true) {

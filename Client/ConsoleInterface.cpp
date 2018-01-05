@@ -22,7 +22,7 @@ void ConsoleInterface::currentBoard(const Board *b) const {
 
 
 /**
- * prints the current board to thr user.
+ * prints the board.
  * @param b - the board.
  */
 void ConsoleInterface::printBoard(const Board *b) const {
@@ -80,7 +80,7 @@ void ConsoleInterface::noMoves(Board::disk d) const {
 /**
  * Prints last player disk and his choice.
  * @param player - last played user.
- * @param step - the step he had chosen.
+ * @param step - the step he had played.
  */
 void ConsoleInterface::played(Board::disk player, Point step) const {
     char c = player;
@@ -109,7 +109,7 @@ void ConsoleInterface::winner(Board::disk d) const {
 }
 
 /**
- * Prints that the game is over with draw.
+ * Prints that the game is over with a draw.
  */
 void ConsoleInterface::draw() const {
     cout <<"It's a draw.";
@@ -123,7 +123,7 @@ void ConsoleInterface::invalidInput() const {
 }
 
 /**
- * Prints to the user that he need to chose step.
+ * Prints to the user that he need to choose step.
  */
 void ConsoleInterface::askForMove() const {
     cout << "please enter your move row col (for example: 1 2):";
@@ -176,7 +176,7 @@ void ConsoleInterface::mainMenu() const {
  * Prints an error message of invalid input.
  */
 void ConsoleInterface::invalidTryAgain() const {
-    cout << "invalid input. Please try again" << endl;
+    cout << "Invalid input. Please try again" << endl;
 }
 
 /**
@@ -190,14 +190,14 @@ void ConsoleInterface::commandMenu() const {
 }
 
 /**
- * Prints an error message of invalid input.
+ * Prints an error message that the name is already taken.
  */
 void ConsoleInterface::nameTaken() const {
     cout << "This name is already taken. Please try a different name" << endl;
 }
 
 /**
- * Prints an error message of invalid input.
+ * Prints an error message that there is no game with that name.
  */
 void ConsoleInterface::noSuchGame() const {
     cout << "A game with this name doesn't exist. Please choose an existing game" << endl;
@@ -230,7 +230,7 @@ void ConsoleInterface::wrongMode() {
 }
 
 /**
- * Get choose from the user.
+ * Get mode choice from the user.
  * @return - the selected mode.
  */
 int ConsoleInterface::chooseMode() {
@@ -241,7 +241,7 @@ int ConsoleInterface::chooseMode() {
 }
 
 /**
- * Get choose from the user.
+ * Get command choice from the user.
  * @return - the selected command.
  */
 string ConsoleInterface::getCommand() {
@@ -251,7 +251,7 @@ string ConsoleInterface::getCommand() {
 }
 
 /**
- * Get choose from the user.
+ * Get step choice from the user.
  * @return - the selected point.
  */
 Point ConsoleInterface::choosePoint() {
@@ -269,4 +269,10 @@ Point ConsoleInterface::choosePoint() {
     }
 
     return Point(row, col);
+}
+/**
+ * Print an error message when a name is not entered.
+ */
+void ConsoleInterface::nameNotEntered() const {
+    cout << "You didn't entered a name. Please try again" << endl;
 }

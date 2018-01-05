@@ -1,4 +1,3 @@
-
 #include <unistd.h>
 #include <sstream>
 #include "ListGamesCommand.h"

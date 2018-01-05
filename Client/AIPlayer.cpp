@@ -1,21 +1,23 @@
 #include <iostream>
 #include "AIPlayer.h"
-#include "ConsoleBoard.h"
 #include "HumanLocalPlayer.h"
 
 
-/*
+/**
  * constructor.
+ * @param d - player disk.
+ * @param gameLogic - the game logic.
+ * @param board - the board of the game
  */
 AIPlayer::AIPlayer(Board::disk d, GameLogic* gameLogic, Board* board): Player(d), gameLogic(gameLogic),board(board){}
 
-/*
+/**
  * The AI player chooses his turn with minimax algorithm.
  */
 Point AIPlayer::chooseStep(UserInterface* userInterface) const {
     vector<Point> v1;
     vector<Point> v2;
-    Board* copyBoard = new ConsoleBoard(this->board);
+    Board* copyBoard = new Board(this->board);
     Board* copyBoard2;
     int mScore;
     vector< pair<Point,int > > v;
@@ -51,7 +53,7 @@ Point AIPlayer::chooseStep(UserInterface* userInterface) const {
         for (vector<Point>::const_iterator it2 = v2.begin(); it2 < v2.end(); it2++) {
 
             //copy board.
-            copyBoard2 =  new ConsoleBoard(copyBoard);
+            copyBoard2 =  new Board(copyBoard);
 
             Point currentOpponentPoint = (*it2);
 
@@ -75,7 +77,7 @@ Point AIPlayer::chooseStep(UserInterface* userInterface) const {
 
         //copy board.
         delete(copyBoard);
-        copyBoard = new ConsoleBoard(this->board);
+        copyBoard = new Board(this->board);
 
 
         //initialize mMaxScore

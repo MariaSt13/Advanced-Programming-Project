@@ -68,6 +68,8 @@ void CommandMenu::runMenu() {
                }
                if(returnValue == -1) {
                    userInterface->nameTaken();
+               } else if(returnValue == -2) {
+                   userInterface->nameNotEntered();
                }
                else{
                    gameStarted = true;
@@ -84,6 +86,8 @@ void CommandMenu::runMenu() {
                }
                if(returnValue == -1) {
                    userInterface->noSuchGame();
+               } else if( returnValue == -2) {
+                   userInterface->nameNotEntered();
                }
                else{
                    gameStarted = true;

@@ -3,12 +3,16 @@
 #include "Point.h"
 using namespace std;
 
-//constructor.
+/**
+ * constructor.
+ * @param x - x value of the point
+ * @param y - y value of the point
+ */
 Point::Point(const int &x,const int &y) : x(x), y(y){}
 
 
-/*
- * overloading operator <
+/**
+ * Overloading operator <
  */
 bool Point:: operator <(const Point& p) const{
     if (p.x > x)
@@ -22,10 +26,11 @@ bool Point:: operator <(const Point& p) const{
     return false;
 }
 
-/*
- * this function gets a vector of points and
+/**
+ * This function gets a vector of points and
  * returns 'true' if this point is exist in
  * the vector. else return 'false'.
+ * @param v -  vector of points.
  */
 bool Point:: ifThePointIsInVector(const vector<Point> &v) const {
 
@@ -41,25 +46,29 @@ bool Point:: ifThePointIsInVector(const vector<Point> &v) const {
 }
 
 
-/*
- * overloading operator ==
+/**
+ * Overloading operator ==
  */
 bool Point:: operator ==(const Point& p) const{
     return ((p.x == x) && (p.y == y));
 }
-/*
- * overloading operator <<
+/**
+ * Overloading operator <<
  */
 ostream &operator<<(ostream &out, const Point &pp) {
     out << '(' << pp.x << ',' << pp.y << ')';
 }
 
-// return x value
+/**
+ * @return - x value of the point
+ */
 int Point::getX() const {
     return this->x;
 }
 
-// return y value
+/**
+ * @return - y value of the point
+ */
 int Point::getY() const {
     return this->y;
 }

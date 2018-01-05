@@ -5,9 +5,9 @@
 #include <vector>
 using namespace std;
 
-/*
- * point class.
- * points represented by x and y value.
+/**
+ * Point class.
+ * Points represented by x and y value.
  */
 class Point{
 
@@ -16,13 +16,18 @@ private:
      int y;
 
 public:
-    //constructor.
+    /**
+    * constructor.
+    * @param x - x value of the point
+    * @param y - y value of the point
+    */
     Point(const int &x,const int &y);
 
-    /*
+    /**
      * this function get a vector of points and
      * return 'true' if this point is exist in
      * the vector. else return 'false'.
+     * @param v -  vector of points.
      */
     bool ifThePointIsInVector(const vector<Point> &v) const;
 

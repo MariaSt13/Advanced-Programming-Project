@@ -32,6 +32,7 @@ public:
     virtual void noSuchGame() const;
     virtual void printListGames(char* list)const;
     virtual void wrongMode();
+    virtual void nameNotEntered() const;
 
     //get input
     virtual int chooseMode();
@@ -42,7 +43,7 @@ private:
     //The function prints a numbered row above the game board.
     void printNumberedRow(int size) const;
 
-    /*
+    /**
      * The function prints a separator line.
      * separator line printed between any two lines in the table.
      */

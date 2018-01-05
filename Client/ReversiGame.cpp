@@ -13,6 +13,7 @@ using namespace std;
  * @param m - the mode of the game
  * @param server - info of the server.
  * @param humanPlayer -the disk of the human player (relevant in remote game).
+ * @param userInterface - the type of userInterface in this game.
  */
 ReversiGame::ReversiGame(const Board *gameBoard, const Player *blackPlayer,const Player *whitePlayer,
                          GameLogic *gameLogic, mode m, Client client,Board::disk humanPlayer, UserInterface* display):
@@ -23,8 +24,8 @@ ReversiGame::ReversiGame(const Board *gameBoard, const Player *blackPlayer,const
     play();
 }
 
-/*
- * this function run the game.
+/**
+ * This function runs the game.
  */
 void ReversiGame::play() {
     Point step = Point(-1,-1);
@@ -115,17 +116,18 @@ void ReversiGame::play() {
     gameOver();
 }
 
-/*
- * prints the current board.
+/**
+ * Prints the current board.
  */
 void ReversiGame::printCurrentBoard()const {
     //print board and current player.
     userInterface->currentBoard(this->gameBoard);
 }
 
-/*
+/**
  * print last point.
  * @param step - last point.
+ * @param virtualOpponentPlayLastTurn - if the last turn was by a virtual player.
  */
 void ReversiGame::printChoosenPoint(Point step,bool virtualOpponentPlayLastTurn){
     changeTurn();
@@ -139,8 +141,8 @@ void ReversiGame::printChoosenPoint(Point step,bool virtualOpponentPlayLastTurn)
     changeTurn();
 }
 
-/*
- *  print the final board and the winner.
+/**
+ *  shows the final board and the winner.
  */
 void ReversiGame::gameOver()const{
     printCurrentBoard();
@@ -179,8 +181,9 @@ void ReversiGame::gameOver()const{
     }
 }
 
-/*
- * if the game end return true, else return false.
+/**
+ * Checks if the game is over.
+ * if the game is over return true, else return false.
  * @return bool.
  */
 bool ReversiGame::isGameOver() {
@@ -208,8 +211,8 @@ bool ReversiGame::isGameOver() {
     }
 }
 
-/*
- * gets the step from the player.
+/**
+ * Gets the step from the player.
  * @param firstTry - true if it is the first try.
  * @param v vector of points.
  * @return Point.
@@ -231,10 +234,10 @@ Point ReversiGame:: getStep(bool firstTry,vector<Point> v){
     return step;
 }
 
-/*
- * print the possible moves of the player in his turn.
+/**
+ * Prints the possible moves of the player in his turn.
  * @param v vector of points.
- * @return bool.
+ * @return bool - if there are possible moves.
  */
 bool ReversiGame::printPossibleMoves(const vector<Point> &v)const {
     Board::disk c = (this->hisTurn->getDisk());
@@ -250,8 +253,8 @@ bool ReversiGame::printPossibleMoves(const vector<Point> &v)const {
 }
 
 
-/*
- * switch between the players turn.
+/**
+ * Switch between the players turn.
  */
 void  ReversiGame::changeTurn (){
     if(this->hisTurn == this->blackPlayer){

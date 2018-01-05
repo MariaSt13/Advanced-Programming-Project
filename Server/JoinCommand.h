@@ -4,7 +4,7 @@
 
 #include "Command.h"
 /**
- * This class extends Command.
+ * This class implements Command.
  * The join command is responsible for adding the
  * second player to the game.
  */

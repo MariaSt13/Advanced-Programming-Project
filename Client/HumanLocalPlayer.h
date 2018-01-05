@@ -4,8 +4,8 @@
 
 #include "Player.h"
 
-/*
- * this class extends player class and represent
+/**
+ * This class extends player class and represent
  * a human player who plays on this computer.
  */
 class HumanLocalPlayer: public Player {
@@ -16,7 +16,7 @@ public:
     //destructor.
     virtual ~HumanLocalPlayer(){};
 
-    /*
+    /**
      * the player in his turn choose point
      * to put in his disk.
      */
