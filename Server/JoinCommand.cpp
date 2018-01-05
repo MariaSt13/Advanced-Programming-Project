@@ -1,5 +1,6 @@
 #include <sstream>
 #include <unistd.h>
+#include <iostream>
 #include "JoinCommand.h"
 #include "GameManager.h"
 #include "GameListManager.h"
@@ -42,7 +43,12 @@ void JoinCommand::execute(vector<string> args){
 
     //error
     if(n == -1) {
-        throw "error writing to socket";
+        cout << "error writing to socket" << endl;
+        return;
+    }
+    if (n == 0) {
+        cout << "Client disconnected" << endl;
+        return;
     }
 
     //if the process ended successfully

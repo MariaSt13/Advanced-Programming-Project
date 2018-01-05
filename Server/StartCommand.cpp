@@ -3,6 +3,7 @@
 #include "ServerDataManager.h"
 #include <sstream>
 #include <unistd.h>
+#include <iostream>
 
 using namespace std;
 
@@ -37,7 +38,12 @@ void StartCommand::execute(vector<string> args){
 
     //error
     if(n == -1) {
-        throw "error writing to socket";
+        cout << "error writing to socket" << endl;
+        return;
+    }
+    if (n == 0) {
+        cout << "Client disconnected" << endl;
+        return;
     }
 
     if(returnVal != 0){

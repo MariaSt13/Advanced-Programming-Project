@@ -1,5 +1,6 @@
 #include <unistd.h>
 #include <sstream>
+#include <iostream>
 #include "ListGamesCommand.h"
 #include "GameListManager.h"
 #include "ServerDataManager.h"
@@ -32,7 +33,8 @@ void ListGamesCommand::execute(vector<string> args) {
 
     //error
     if(n == -1) {
-        throw "error writing to socket";
+        cout << "error writing to socket" << endl;
+        return;
     }
 
     //send the list
@@ -40,7 +42,12 @@ void ListGamesCommand::execute(vector<string> args) {
 
     //error
     if(n == -1) {
-        throw "error writing to socket";
+        cout << "error writing to socket" << endl;
+        return;
+    }
+    if (n == 0) {
+        cout << "Client disconnected" << endl;
+        return;
     }
 
     //close client socket

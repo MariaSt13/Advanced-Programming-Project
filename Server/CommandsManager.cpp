@@ -1,5 +1,6 @@
 #include <sstream>
 #include <unistd.h>
+#include <iostream>
 #include "CommandsManager.h"
 #include "StartCommand.h"
 #include "ListGamesCommand.h"
@@ -36,10 +37,15 @@ void CommandsManager::executeCommand(string command, vector<string> args) {
 
     //write to client 0 if command is valid and
     int n = write(clientSocket, &returnVal, sizeof(returnVal));
+    if (n == 0) {
+        cout << "Client disconnected" << endl;
+        return;
+    }
 
     //error
     if(n == -1) {
-        throw "error writing to socket";
+        cout<< "error writing to socket" <<endl;
+        return;
     }
 
     //if the command is valid

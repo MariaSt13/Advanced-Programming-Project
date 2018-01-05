@@ -29,11 +29,13 @@ int main() {
     Server server(port);
 
     //open server
+    string str;
     try {
         server.start();
         cout << "Enter exit to stop server" <<endl;
-        string str;
-        cin >> str;
+        do {
+            cin >> str;
+        } while (str != "exit");
         
         if (str == "exit") {
             server.stop();
@@ -42,5 +44,6 @@ int main() {
         cout << "Cannot start server. Reason: " << msg << endl;
         exit(1);
     }
+    return 0;
 }
 

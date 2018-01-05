@@ -23,6 +23,18 @@ void GameManager::run() {
         int n = write(clientSocket[i], &result, sizeof(result));
         if (n == -1) {
             cout << "Error writing to socket" << endl;
+            GameListManager::getInstance()->removeGame(game);
+            ServerDataManager::getInstance()->removeSocket(clientSocket[0]);
+            ServerDataManager::getInstance()->removeSocket(clientSocket[1]);
+            ServerDataManager::getInstance()->removePthread(pthread_self());
+            return;
+        }
+        if (n == 0) {
+            cout << "disconnected" << endl;
+            GameListManager::getInstance()->removeGame(game);
+            ServerDataManager::getInstance()->removeSocket(clientSocket[0]);
+            ServerDataManager::getInstance()->removeSocket(clientSocket[1]);
+            ServerDataManager::getInstance()->removePthread(pthread_self());
             return;
         }
     }
@@ -78,6 +90,12 @@ void GameManager::handleClient(int clientSocket1,int clientSocket2) {
         n = write(clientSocket2, &s, sizeof(s));
         if (n == -1) {
             cout << "Error writing to socket" << endl;
+            game->setStatus(Game::finished);
+            return;
+        }
+        //clientSocket2 disconnected
+        if (n == 0) {
+            cout << "Client disconnected" << endl;
             game->setStatus(Game::finished);
             return;
         }
