@@ -30,7 +30,7 @@ public:
     virtual void commandMenu()const;
     virtual void nameTaken()const;
     virtual void noSuchGame() const;
-    virtual void printListGames(char* list)const;
+    virtual void printListGames(string list)const;
     virtual void wrongMode();
     virtual void nameNotEntered() const;
 

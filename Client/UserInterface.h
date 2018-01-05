@@ -29,7 +29,7 @@ public:
     virtual void commandMenu()const = 0;
     virtual void nameTaken()const =0;
     virtual void noSuchGame() const=0;
-    virtual void printListGames(char* list)const=0;
+    virtual void printListGames(string list)const=0;
     virtual void wrongMode() = 0;
     virtual void nameNotEntered() const =0;
 

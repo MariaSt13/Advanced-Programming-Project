@@ -208,7 +208,7 @@ void ConsoleInterface::noSuchGame() const {
  * Prints all the games that the user can join.
  * @param list - list of waiting games.
  */
-void ConsoleInterface::printListGames(char *list) const {
+void ConsoleInterface::printListGames(string list) const {
     cout << list << endl;
 }
 

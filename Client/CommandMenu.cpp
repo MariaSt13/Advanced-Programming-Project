@@ -103,7 +103,7 @@ void CommandMenu::runMenu() {
                //list games command
            else if (command == "list_games") {
                // read the length of the list
-               int length;
+               int length = 0;
                int n = read(clientSocket, &length, sizeof(length));
 
                if (n == -1) {
@@ -114,14 +114,19 @@ void CommandMenu::runMenu() {
                }
 
                //read the list
-               char list[length+1] = {0};
-               n = read(clientSocket, &list, sizeof(list));
-               if (n == -1) {
-                   throw "Error reading from socket";
+               string list;
+               char currentChar;
+               for (int i = 0; i <length; i++) {
+                   n = read(clientSocket, &currentChar, sizeof(currentChar));
+                   if (n == -1) {
+                       throw "Error reading from socket";
+                   }
+                   if (n == 0) {
+                       throw "disconnected";
+                   }
+                   list += currentChar;
                }
-               if (n == 0) {
-                   throw "disconnected";
-               }
+
                userInterface->printListGames(list);
            }
        }

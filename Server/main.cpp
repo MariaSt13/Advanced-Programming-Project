@@ -16,7 +16,7 @@ int main() {
     map<string,string> myMap;
 
     try{
-        myMap = read.getVectorDefinition("/home/maria/Documents/git/Advanced-Programming-Project/Server/serverDefinitionFile.txt");
+        myMap = read.getVectorDefinition("serverDefinitionFile.txt");
     } catch (char const* msg){
         cout << "Error: " << msg << endl;
         exit(1);
@@ -36,7 +36,7 @@ int main() {
         do {
             cin >> str;
         } while (str != "exit");
-        
+
         if (str == "exit") {
             server.stop();
         }
