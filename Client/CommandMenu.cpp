@@ -1,6 +1,3 @@
-//
-// Created by maria on 29/12/17.
-//
 
 #include "CommandMenu.h"
 #include <iostream>
@@ -10,15 +7,13 @@
 
 using namespace std;
 using namespace boost;
-CommandMenu::CommandMenu(Display *display, Client* client): display(display), client(client) {
+CommandMenu::CommandMenu(UserInterface *userInterface, Client* client): userInterface(userInterface), client(client) {
 
 }
 void CommandMenu::runMenu() {
     bool gameStarted = false;
 
-
     string command;
-    cin.ignore();
    do {
        //connect to server
        try {
@@ -28,12 +23,11 @@ void CommandMenu::runMenu() {
            exit(1);
        }
        int clientSocket = client->getClientSocket();
-       display->commandMenu();
+       userInterface->commandMenu();
 
-       char input[ARRAY_SIZE] = {0};
-       cin.getline(input, sizeof(input));
+       string input = userInterface->getCommand();
 
-       int n = write(clientSocket, &input, sizeof(input));
+       int n = write(clientSocket, input.c_str(), input.length());
        //error
        if (n == -1) {
            throw "error writing to socket";
@@ -42,7 +36,6 @@ void CommandMenu::runMenu() {
        vector<string> args;
        split(args,input,is_any_of(" "));
        command = args.at(0);
-
        if (command == "start") {
            int returnValue;
            int n = read(clientSocket, &returnValue, sizeof(returnValue));
@@ -51,7 +44,7 @@ void CommandMenu::runMenu() {
                throw "Error reading from socket";
            }
            if(returnValue == -1) {
-               display->nameTaken();
+               userInterface->nameTaken();
            }
            else{
                gameStarted = true;
@@ -66,7 +59,7 @@ void CommandMenu::runMenu() {
                throw "Error reading from socket";
            }
            if(returnValue == -1) {
-               display->noSuchGame();
+               userInterface->noSuchGame();
            }
            else{
                gameStarted = true;
@@ -88,7 +81,7 @@ void CommandMenu::runMenu() {
            if (n == -1) {
                throw "Error reading from socket";
            }
-           display->printListGames(list);
+           userInterface->printListGames(list);
        }
 
    } while (!gameStarted);

@@ -14,7 +14,7 @@ RemotePlayer::RemotePlayer(Board::disk d, Client client): Player(d),client(clien
  * the player gets the move from the server.
  * @return - point.
  */
-Point RemotePlayer::chooseStep() const {
+Point RemotePlayer::chooseStep(UserInterface* userInterface) const {
     char s[MAX_ARRAY_SIZE];
     int x,y;
 

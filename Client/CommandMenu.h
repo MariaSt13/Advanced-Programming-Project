@@ -1,21 +1,17 @@
-//
-// Created by maria on 29/12/17.
-//
-
 #ifndef EX4_COMMANDMENU_H
 #define EX4_COMMANDMENU_H
 #define ARRAY_SIZE 56
 
-#include "Display.h"
+#include "UserInterface.h"
 #include "Client.h"
 
 class CommandMenu {
 public:
-    CommandMenu(Display* display, Client* client);
+    CommandMenu(UserInterface* userInterface, Client* client);
     void runMenu();
 
 private:
-    Display* display;
+    UserInterface* userInterface;
     Client* client;
 };
 

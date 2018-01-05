@@ -15,9 +15,9 @@ using namespace std;
  * @param humanPlayer -the disk of the human player (relevant in remote game).
  */
 ReversiGame::ReversiGame(const Board *gameBoard, const Player *blackPlayer,const Player *whitePlayer,
-                         GameLogic *gameLogic, mode m, Client client,Board::disk humanPlayer, Display* display):
+                         GameLogic *gameLogic, mode m, Client client,Board::disk humanPlayer, UserInterface* display):
         gameBoard(gameBoard),blackPlayer(blackPlayer),whitePlayer(whitePlayer),gameLogic(gameLogic),
-        currentMode(m), client(client), humanPlayer(humanPlayer), display(display){
+        currentMode(m), client(client), humanPlayer(humanPlayer), userInterface(display){
 
     this->hisTurn = this->blackPlayer;
     play();
@@ -85,12 +85,12 @@ void ReversiGame::play() {
             //remote game mode.
             if(this->currentMode == remoteGame) {
                 printCurrentBoard(); // print update board after local player choice
-                display->waiting();
+                userInterface->waiting();
             }
 
             //current player choose step.
             try{
-                step = this->hisTurn->chooseStep();
+                step = this->hisTurn->chooseStep(userInterface);
             }
             catch(char const* msg){
                 cout << "failed read other player step. Result:" << msg << endl;
@@ -120,7 +120,7 @@ void ReversiGame::play() {
  */
 void ReversiGame::printCurrentBoard()const {
     //print board and current player.
-    display->currentBoard(this->gameBoard);
+    userInterface->currentBoard(this->gameBoard);
 }
 
 /*
@@ -131,10 +131,10 @@ void ReversiGame::printChoosenPoint(Point step,bool virtualOpponentPlayLastTurn)
     changeTurn();
     Board::disk c = (this->hisTurn->getDisk());
     if(!virtualOpponentPlayLastTurn){
-        display->noMoves(c);
+        userInterface->noMoves(c);
     }
     else{
-        display->played(c, step);
+        userInterface->played(c, step);
     }
     changeTurn();
 }
@@ -144,7 +144,7 @@ void ReversiGame::printChoosenPoint(Point step,bool virtualOpponentPlayLastTurn)
  */
 void ReversiGame::gameOver()const{
     printCurrentBoard();
-    display->gameOver();
+    userInterface->gameOver();
     int countWhite = 0;
     int countBlack = 0;
     Board::disk ** array = gameBoard->getArray();
@@ -163,13 +163,13 @@ void ReversiGame::gameOver()const{
 
     //prints the winning player.
     if(countBlack > countWhite){
-        display->winner(blackPlayer->getDisk());
+        userInterface->winner(blackPlayer->getDisk());
     }
     else if(countBlack < countWhite){
-        display->winner(whitePlayer->getDisk());
+        userInterface->winner(whitePlayer->getDisk());
     }
     else if(countBlack == countWhite){
-        display->draw();
+        userInterface->draw();
     }
 
     //if it is remote game.
@@ -220,11 +220,11 @@ Point ReversiGame:: getStep(bool firstTry,vector<Point> v){
         cout << endl << endl;
         do {
             if(!firstTry){
-                display->invalidInput();
+                userInterface->invalidInput();
             }
             firstTry = false;
-            display->askForMove();
-            step = this->hisTurn->chooseStep();
+            userInterface->askForMove();
+            step = this->hisTurn->chooseStep(userInterface);
 
         } while (!step.ifThePointIsInVector(v));
 
@@ -238,14 +238,14 @@ Point ReversiGame:: getStep(bool firstTry,vector<Point> v){
  */
 bool ReversiGame::printPossibleMoves(const vector<Point> &v)const {
     Board::disk c = (this->hisTurn->getDisk());
-    display->yourMove(c);
+    userInterface->yourMove(c);
 
     //if there is no possible moves.
     if(v.size() == 0){
-        display->noMoves();
+        userInterface->noMoves();
         return false;
     }
-    display->possibleMoves(v);
+    userInterface->possibleMoves(v);
     return true;
 }
 

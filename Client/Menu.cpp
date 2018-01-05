@@ -9,7 +9,7 @@
 #include "ReversiGame.h"
 #include "RemotePlayer.h"
 #include "ReadDefinitionFile.h"
-#include "ConsoleDisplay.h"
+#include "ConsoleInterface.h"
 #include "CommandMenu.h"
 using namespace std;
 /*
@@ -17,7 +17,7 @@ using namespace std;
  * rows - number of rows in the board game.
  * cols - number of columns in the board game.
  */
-Menu::Menu(const int &rows,const int &cols, Display* display): rowNumber(rows), colNumber(cols), display(display){
+Menu::Menu(const int &rows,const int &cols, UserInterface* userInterface): rowNumber(rows), colNumber(cols), userInterface(userInterface){
     runMenu();
 }
 /*
@@ -25,24 +25,14 @@ Menu::Menu(const int &rows,const int &cols, Display* display): rowNumber(rows), 
  */
 void Menu::runMenu()const{
     // print menu
-    display->mainMenu();
+    userInterface->mainMenu();
 
     // mode of the game
-    int chosenMode =  ReversiGame::noMode;
-    cin >> chosenMode;
-    while (chosenMode != ReversiGame::humanAgainstHuman && chosenMode !=  ReversiGame::humanAgainstAI && chosenMode != ReversiGame::remoteGame) {
-        if(cin.fail()) {
-            display->invalidTryAgain();
-            // get rid of failure state
-            cin.clear();
-
-            // discard 'bad' character(s)
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        }
-        else {
-            display->invalidTryAgain();
-        }
-        cin >> chosenMode;
+    int chosenMode = userInterface->chooseMode();
+    while (chosenMode != ReversiGame::humanAgainstHuman && chosenMode !=  ReversiGame::humanAgainstAI &&
+           chosenMode != ReversiGame::remoteGame) {
+        userInterface->wrongMode();
+        chosenMode = userInterface->chooseMode();
     }
     runGame(chosenMode);
 
@@ -65,7 +55,7 @@ void Menu::runGame(const int &mode)const {
     ReadDefinitionFile read = ReadDefinitionFile();
     map<string,string> myMap;
     try{
-        myMap = read.getVectorDefinition("/home/linoy/Desktop/myGIt/Advanced-Programming-Project/Client/clientDefinitionFile.txt");
+        myMap = read.getVectorDefinition("/home/maria/Documents/git/Advanced-Programming-Project/Client/clientDefinitionFile.txt");
     }
     catch (char const* msg){
         cout << "Failed to file. Reason:" << msg << endl;
@@ -98,7 +88,7 @@ void Menu::runGame(const int &mode)const {
         case ReversiGame::remoteGame:
             currentMode = ReversiGame::remoteGame;
 
-            CommandMenu menu = CommandMenu(display, &client);
+            CommandMenu menu = CommandMenu(userInterface, &client);
             menu.runMenu();
 
             int color = client.readTypeOfPlayer();
@@ -117,7 +107,7 @@ void Menu::runGame(const int &mode)const {
             }
             break;
     }
-    ReversiGame(b, blackActor, whiteActor, standardGameLogic, currentMode, client,humanPlayer, display);
+    ReversiGame(b, blackActor, whiteActor, standardGameLogic, currentMode, client,humanPlayer, userInterface);
 
     //free memory
     delete(b);

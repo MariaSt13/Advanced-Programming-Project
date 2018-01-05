@@ -23,7 +23,7 @@ SUFFIXES =
 .SUFFIXES: .hpux_make_needs_suffix_list
 
 
-# Suppress display of executed commands.
+# Suppress userInterface of executed commands.
 $(VERBOSE).SILENT:
 
 

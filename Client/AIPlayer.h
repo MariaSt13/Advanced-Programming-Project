@@ -26,7 +26,7 @@ public:
     /*
      * The player in his turn choose where to put is disk.
      */
-    virtual Point chooseStep()const;
+    virtual Point chooseStep(UserInterface* userInterface)const;
 
 private:
 

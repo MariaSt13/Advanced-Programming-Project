@@ -3,18 +3,19 @@
 //
 
 #include <iostream>
-#include "ConsoleDisplay.h"
+#include <limits>
+#include "ConsoleInterface.h"
 
-void ConsoleDisplay::waiting() const {
+void ConsoleInterface::waiting() const {
     cout << "Waiting for other player's move..." << endl;
 }
 
-void ConsoleDisplay::currentBoard(const Board *b) const {
+void ConsoleInterface::currentBoard(const Board *b) const {
     cout << endl << "current board:" << endl << endl;
     printBoard(b);
 }
 
-void ConsoleDisplay::printBoard(const Board *b) const {
+void ConsoleInterface::printBoard(const Board *b) const {
     Board::disk** array = b->getArray();
     printNumberedRow(b->getColSize());
 
@@ -30,7 +31,7 @@ void ConsoleDisplay::printBoard(const Board *b) const {
     }
 }
 
-void ConsoleDisplay::printNumberedRow(int size) const {
+void ConsoleInterface::printNumberedRow(int size) const {
     for (int k = 1; k < size ; k++) {
         cout << " | ";
         cout << k;
@@ -39,7 +40,7 @@ void ConsoleDisplay::printNumberedRow(int size) const {
     printSeparator(size);
 }
 
-void ConsoleDisplay::printSeparator(int size) const {
+void ConsoleInterface::printSeparator(int size) const {
     cout << "|" << endl;
     for (int i = 1; i < size; ++i) {
         cout << "----";
@@ -47,21 +48,21 @@ void ConsoleDisplay::printSeparator(int size) const {
     cout << "--" << endl;
 }
 
-void ConsoleDisplay::noMoves(Board::disk d) const {
+void ConsoleInterface::noMoves(Board::disk d) const {
     char c = d;
     cout << c << " had no moves" << endl << endl;
 }
 
-void ConsoleDisplay::played(Board::disk player, Point step) const {
+void ConsoleInterface::played(Board::disk player, Point step) const {
     char c = player;
     cout << c << " played" << step << endl << endl;
 }
 
-void ConsoleDisplay::gameOver() const {
+void ConsoleInterface::gameOver() const {
     cout <<"Game over. ";
 }
 
-void ConsoleDisplay::winner(Board::disk d) const {
+void ConsoleInterface::winner(Board::disk d) const {
     if (d == Board::blackActor) {
         cout <<"The winner is: the black player.";
     }
@@ -70,29 +71,29 @@ void ConsoleDisplay::winner(Board::disk d) const {
     }
 }
 
-void ConsoleDisplay::draw() const {
+void ConsoleInterface::draw() const {
     cout <<"It's a draw.";
 }
 
-void ConsoleDisplay::invalidInput() const {
+void ConsoleInterface::invalidInput() const {
     cout << "Invalid input" << endl;
 }
 
-void ConsoleDisplay::askForMove() const {
+void ConsoleInterface::askForMove() const {
     cout << "please enter your move row col (for example: 1 2):";
 }
 
-void ConsoleDisplay::yourMove(Board::disk d) const {
+void ConsoleInterface::yourMove(Board::disk d) const {
     char c = d;
     cout << c;
     cout <<  ": It's your move." << endl;
 }
 
-void ConsoleDisplay::noMoves() const {
+void ConsoleInterface::noMoves() const {
     cout <<  "no possible moves. play passes back to the other player." << endl;
 }
 
-void ConsoleDisplay::possibleMoves(const vector<Point> &v) const {
+void ConsoleInterface::possibleMoves(const vector<Point> &v) const {
     cout <<  "your possible moves: ";
 
     //print possible points
@@ -104,29 +105,71 @@ void ConsoleDisplay::possibleMoves(const vector<Point> &v) const {
     }
 }
 
-void ConsoleDisplay::mainMenu() const {
+void ConsoleInterface::mainMenu() const {
     cout << "Please choose game mode:" << endl;
     cout << "(1) Human player" << endl;
     cout << "(2) AI player" << endl;
     cout << "(3) Remote player" << endl;
 }
-void ConsoleDisplay::invalidTryAgain() const {
+void ConsoleInterface::invalidTryAgain() const {
     cout << " invalid input. Please try again" << endl;
 }
-void ConsoleDisplay::commandMenu() const {
+void ConsoleInterface::commandMenu() const {
     cout << "Please select an option:" << endl;
     cout << "start <name> - to start a new game with that name " << endl;
     cout << "list_games - to see games that can be joined" <<  endl;
     cout << "join <name> - to join a game with that name" << endl;
 }
-void ConsoleDisplay::nameTaken() const {
+void ConsoleInterface::nameTaken() const {
     cout << "This name is already taken. Please try a different name" << endl;
 }
 
-void ConsoleDisplay::noSuchGame() const {
+void ConsoleInterface::noSuchGame() const {
     cout << "A game with this name doesn't exist. Please choose an existing game" << endl;
 }
 
-void ConsoleDisplay::printListGames(char *list) const {
+void ConsoleInterface::printListGames(char *list) const {
     cout << list << endl;
+}
+
+int ConsoleInterface::chooseMode() {
+    int chosenMode;
+    cin >> chosenMode;
+    cin.ignore();
+    return chosenMode;
+}
+void ConsoleInterface::wrongMode() {
+    if(cin.fail()) {
+        this->invalidTryAgain();
+        // get rid of failure state
+        cin.clear();
+
+        // discard 'bad' character(s)
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
+    else {
+        this->invalidTryAgain();
+    }
+}
+string ConsoleInterface::getCommand() {
+    string s;
+    getline(cin, s);
+    return s;
+}
+
+Point ConsoleInterface::choosePoint() {
+    int row;
+    int col;
+    cin >> row >> col;
+
+    if(cin.fail()){
+        // get rid of failure state
+        cin.clear();
+
+        // discard 'bad' character(s)
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        return Point(-1,-1);
+    }
+
+    return Point(row, col);
 }

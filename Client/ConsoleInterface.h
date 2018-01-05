@@ -6,9 +6,9 @@
 #define EX4_CONSOLEDISPLAY_H
 
 
-#include "Display.h"
+#include "UserInterface.h"
 
-class ConsoleDisplay: public Display {
+class ConsoleInterface: public UserInterface {
 public:
     virtual void waiting() const;
     virtual void currentBoard(const Board* b) const;
@@ -29,6 +29,10 @@ public:
     virtual void nameTaken()const;
     virtual void noSuchGame() const;
     virtual void printListGames(char* list)const;
+    virtual int chooseMode();
+    virtual string getCommand();
+    virtual void wrongMode();
+    virtual Point choosePoint();
 
 private:
     //The function prints a numbered row above the game board.

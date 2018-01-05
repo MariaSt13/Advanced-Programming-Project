@@ -12,7 +12,7 @@ AIPlayer::AIPlayer(Board::disk d, GameLogic* gameLogic, Board* board): Player(d)
 /*
  * The AI player chooses his turn with minimax algorithm.
  */
-Point AIPlayer::chooseStep() const {
+Point AIPlayer::chooseStep(UserInterface* userInterface) const {
     vector<Point> v1;
     vector<Point> v2;
     Board* copyBoard = new ConsoleBoard(this->board);

@@ -42,7 +42,7 @@ Compiler flag queries output the union of the sets of flags when combined.
 
  Help:
   --usage                    brief usage information
-  --help                     display this help message
+  --help                     userInterface this help message
 
  Installation Overrides:
   --prefix=<dir>             overrides the installation prefix

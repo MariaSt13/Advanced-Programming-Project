@@ -1,11 +1,11 @@
 
 #include "Menu.h"
-#include "ConsoleDisplay.h"
+#include "ConsoleInterface.h"
 
 int main() {
 
     //create a new game.
-    Display* display = new ConsoleDisplay();
-    Menu menu = Menu(8,8, display);
-    delete(display);
+    UserInterface* userInterface = new ConsoleInterface();
+    Menu menu = Menu(8,8, userInterface);
+    delete(userInterface);
 }

@@ -8,7 +8,7 @@
 
 #include "Board.h"
 
-class Display {
+class UserInterface {
 public:
     virtual void waiting() const = 0;
     virtual void currentBoard(const Board* b) const = 0;
@@ -29,6 +29,10 @@ public:
     virtual void nameTaken()const =0;
     virtual void noSuchGame() const=0;
     virtual void printListGames(char* list)const=0;
+    virtual int chooseMode() =0;
+    virtual string getCommand() = 0;
+    virtual void wrongMode() = 0;
+    virtual Point choosePoint()=0;
 
 };
 #endif //EX4_DISPLAY_H

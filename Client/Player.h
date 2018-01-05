@@ -3,6 +3,7 @@
 
 #include "Point.h"
 #include "Board.h"
+#include "UserInterface.h"
 
 /*
  * player class.
@@ -12,7 +13,7 @@ class Player{
 public:
 
     // the player choose his next move in his turn.
-    virtual Point chooseStep() const = 0;
+    virtual Point chooseStep(UserInterface* userInterface) const = 0;
 
     //constructor.
     Player(Board::disk d): d(d){} ;

@@ -20,7 +20,7 @@ public:
      * the player in his turn choose point
      * to put in his disk.
      */
-    virtual Point chooseStep() const;
+    virtual Point chooseStep(UserInterface* userInterface) const;
 
     //destructor.
     virtual ~RemotePlayer(){};
