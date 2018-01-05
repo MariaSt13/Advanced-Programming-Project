@@ -28,7 +28,7 @@ void CommandMenu::runMenu() {
    do {
        //connect to server
        client->connectToServer();
-           
+
        int clientSocket = client->getClientSocket();
        userInterface->commandMenu();
        string input = userInterface->getCommand();

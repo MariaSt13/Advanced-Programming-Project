@@ -23,6 +23,11 @@ void ListGamesCommand::execute(vector<string> args) {
 
     //send length of list
     int length = result.length();
+    if (length == 0) {
+        result = "There are no games in the list yet.";
+        length = result.length();
+        s = result.c_str();
+    }
     int n = write(clientSocket, &length, sizeof(length));
 
     //error
