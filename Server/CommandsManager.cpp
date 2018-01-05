@@ -1,7 +1,10 @@
+#include <sstream>
+#include <unistd.h>
 #include "CommandsManager.h"
 #include "StartCommand.h"
 #include "ListGamesCommand.h"
 #include "JoinCommand.h"
+#include "ServerDataManager.h"
 
 CommandsManager* CommandsManager::instance = 0;
 pthread_mutex_t  CommandsManager::lock;
@@ -23,8 +26,31 @@ CommandsManager::CommandsManager() {
  * @param args - vector of arguments to execute function.
  */
 void CommandsManager::executeCommand(string command, vector<string> args) {
-    Command *commandObj = commandsMap[command];
-    commandObj->execute(args);
+    int returnVal = -1;
+    if(commandsMap.count(command) != 0){
+        returnVal = 0;
+    }
+    istringstream is(args.at(0));
+    int clientSocket;
+    is >> clientSocket;
+
+    //write to client 0 if command is valid and
+    int n = write(clientSocket, &returnVal, sizeof(returnVal));
+
+    //error
+    if(n == -1) {
+        throw "error writing to socket";
+    }
+
+    //if the command is valid
+    if(returnVal == 0){
+        Command *commandObj = commandsMap[command];
+        commandObj->execute(args);
+    }
+    else{
+        //close client socket
+        ServerDataManager::getInstance()->removeSocket(clientSocket);
+    }
 }
 
 /**

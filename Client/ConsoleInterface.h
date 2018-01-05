@@ -1,15 +1,17 @@
-//
-// Created by maria on 25/12/17.
-//
-
 #ifndef EX4_CONSOLEDISPLAY_H
 #define EX4_CONSOLEDISPLAY_H
 
 
 #include "UserInterface.h"
 
+/**
+ * This class extend UserInterface and responsible for
+ * interaction with the user: prints output
+ * and get input by console.
+ */
 class ConsoleInterface: public UserInterface {
 public:
+    //prints output
     virtual void waiting() const;
     virtual void currentBoard(const Board* b) const;
     virtual void printBoard(const Board* b) const;
@@ -29,9 +31,11 @@ public:
     virtual void nameTaken()const;
     virtual void noSuchGame() const;
     virtual void printListGames(char* list)const;
+    virtual void wrongMode();
+
+    //get input
     virtual int chooseMode();
     virtual string getCommand();
-    virtual void wrongMode();
     virtual Point choosePoint();
 
 private:

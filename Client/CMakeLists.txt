@@ -13,6 +13,6 @@ set(SOURCE_FILES Board.cpp Board.h ConsoleBoard.cpp ConsoleBoard.h Player.h Huma
 
 set(TEST_FILES test/ConsoleBoardTest.cpp test/ConsoleBoardTest.h test/StandardGameLogicTest.cpp test/PointTest.cpp
         test/AIPlayerTest.cpp test/ReadDefinitionFileTest.cpp)
-add_executable(cleint ${SOURCE_FILES} main.cpp)
+add_executable(MyCleint ${SOURCE_FILES} main.cpp)
 add_executable(testing ${SOURCE_FILES} ${TEST_FILES} test/gtest_main.cpp)
 target_link_libraries(testing gmock gmock_main gtest gtest_main)

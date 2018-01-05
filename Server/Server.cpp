@@ -83,7 +83,7 @@ void* Server::handleClient(void* socket) {
     argsToCommand.erase(argsToCommand.begin());
     stringstream ss;
     ss << clientSocket;
-    argsToCommand.push_back(ss.str());
+    argsToCommand.insert(argsToCommand.begin(),ss.str());
 
     CommandsManager::getInstance()->executeCommand(command,argsToCommand);
 }

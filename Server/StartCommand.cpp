@@ -13,23 +13,24 @@ using namespace std;
  * @param args - arguments vector.
  */
 void StartCommand::execute(vector<string> args){
-    string name = args.at(0);
-    istringstream is(args.at(1));
+    int returnVal = -1;
     int firstPlayerSocket;
+    istringstream is(args.at(0));
     is >> firstPlayerSocket;
-    int returnVal = 0;
 
-    //if there is no game with this name
-    if(GameListManager::getInstance()->getGame(name) == NULL){
-       //create a new game and push to games list
-       Game* g = new Game(name,firstPlayerSocket);
-       GameListManager::getInstance()->addGame(g);
-       cout << "game started";
-    }
+    //if arguments vector is valid
+    if(args.size() >= 2){
+        string name = args.at(1);
 
-    //if game with this name is already exist
-    else{
-       returnVal = -1;
+        //if there is no game with this name
+        if(GameListManager::getInstance()->getGame(name) == NULL){
+            //create a new game and push to games list
+            Game* g = new Game(name,firstPlayerSocket);
+            GameListManager::getInstance()->addGame(g);
+            returnVal = 0;
+            cout << "game started";
+        }
+
     }
 
     int n = write(firstPlayerSocket, &returnVal, sizeof(returnVal));

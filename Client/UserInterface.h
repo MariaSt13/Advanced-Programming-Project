@@ -1,15 +1,16 @@
-//
-// Created by maria on 25/12/17.
-//
-
 #ifndef EX4_DISPLAY_H
 #define EX4_DISPLAY_H
 
 
 #include "Board.h"
 
+/**
+ * This class are responsible for interaction
+ * with the user: prints output and get input.
+ */
 class UserInterface {
 public:
+    //prints output
     virtual void waiting() const = 0;
     virtual void currentBoard(const Board* b) const = 0;
     virtual void printBoard(const Board* b) const= 0;
@@ -29,9 +30,11 @@ public:
     virtual void nameTaken()const =0;
     virtual void noSuchGame() const=0;
     virtual void printListGames(char* list)const=0;
+    virtual void wrongMode() = 0;
+
+    //get input
     virtual int chooseMode() =0;
     virtual string getCommand() = 0;
-    virtual void wrongMode() = 0;
     virtual Point choosePoint()=0;
 
 };
