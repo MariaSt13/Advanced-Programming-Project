@@ -62,7 +62,7 @@ void ReversiGame::play() {
 
                 //is this is remote game mode.
                 if (this->currentMode == remoteGame) {
-                    char s[MAX_ARRAY_SIZE];
+                    char s[MAX_ARRAY_SIZE] = {0};
                     s[0] = (char)step.getX();
                     s[1]= ' ';
                     s[2] = (char)step.getY();

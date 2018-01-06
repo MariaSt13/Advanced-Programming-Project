@@ -2,7 +2,7 @@
 #ifndef EX4_CLIENT_H
 #define EX4_CLIENT_H
 #include <string>
-#define ARRAY_SMALL_SIZE 7
+#define MAX_ARRAY_SIZE 7
 
 using namespace std;
 
@@ -25,7 +25,7 @@ public:
     int getClientSocket() const;
 
     //write to server
-    void writeToServer(char* s, int clientSocket)const;
+    void writeToServer(char* str, int clientSocket)const;
 
 private:
     const char *serverIP;

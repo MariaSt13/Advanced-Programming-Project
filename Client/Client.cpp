@@ -94,11 +94,10 @@ int Client::getClientSocket() const{
  * @param s - the message to the server.
  * @param clientSocket - socket number.
  */
-void Client::writeToServer(char* s, int clientSocket)const{
+void Client::writeToServer(char* str, int clientSocket)const{
     //write to server
-   // char s2[ARRAY_SMALL_SIZE] = {0};
-   // strcpy(s2,s);
-    int n = write(clientSocket, s, sizeof(*s));
+
+    int n = write(clientSocket, str, MAX_ARRAY_SIZE);
 
     //error
     if(n == -1) {
