@@ -100,7 +100,17 @@ void Menu::runGame(const int &mode)const {
             }
             break;
     }
-    ReversiGame(b, blackActor, whiteActor, standardGameLogic, currentMode, client,humanPlayer, userInterface);
+    try {
+        ReversiGame(b, blackActor, whiteActor, standardGameLogic, currentMode, client,humanPlayer, userInterface);
+    } catch (char const* msg) {
+        cout << "Error:" << msg << endl;
+        //free memory
+        delete(b);
+        delete(blackActor);
+        delete(whiteActor);
+        delete(standardGameLogic);
+        delete(standardGameLogic2);
+    }
 
     //free memory
     delete(b);
