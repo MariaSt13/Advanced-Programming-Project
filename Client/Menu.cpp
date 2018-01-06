@@ -90,8 +90,6 @@ void Menu::runGame(const int &mode)const {
             }catch(char const* msg){
                 //free memory
                 delete(b);
-                delete(blackActor);
-                delete(whiteActor);
                 delete(standardGameLogic);
                 delete(standardGameLogic2);
                 return;
