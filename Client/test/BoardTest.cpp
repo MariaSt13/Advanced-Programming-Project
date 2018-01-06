@@ -1,14 +1,16 @@
 
-#include "ConsoleBoardTest.h"
+#include "BoardTest.h"
 #include <gtest/gtest.h>
-#include "../ConsoleBoard.h"
+#include "../Board.h"
+#include "../ConsoleInterface.h"
 
 /*
  * test 1: check that copy constructor work correctly.
  */
 TEST(BoardTest,copyConstuctorTest){
-    ConsoleBoardTest test = ConsoleBoardTest();
-    ConsoleBoard b =  ConsoleBoard(SIZE_ROW_STANDARD,SIZE_COL_STANDARD);
+    BoardTest test = BoardTest();
+    ConsoleInterface user = ConsoleInterface();
+    Board b =  Board(SIZE_ROW_STANDARD,SIZE_COL_STANDARD, &user);
     Board::disk** array =  b.getArray();
     array[4][6] = b.blackActor;
     array[4][5] = b.blackActor;
@@ -19,7 +21,7 @@ TEST(BoardTest,copyConstuctorTest){
     array[1][6] = b.whiteActor;
     array[2][3] = b.whiteActor;
 
-    ConsoleBoard copyBoard =  ConsoleBoard(&b);
+    Board copyBoard =  Board(&b);
     Board::disk** copyBoardArr =  copyBoard.getArray();
     //compare
     for (int i = 0; i < b.getRowSize(); i++) {
@@ -32,7 +34,7 @@ TEST(BoardTest,copyConstuctorTest){
     test.fullBoard(b,b.empty);
 
 
-    ConsoleBoard copyBoard2 =  ConsoleBoard(&b);
+    Board copyBoard2 =  Board(&b);
     Board::disk** copyBoardArr2 =  copyBoard2.getArray();
 
     //compare
@@ -49,15 +51,16 @@ TEST(BoardTest,copyConstuctorTest){
  * on small board.
  */
 TEST(BoardTest,copyConstuctorSmallBoardTest){
-    ConsoleBoardTest test = ConsoleBoardTest();
-    ConsoleBoard b =  ConsoleBoard(SIZE_ROW_SMALL,SIZE_COL_SMALL);
+    BoardTest test = BoardTest();
+    ConsoleInterface user = ConsoleInterface();
+    Board b =  Board(SIZE_ROW_SMALL,SIZE_COL_SMALL, &user);
     Board::disk** array =  b.getArray();
     array[1][1] = b.blackActor;
     array[3][3] = b.blackActor;
     array[2][1] = b.blackActor;
     array[2][2] = b.blackActor;
 
-    ConsoleBoard copyBoard =  ConsoleBoard(&b);
+    Board copyBoard =  Board(&b);
     Board::disk** copyBoardArr =  copyBoard.getArray();
     //compare
     for (int i = 0; i < b.getRowSize(); i++) {
@@ -69,7 +72,7 @@ TEST(BoardTest,copyConstuctorSmallBoardTest){
     //empty board
     test.fullBoard(b,b.empty);
 
-    ConsoleBoard copyBoard2 =  ConsoleBoard(&b);
+    Board copyBoard2 =  Board(&b);
     Board::disk** copyBoardArr2 =  copyBoard2.getArray();
 
     //compare
@@ -85,8 +88,9 @@ TEST(BoardTest,copyConstuctorSmallBoardTest){
  * test 3: check that fullBoard function work correctly.
  */
 TEST(BoardTest,fullBoardTest){
-    ConsoleBoardTest test = ConsoleBoardTest();
-    ConsoleBoard b =  ConsoleBoard(SIZE_ROW_STANDARD,SIZE_COL_STANDARD);
+    BoardTest test = BoardTest();
+    ConsoleInterface user = ConsoleInterface();
+    Board b =  Board(SIZE_ROW_STANDARD,SIZE_COL_STANDARD,&user);
     Board::disk** array =  b.getArray();
 
     //full board
@@ -111,8 +115,9 @@ TEST(BoardTest,fullBoardTest){
  * on small board.
  */
 TEST(BoardTest,fullBoardSmallTest){
-    ConsoleBoardTest test = ConsoleBoardTest();
-    ConsoleBoard b =  ConsoleBoard(SIZE_ROW_SMALL,SIZE_COL_SMALL);
+    BoardTest test = BoardTest();
+    ConsoleInterface user = ConsoleInterface();
+    Board b =  Board(SIZE_ROW_SMALL,SIZE_COL_SMALL,&user);
     Board::disk** array =  b.getArray();
 
     //full board
@@ -137,7 +142,8 @@ TEST(BoardTest,fullBoardSmallTest){
  * test 5: check that pointIsInRange function work correctly.
  */
 TEST(BoardTest,BoardLimitsTest){
-    ConsoleBoard b =  ConsoleBoard(SIZE_ROW_STANDARD,SIZE_COL_STANDARD);
+    ConsoleInterface user = ConsoleInterface();
+    Board b =  Board(SIZE_ROW_STANDARD,SIZE_COL_STANDARD,&user);
     EXPECT_FALSE(b.pointIsInRange(Point(-1,-1)));
     EXPECT_FALSE(b.pointIsInRange(Point(9,9)));
     EXPECT_FALSE(b.pointIsInRange(Point(-7,-5)));
@@ -170,7 +176,8 @@ TEST(BoardTest,BoardLimitsTest){
  * test 6: check that pointIsInRange function work correctly.
  */
 TEST(BoardTest,BoardLimitsSmallBoardTest){
-    ConsoleBoard b =  ConsoleBoard(SIZE_ROW_SMALL,SIZE_COL_SMALL);
+    ConsoleInterface user = ConsoleInterface();
+    Board b =  Board(SIZE_ROW_SMALL,SIZE_COL_SMALL,&user);
     EXPECT_FALSE(b.pointIsInRange(Point(-1,-1)));
     EXPECT_FALSE(b.pointIsInRange(Point(4,4)));
     EXPECT_FALSE(b.pointIsInRange(Point(-7,-5)));
@@ -201,8 +208,9 @@ TEST(BoardTest,BoardLimitsSmallBoardTest){
  * test 7: check that numOfPlayerDisks function work correctly.
  */
 TEST(BoardTest,countDiskTest){
-    ConsoleBoardTest test = ConsoleBoardTest();
-    ConsoleBoard b =  ConsoleBoard(SIZE_ROW_STANDARD,SIZE_COL_STANDARD);
+    BoardTest test = BoardTest();
+    ConsoleInterface user = ConsoleInterface();
+    Board b =  Board(SIZE_ROW_STANDARD,SIZE_COL_STANDARD,&user);
     EXPECT_TRUE(b.numOfPlayerDisks(b.blackActor) == 2);
     EXPECT_TRUE(b.numOfPlayerDisks(b.whiteActor) == 2);
     Board::disk** array =  b.getArray();
@@ -237,8 +245,9 @@ TEST(BoardTest,countDiskTest){
  * on small board.
  */
 TEST(BoardTest,countDiskSmallBoardTest){
-    ConsoleBoardTest test = ConsoleBoardTest();
-    ConsoleBoard b =  ConsoleBoard(SIZE_ROW_SMALL,SIZE_ROW_SMALL);
+    BoardTest test = BoardTest();
+    ConsoleInterface user = ConsoleInterface();
+    Board b =  Board(SIZE_ROW_SMALL,SIZE_ROW_SMALL,&user);
     EXPECT_TRUE(b.numOfPlayerDisks(b.blackActor) == 2);
     EXPECT_TRUE(b.numOfPlayerDisks(b.whiteActor) == 2);
     Board::disk** array =  b.getArray();
@@ -268,7 +277,7 @@ TEST(BoardTest,countDiskSmallBoardTest){
  * @param b board.
  * @param d disk.
  */
-void ConsoleBoardTest:: fullBoard(ConsoleBoard &b,Board::disk d){
+void BoardTest:: fullBoard(Board &b,Board::disk d){
     Board::disk** array =  b.getArray();
     //empty board.
     for (int i = 1; i < b.getRowSize(); i++) {

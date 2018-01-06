@@ -11,7 +11,7 @@ set(SOURCE_FILES Board.cpp Board.h Player.h HumanLocalPlayer.cpp HumanLocalPlaye
         Client.cpp Client.h ReadDefinitionFile.cpp ReadDefinitionFile.h clientDefinitionFile.txt UserInterface.h ConsoleInterface.cpp ConsoleInterface.h
         CommandMenu.cpp CommandMenu.h)
 
-set(TEST_FILES test/ConsoleBoardTest.cpp test/ConsoleBoardTest.h test/StandardGameLogicTest.cpp test/PointTest.cpp
+set(TEST_FILES test/BoardTest.cpp test/BoardTest.h test/StandardGameLogicTest.cpp test/PointTest.cpp
         test/AIPlayerTest.cpp test/ReadDefinitionFileTest.cpp)
 add_executable(cleint ${SOURCE_FILES} main.cpp)
 add_executable(testing ${SOURCE_FILES} ${TEST_FILES} test/gtest_main.cpp)

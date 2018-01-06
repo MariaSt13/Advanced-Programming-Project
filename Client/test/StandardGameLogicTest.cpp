@@ -2,7 +2,8 @@
 #include <gtest/gtest.h>
 #include "../StandardGameLogic.h"
 #include "../HumanLocalPlayer.h"
-#include "../ConsoleBoard.h"
+#include "../Board.h"
+#include "../ConsoleInterface.h"
 
 #define SIZE_ROW_STANDARD 8
 #define SIZE_COL_STANDARD 8
@@ -15,7 +16,9 @@
  */
 TEST(GameLogicTest,returnValidMovesTest){
     StandardGameLogic gameLogic = StandardGameLogic();
-    ConsoleBoard b = ConsoleBoard(SIZE_ROW_STANDARD, SIZE_COL_STANDARD);
+    ConsoleInterface user = ConsoleInterface();
+
+    Board b = Board(SIZE_ROW_STANDARD, SIZE_COL_STANDARD, &user);
 
     //check black actor valid steps.
     HumanLocalPlayer blackPlayer = HumanLocalPlayer(b.blackActor);
@@ -59,7 +62,8 @@ TEST(GameLogicTest,returnValidMovesTest){
  */
 TEST(GameLogicTest,returnValidMovesSmallBoardTest){
     StandardGameLogic gameLogic = StandardGameLogic();
-    ConsoleBoard b = ConsoleBoard(SIZE_ROW_SMALL, SIZE_COL_SMALL);
+    ConsoleInterface user = ConsoleInterface();
+    Board b = Board(SIZE_ROW_SMALL, SIZE_COL_SMALL, &user);
 
     //check black actor valid steps.
     HumanLocalPlayer blackPlayer = HumanLocalPlayer(b.blackActor);
@@ -94,7 +98,8 @@ TEST(GameLogicTest,returnValidMovesSmallBoardTest){
  */
 TEST(GameLogicTest,returnValdMovesWithFullBoard){
     StandardGameLogic gameLogic = StandardGameLogic();
-    ConsoleBoard b = ConsoleBoard(SIZE_ROW_STANDARD, SIZE_COL_STANDARD);
+    ConsoleInterface user = ConsoleInterface();
+    Board b = Board(SIZE_ROW_STANDARD, SIZE_COL_STANDARD, &user);
     HumanLocalPlayer whitePlayer = HumanLocalPlayer(b.whiteActor);
     HumanLocalPlayer blackPlayer = HumanLocalPlayer(b.blackActor);
     Board::disk** array =  b.getArray();
@@ -133,7 +138,8 @@ TEST(GameLogicTest,returnValdMovesWithFullBoard){
  */
 TEST(GameLogicTest,returnValdMovesWithFullBoardSmallBoard){
     StandardGameLogic gameLogic = StandardGameLogic();
-    ConsoleBoard b = ConsoleBoard(SIZE_ROW_SMALL, SIZE_COL_SMALL);
+    ConsoleInterface user = ConsoleInterface();
+    Board b = Board(SIZE_ROW_SMALL, SIZE_COL_SMALL, &user);
     HumanLocalPlayer whitePlayer = HumanLocalPlayer(b.whiteActor);
     HumanLocalPlayer blackPlayer = HumanLocalPlayer(b.blackActor);
     Board::disk** array =  b.getArray();
@@ -171,7 +177,8 @@ TEST(GameLogicTest,returnValdMovesWithFullBoardSmallBoard){
  */
 TEST(GameLogicTest, emptyBoardBigBoard) {
     StandardGameLogic gameLogic = StandardGameLogic();
-    ConsoleBoard b = ConsoleBoard(SIZE_ROW_STANDARD, SIZE_COL_STANDARD);
+    ConsoleInterface user = ConsoleInterface();
+    Board b = Board(SIZE_ROW_STANDARD, SIZE_COL_STANDARD, &user);
     HumanLocalPlayer whitePlayer = HumanLocalPlayer(b.whiteActor);
     HumanLocalPlayer blackPlayer = HumanLocalPlayer(b.blackActor);
     Board::disk** array =  b.getArray();
@@ -194,7 +201,8 @@ TEST(GameLogicTest, emptyBoardBigBoard) {
  */
 TEST(GameLogicTest, emptyBoardSmallBoard) {
     StandardGameLogic gameLogic = StandardGameLogic();
-    ConsoleBoard b = ConsoleBoard(SIZE_ROW_SMALL, SIZE_COL_SMALL);
+    ConsoleInterface user = ConsoleInterface();
+    Board b = Board(SIZE_ROW_SMALL, SIZE_COL_SMALL,&user);
     HumanLocalPlayer whitePlayer = HumanLocalPlayer(b.whiteActor);
     HumanLocalPlayer blackPlayer = HumanLocalPlayer(b.blackActor);
     Board::disk** array =  b.getArray();
@@ -216,7 +224,8 @@ TEST(GameLogicTest, emptyBoardSmallBoard) {
  */
 TEST(GameLogicTest, oneMoveBigBoard) {
     StandardGameLogic gameLogic = StandardGameLogic();
-    ConsoleBoard b = ConsoleBoard(SIZE_ROW_STANDARD, SIZE_COL_STANDARD);
+    ConsoleInterface user = ConsoleInterface();
+    Board b = Board(SIZE_ROW_STANDARD, SIZE_COL_STANDARD, &user);
     HumanLocalPlayer whitePlayer = HumanLocalPlayer(b.whiteActor);
     HumanLocalPlayer blackPlayer = HumanLocalPlayer(b.blackActor);
     Board::disk** array =  b.getArray();
@@ -254,7 +263,8 @@ TEST(GameLogicTest, oneMoveBigBoard) {
  */
 TEST(GameLogicTest, oneMoveSmallBoard) {
     StandardGameLogic gameLogic = StandardGameLogic();
-    ConsoleBoard b = ConsoleBoard(SIZE_ROW_SMALL, SIZE_COL_SMALL);
+    ConsoleInterface user = ConsoleInterface();
+    Board b = Board(SIZE_ROW_SMALL, SIZE_COL_SMALL, &user);
     HumanLocalPlayer whitePlayer = HumanLocalPlayer(b.whiteActor);
     HumanLocalPlayer blackPlayer = HumanLocalPlayer(b.blackActor);
     Board::disk** array =  b.getArray();
