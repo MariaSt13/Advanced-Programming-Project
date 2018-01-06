@@ -110,6 +110,7 @@ void Menu::runGame(const int &mode)const {
         delete(whiteActor);
         delete(standardGameLogic);
         delete(standardGameLogic2);
+        return;
     }
 
     //free memory
