@@ -79,12 +79,23 @@ void Menu::runGame(const int &mode)const {
             break;
 
         case ReversiGame::remoteGame:
-            currentMode = ReversiGame::remoteGame;
+            int color;
+            try {
+                currentMode = ReversiGame::remoteGame;
 
-            CommandMenu menu = CommandMenu(userInterface, &client);
-            menu.runMenu();
+                CommandMenu menu = CommandMenu(userInterface, &client);
+                menu.runMenu();
 
-            int color = client.readTypeOfPlayer();
+                color = client.readTypeOfPlayer();
+            }catch(char const* msg){
+                //free memory
+                delete(b);
+                delete(blackActor);
+                delete(whiteActor);
+                delete(standardGameLogic);
+                delete(standardGameLogic2);
+                return;
+            }
 
             // This player connected first so he is black
             if (color == connectedFirst) {
@@ -100,9 +111,9 @@ void Menu::runGame(const int &mode)const {
             }
             break;
     }
-    try {
-        ReversiGame(b, blackActor, whiteActor, standardGameLogic, currentMode, client,humanPlayer, userInterface);
-    } catch (char const* msg) {
+        try {
+            ReversiGame(b, blackActor, whiteActor, standardGameLogic, currentMode, client, humanPlayer, userInterface);
+        }catch (char const* msg) {
         cout << "Error:" << msg << endl;
         //free memory
         delete(b);
