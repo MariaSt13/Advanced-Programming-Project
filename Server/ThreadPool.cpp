@@ -35,6 +35,10 @@ void ThreadPool::terminate() {
  */
 ThreadPool::~ThreadPool() {
     delete[] threads;
+    for(int i = 0; i< this->tasksQueue.size();i++){
+        delete this->tasksQueue.front();
+        tasksQueue.pop();
+    }
 }
 
 /**
@@ -48,6 +52,7 @@ void ThreadPool::executeTasks() {
             tasksQueue.pop();
             pthread_mutex_unlock(&lock);
             task ->execute();
+            delete(task);
         }
         else {
             pthread_mutex_unlock(&lock);

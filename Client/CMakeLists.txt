@@ -13,6 +13,6 @@ set(SOURCE_FILES Board.cpp Board.h Player.h HumanLocalPlayer.cpp HumanLocalPlaye
 
 set(TEST_FILES test/BoardTest.cpp test/BoardTest.h test/StandardGameLogicTest.cpp test/PointTest.cpp
         test/AIPlayerTest.cpp test/ReadDefinitionFileTest.cpp)
-add_executable(mycleint ${SOURCE_FILES} main.cpp)
+add_executable(cleint ${SOURCE_FILES} main.cpp)
 add_executable(Mytesting ${SOURCE_FILES} ${TEST_FILES} test/gtest_main.cpp)
 target_link_libraries(Mytesting gmock gmock_main gtest gtest_main)
