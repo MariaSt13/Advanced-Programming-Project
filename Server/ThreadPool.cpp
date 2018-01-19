@@ -10,7 +10,7 @@ ThreadPool::ThreadPool(int threadsNum):stopped(false) {
     for (int i = 0; i < threadsNum; i++) {
         pthread_create(threads + i, NULL, execute, this);
     }
-    pthread_mutex_init(&lock, NULL); {
+    pthread_mutex_init(&lock, NULL);
 }
 
 /**
@@ -20,6 +20,7 @@ ThreadPool::ThreadPool(int threadsNum):stopped(false) {
 void ThreadPool::addTask(Task *task) {
     tasksQueue.push(task);
 }
+
 
 /**
  * This function set "stopped" to true.
@@ -65,9 +66,3 @@ void *ThreadPool::execute(void *arg) {
     ThreadPool *pool = (ThreadPool *) arg;
     pool -> executeTasks();
 }
-    void ThreadPool::addTask(Task *task) {
-
-    }
-    void ThreadPool::addTask(Task *task) {
-
-    }

@@ -4,6 +4,7 @@
 
 #include <sys/types.h>
 #include <vector>
+#include "ThreadPool.h"
 
 using namespace std;
 
@@ -20,25 +21,21 @@ private:
     //destructor
      ~ServerDataManager();
 
-    //list of threads
-    vector<pthread_t> pthreadList;
-
     vector<int> socketsList;
 
     static ServerDataManager* instance;
     static pthread_mutex_t lock;
+    ThreadPool *pool;
 
 public:
     //get instance of singleton
     static ServerDataManager* getInstance();
 
-    //add pthread to list
-    void addPthread(pthread_t pthread);
+    //add threadPool object
+    void addThreadPool(ThreadPool *pool);
 
-    //remove pthread from list
-    void removePthread(pthread_t pthread);
-
-    void removeAllPthreads();
+    // close the thread pool
+    void terminateThreadPool();
 
     //add socket to list
     void addSocket(int socket);

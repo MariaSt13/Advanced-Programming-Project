@@ -23,13 +23,19 @@ ServerDataManager *ServerDataManager::getInstance() {
 }
 
 /**
- * This function adds pthread to pthreads vector.
- * @param pthread - pthread id number.
+ * This function gets a ThreadPool object and saves it.
+ * @param pool - ThreadPool.
  */
-void ServerDataManager::addPthread(pthread_t pthread) {
-    this->pthreadList.push_back(pthread);
+void ServerDataManager::addThreadPool(ThreadPool *pool) {
+    this->pool = pool;
 }
 
+/**
+ * This function closes the threadPool.
+ */
+void ServerDataManager::terminateThreadPool() {
+    this->pool->terminate();
+}
 /**
  * This function adds socket to sockets list.
  * @param socket - socket number.
@@ -38,19 +44,6 @@ void ServerDataManager::addSocket(int socket) {
     this->socketsList.push_back(socket);
 }
 
-/**
- * This function removes pthread from pthreads list and closes it.
- * @param pthread - pthread id number.
- */
-void ServerDataManager::removePthread(pthread_t pthread) {
-    //remove from list
-    for (int i = 0; i < pthreadList.size(); ++i) {
-        if(pthread == pthreadList.at(i)){
-            pthreadList.erase(pthreadList.begin() + i);
-        }
-    }
-    pthread_exit(NULL);
-}
 
 /**
  * This function removes socket from sockets vector and closes it.
@@ -66,15 +59,6 @@ void ServerDataManager::removeSocket(int socket) {
     close(socket);
 }
 
-/**
- * This function closes all the pthreads in the list and clears the list.
- */
-void ServerDataManager::removeAllPthreads() {
-    for (vector<pthread_t>::const_iterator it = pthreadList.begin(); it < pthreadList.end(); it++) {
-        pthread_cancel(*it);
-    }
-    pthreadList.clear();
-}
 /**
  * This function closes all the sockets in the list and clears the list.
  */

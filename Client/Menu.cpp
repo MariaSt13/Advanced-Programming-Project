@@ -52,7 +52,7 @@ void Menu::runGame(const int &mode)const {
     ReadDefinitionFile read = ReadDefinitionFile();
     map<string,string> myMap;
 
-    myMap = read.getVectorDefinition("clientDefinitionFile.txt");
+    myMap = read.getVectorDefinition("/home/maria/Documents/git/Advanced-Programming-Project/Client/clientDefinitionFile.txt");
 
     string ip = myMap.find("ip")->second;
     int port;

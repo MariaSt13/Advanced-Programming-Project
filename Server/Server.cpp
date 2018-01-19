@@ -57,8 +57,6 @@ void Server::start() {
  * @param socket - the server reads from this client.
  */
 void* Server::handleClient(void* socket) {
-    ServerDataManager::getInstance()->addPthread(pthread_self());
-
     long clientSocket = (long) socket;
     char s[ARRAY_SIZE] = {0};
     string command;
@@ -97,6 +95,9 @@ void* Server::acceptClients(void *socket) {
     struct sockaddr_in clientAddress;
     socklen_t clientAddressLen = sizeof((struct sockaddr*) &clientAddress);
 
+    ThreadPool pool(THREADS_NUM);
+    ServerDataManager::getInstance()->addThreadPool(&pool);
+
     while(true){
         //connection to client.
         cout << "Waiting for client connections..." << endl;
@@ -109,9 +110,8 @@ void* Server::acceptClients(void *socket) {
         if (clientSocket == -1) {
             throw "Error on accept";
         }
-
-        pthread_t threadId;
-        pthread_create(&threadId, NULL,(&handleClient), reinterpret_cast<void *>(clientSocket));
+        //add task to the threadPool
+        pool.addTask(new Task(&handleClient, reinterpret_cast<void *>(clientSocket)));
     }
 }
 /**
@@ -119,7 +119,7 @@ void* Server::acceptClients(void *socket) {
  */
 void Server::stop() {
     ServerDataManager::getInstance()->removeAllSockets();
-    ServerDataManager::getInstance()->removeAllPthreads();
+    ServerDataManager::getInstance()->terminateThreadPool();
     pthread_cancel(this->serverThreadId);
     close(serverSocket);
 }

@@ -3,9 +3,11 @@
 #define EX4_SERVER_H
 
 #include "CommandsManager.h"
+#include "ThreadPool.h"
 
 #define MAX_CONNECTED_CLIENTS 10
 #define ARRAY_SIZE 56
+#define THREADS_NUM 5
 
 /**
  * Server class.
