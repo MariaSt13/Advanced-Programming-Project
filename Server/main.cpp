@@ -16,7 +16,7 @@ int main() {
     map<string,string> myMap;
 
     try{
-        myMap = read.getVectorDefinition("/home/linoy/Programming projects/advanced Programming/myGIt/Advanced-Programming-Project/Server/serverDefinitionFile.txt");
+        myMap = read.getVectorDefinition("serverDefinitionFile.txt");
     } catch (char const* msg){
         cout << "Error: " << msg << endl;
         exit(1);
