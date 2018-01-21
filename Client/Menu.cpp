@@ -1,5 +1,4 @@
 #include <iostream>
-#include <cstdlib>
 #include "Menu.h"
 #include "HumanLocalPlayer.h"
 #include "StandardGameLogic.h"
@@ -52,7 +51,7 @@ void Menu::runGame(const int &mode)const {
     ReadDefinitionFile read = ReadDefinitionFile();
     map<string,string> myMap;
 
-    myMap = read.getVectorDefinition("/home/linoy/Programming projects/advanced Programming/myGIt/Advanced-Programming-Project/Client/clientDefinitionFile.txt");
+    myMap = read.getVectorDefinition("clientDefinitionFile.txt");
 
     string ip = myMap.find("ip")->second;
     int port;
